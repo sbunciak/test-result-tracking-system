@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value="#{productBuildBean.page}"/>
+		<f:event type="preRenderView" listener="#{productBuildBean.paginate}"/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Product Build entities"/>
+
+	<ui:define name="header">
+		Product Build
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Product Build entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<h:panelGroup styleClass="search">
+
+				<h:panelGrid columnClasses="label,component,required" columns="3">
+					<h:outputLabel for="productBuildBeanSearchProductVersion" value="Product Version:"/>
+					<h:panelGroup>
+						<h:selectOneMenu converter="#{productVersionBean.converter}" id="productBuildBeanSearchProductVersion" value="#{productBuildBean.search.productVersion}">
+							<f:selectItems value="#{productVersionBean.all}"/>
+						</h:selectOneMenu>
+						<h:message for="productBuildBeanSearchProductVersion" styleClass="error"/>
+					</h:panelGroup>
+					<h:outputText/>
+					<h:outputLabel for="productBuildBeanSearchLabel" value="Label:"/>
+					<h:panelGroup>
+						<h:inputText id="productBuildBeanSearchLabel" value="#{productBuildBean.search.label}"/>
+						<h:message for="productBuildBeanSearchLabel" styleClass="error"/>
+					</h:panelGroup>
+					<h:outputText/>
+				</h:panelGrid>
+				<h:panelGroup styleClass="buttons">
+					<h:commandLink value="Search" action="#{productBuildBean.search}"/>
+					<h:commandLink value="Create New" action="#{productBuildBean.create}"/>
+				</h:panelGroup>
+			</h:panelGroup>
+			
+			<h:dataTable id="productBuildBeanPageItems" styleClass="data-table" value="#{productBuildBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Product Version"/>
+					</f:facet>
+					<h:link outcome="/admin/productBuild/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemProductVersion" value="#{_item.productVersion}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value="#{productBuildBean}"/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,43 @@
+/* This rule template is not used any more */
+
+// == This part will be added programatically == //
+import org.jboss.community.trts.model.TestPlan;
+import org.jboss.community.trts.model.TestRunCase;
+import org.jboss.community.trts.model.Axis;
+import org.jboss.community.trts.model.AxisCriteria;
+
+global java.util.List runCases;
+// == This part will be added programatically == // 
+
+// Only rule's body will be saved to/leaded from DB
+rule 'Filter Java 1.6'
+	when
+		There is a TestPlan
+		
+		There is a TestRunCase with
+			- title 'Manual Tests'
+		
+		There is an Axis with
+			- category 'Java'
+		
+		There is an AxisCriteria with
+			- appropriate axis
+			- value '1.6'
+			
+		The AxisCriteria has been used
+	then
+		filter this TestRunCase
+end
+
+/*
+	Before DSL:
+	
+	when
+		$p : TestPlan()
+		$ax : Axis( category == "Java" )
+		$ac : AxisCriteria( axis == $ax, value == "1.6" )
+		$rc : TestRunCase( title == "Manual Tests" )
+		eval($rc.getCriterias().contains($ac)
+	then
+		runCases.remove( $rc );
+*/

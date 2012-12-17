@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{testRunCaseBean.id}"/>
+		<f:event type="preRenderView" listener="#{testRunCaseBean.retrieve}"/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Test Run Case"/>
+
+	<ui:define name="header">
+		Test Run Case
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Test Run Case
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="testRunCaseBeanTestRunCaseCriterias" value="Criterias:"/>
+			<h:dataTable id="testRunCaseBeanTestRunCaseCriterias" styleClass="data-table" value="#{testRunCaseBean.testRunCase.criterias}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Axis"/>
+					</f:facet>
+					<h:link outcome="/admin/axisCriteria/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemAxis" value="#{_item.axis}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Priority"/>
+					</f:facet>
+					<h:link outcome="/admin/axisCriteria/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemPriority" value="#{_item.priority}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="testRunCaseBeanTestRunCaseTestRun" value="Test Run:"/>
+			<h:link id="testRunCaseBeanTestRunCaseTestRun" outcome="/admin/testRun/view" value="#{testRunCaseBean.testRunCase.testRun}">
+				<f:param name="id" value="#{testRunCaseBean.testRunCase.testRun.id}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="testRunCaseBeanTestRunCaseTestPlan" value="Test Plan:"/>
+			<h:panelGrid columnClasses="label,component,required" columns="3" id="testRunCaseBeanTestRunCaseTestPlan">
+				<h:outputLabel for="testRunCaseBeanTestRunCaseTestPlanProductVersion" value="Product Version:"/>
+				<h:link id="testRunCaseBeanTestRunCaseTestPlanProductVersion" outcome="/admin/productVersion/view" value="#{testRunCaseBean.testRunCase.testPlan.productVersion}">
+					<f:param name="id" value="#{testRunCaseBean.testRunCase.testPlan.productVersion.id}"/>
+				</h:link>
+				<h:outputText/>
+				<h:outputLabel for="testRunCaseBeanTestRunCaseTestPlanRules" value="Rules:"/>
+				<h:outputText id="testRunCaseBeanTestRunCaseTestPlanRules" value="#{testRunCaseBean.testRunCase.testPlan.rules}"/>
+				<h:outputText/>
+				<h:outputLabel for="testRunCaseBeanTestRunCaseTestPlanName" value="Name:"/>
+				<h:outputText id="testRunCaseBeanTestRunCaseTestPlanName" value="#{testRunCaseBean.testRunCase.testPlan.name}"/>
+				<h:outputText/>
+				<h:outputLabel for="testRunCaseBeanTestRunCaseTestPlanDescription" value="Description:"/>
+				<h:outputText id="testRunCaseBeanTestRunCaseTestPlanDescription" value="#{testRunCaseBean.testRunCase.testPlan.description}"/>
+				<h:outputText/>
+				<h:outputLabel for="testRunCaseBeanTestRunCaseTestPlanType" value="Type:"/>
+				<h:outputText id="testRunCaseBeanTestRunCaseTestPlanType" value="#{testRunCaseBean.testRunCase.testPlan.type}"/>
+				<h:outputText/>
+			</h:panelGrid>
+			<h:outputText/>
+			<h:outputLabel for="testRunCaseBeanTestRunCaseResult" value="Result:"/>
+			<h:outputText id="testRunCaseBeanTestRunCaseResult" value="#{testRunCaseBean.testRunCase.result}"/>
+			<h:outputText/>
+			<h:outputLabel for="testRunCaseBeanTestRunCaseBugTrLink" value="Bug Tr Link:"/>
+			<h:outputText id="testRunCaseBeanTestRunCaseBugTrLink" value="#{testRunCaseBean.testRunCase.bugTrLink}"/>
+			<h:outputText/>
+			<h:outputLabel for="testRunCaseBeanTestRunCaseAssignee" value="Assignee:"/>
+			<h:outputText id="testRunCaseBeanTestRunCaseAssignee" value="#{testRunCaseBean.testRunCase.assignee}"/>
+			<h:outputText/>
+			<h:outputLabel for="testRunCaseBeanTestRunCaseCiLink" value="Ci Link:"/>
+			<h:outputText id="testRunCaseBeanTestRunCaseCiLink" value="#{testRunCaseBean.testRunCase.ciLink}"/>
+			<h:outputText/>
+			<h:outputLabel for="testRunCaseBeanTestRunCaseTitle" value="Title:"/>
+			<h:outputText id="testRunCaseBeanTestRunCaseTitle" value="#{testRunCaseBean.testRunCase.title}"/>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true"/>
+			<h:link value="Create New" outcome="create"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

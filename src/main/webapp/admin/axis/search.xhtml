@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value="#{axisBean.page}"/>
+		<f:event type="preRenderView" listener="#{axisBean.paginate}"/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Axis entities"/>
+
+	<ui:define name="header">
+		Axis
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Axis entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<h:panelGroup styleClass="search">
+
+				<h:panelGrid columnClasses="label,component,required" columns="3">
+					<h:outputLabel for="axisBeanSearchPlan" value="Plan:"/>
+					<h:panelGroup>
+						<h:selectOneMenu converter="#{testPlanBean.converter}" id="axisBeanSearchPlan" value="#{axisBean.search.plan}">
+							<f:selectItem/>
+							<f:selectItems value="#{testPlanBean.all}"/>
+						</h:selectOneMenu>
+						<h:message for="axisBeanSearchPlan" styleClass="error"/>
+					</h:panelGroup>
+					<h:outputText/>
+					<h:outputLabel for="axisBeanSearchCategory" value="Category:"/>
+					<h:panelGroup>
+						<h:inputText id="axisBeanSearchCategory" value="#{axisBean.search.category}"/>
+						<h:message for="axisBeanSearchCategory" styleClass="error"/>
+					</h:panelGroup>
+					<h:outputText/>
+					<h:outputLabel for="axisBeanSearchDescription" value="Description:"/>
+					<h:panelGroup>
+						<h:inputText id="axisBeanSearchDescription" value="#{axisBean.search.description}"/>
+						<h:message for="axisBeanSearchDescription" styleClass="error"/>
+					</h:panelGroup>
+					<h:outputText/>
+				</h:panelGrid>
+				<h:panelGroup styleClass="buttons">
+					<h:commandLink value="Search" action="#{axisBean.search}"/>
+					<h:commandLink value="Create New" action="#{axisBean.create}"/>
+				</h:panelGroup>
+			</h:panelGroup>
+			
+			<h:dataTable id="axisBeanPageItems" styleClass="data-table" value="#{axisBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Plan"/>
+					</f:facet>
+					<h:link outcome="/admin/axis/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemPlan" value="#{_item.plan}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Category"/>
+					</f:facet>
+					<h:link outcome="/admin/axis/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemCategory" value="#{_item.category}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Description"/>
+					</f:facet>
+					<h:link outcome="/admin/axis/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemDescription" value="#{_item.description}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value="#{axisBean}"/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

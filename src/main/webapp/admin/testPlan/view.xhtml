@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{testPlanBean.id}"/>
+		<f:event type="preRenderView" listener="#{testPlanBean.retrieve}"/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Test Plan"/>
+
+	<ui:define name="header">
+		Test Plan
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Test Plan
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="testPlanBeanTestPlanProductVersion" value="Product Version:"/>
+			<h:link id="testPlanBeanTestPlanProductVersion" outcome="/admin/productVersion/view" value="#{testPlanBean.testPlan.productVersion}">
+				<f:param name="id" value="#{testPlanBean.testPlan.productVersion.id}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="testPlanBeanTestPlanRules" value="Rules:"/>
+			<h:outputText id="testPlanBeanTestPlanRules" value="#{testPlanBean.testPlan.rules}"/>
+			<h:outputText/>
+			<h:outputLabel for="testPlanBeanTestPlanName" value="Name:"/>
+			<h:outputText id="testPlanBeanTestPlanName" value="#{testPlanBean.testPlan.name}"/>
+			<h:outputText/>
+			<h:outputLabel for="testPlanBeanTestPlanDescription" value="Description:"/>
+			<h:outputText id="testPlanBeanTestPlanDescription" value="#{testPlanBean.testPlan.description}"/>
+			<h:outputText/>
+			<h:outputLabel for="testPlanBeanTestPlanType" value="Type:"/>
+			<h:outputText id="testPlanBeanTestPlanType" value="#{testPlanBean.testPlan.type}"/>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true"/>
+			<h:link value="Create New" outcome="create"/>
+		</div>
+	</ui:define>
+
+</ui:composition>
