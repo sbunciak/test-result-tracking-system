@@ -5,7 +5,7 @@
 
 	<function>
 		<function-name>asList</function-name>
-		<function-class>org.jboss.tools.trts.view.ViewUtils</function-class>
+		<function-class>org.jboss.community.trts.view.ViewUtils</function-class>
 		<function-signature>
 			java.util.List asList(java.util.Collection)
 		</function-signature>

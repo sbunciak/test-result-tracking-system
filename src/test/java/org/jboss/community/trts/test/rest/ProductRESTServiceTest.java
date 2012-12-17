@@ -1,4 +1,4 @@
-package org.jboss.tools.trts.test.rest;
+package org.jboss.community.trts.test.rest;
 
 import java.util.List;
 
