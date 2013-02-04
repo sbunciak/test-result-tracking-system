@@ -23,7 +23,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.jboss.community.trts.model.Axis;
-import org.jboss.community.trts.model.TestPlan;
 
 /**
  * Backing bean for Axis entities.
@@ -214,11 +213,6 @@ public class AxisBean implements Serializable
       CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
       List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-      TestPlan plan = this.search.getPlan();
-      if (plan != null)
-      {
-         predicatesList.add(builder.equal(root.get("plan"), plan));
-      }
       String category = this.search.getCategory();
       if (category != null && !"".equals(category))
       {

@@ -36,15 +36,6 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="axisBeanAxisPlan" value="Plan:"/>
-				<h:panelGroup>
-					<h:selectOneMenu converter="#{testPlanBean.converter}" id="axisBeanAxisPlan" value="#{axisBean.axis.plan}">
-						<f:selectItem/>
-						<f:selectItems value="#{testPlanBean.all}"/>
-					</h:selectOneMenu>
-					<h:message for="axisBeanAxisPlan" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
 				<h:outputLabel for="axisBeanAxisCategory" value="Category:"/>
 				<h:panelGroup>
 					<h:inputText id="axisBeanAxisCategory" value="#{axisBean.axis.category}"/>

@@ -25,11 +25,6 @@
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="axisBeanAxisPlan" value="Plan:"/>
-			<h:link id="axisBeanAxisPlan" outcome="/admin/testPlan/view" value="#{axisBean.axis.plan}">
-				<f:param name="id" value="#{axisBean.axis.plan.id}"/>
-			</h:link>
-			<h:outputText/>
 			<h:outputLabel for="axisBeanAxisCategory" value="Category:"/>
 			<h:outputText id="axisBeanAxisCategory" value="#{axisBean.axis.category}"/>
 			<h:outputText/>

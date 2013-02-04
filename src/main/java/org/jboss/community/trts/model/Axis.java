@@ -2,7 +2,6 @@ package org.jboss.community.trts.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
@@ -16,24 +15,12 @@ public class Axis extends TestSystemEntity {
 	@Transient
 	private static final long serialVersionUID = -508142527954177187L;
 
-	@ManyToOne
-	// TODO @ManyToMany
-	private TestPlan plan;
-
 	@Column
 	@NotEmpty
 	private String category;
 
 	@Column
 	private String description;
-
-	public TestPlan getPlan() {
-		return plan;
-	}
-
-	public void setPlan(TestPlan plan) {
-		this.plan = plan;
-	}
 
 	public String getCategory() {
 		return this.category;

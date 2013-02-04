@@ -66,7 +66,6 @@ public class TestRunCaseServiceTest {
 		// create java axis
 		Axis axis = new Axis();
 		axis.setCategory("Java");
-		axis.setPlan(plan);
 		axis.setDescription("Test axis to meet Java requirements.");
 
 		AxisCriteria criteria1 = new AxisCriteria();
@@ -80,7 +79,6 @@ public class TestRunCaseServiceTest {
 		criteria2.setValue("1.7");
 
 		Axis axis2 = new Axis();
-		axis2.setPlan(plan);
 		axis2.setCategory("OS");
 		axis2.setDescription("Test axis to meet OS requirements.");
 

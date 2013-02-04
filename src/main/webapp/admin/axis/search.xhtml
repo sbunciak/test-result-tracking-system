@@ -28,15 +28,6 @@
 			<h:panelGroup styleClass="search">
 
 				<h:panelGrid columnClasses="label,component,required" columns="3">
-					<h:outputLabel for="axisBeanSearchPlan" value="Plan:"/>
-					<h:panelGroup>
-						<h:selectOneMenu converter="#{testPlanBean.converter}" id="axisBeanSearchPlan" value="#{axisBean.search.plan}">
-							<f:selectItem/>
-							<f:selectItems value="#{testPlanBean.all}"/>
-						</h:selectOneMenu>
-						<h:message for="axisBeanSearchPlan" styleClass="error"/>
-					</h:panelGroup>
-					<h:outputText/>
 					<h:outputLabel for="axisBeanSearchCategory" value="Category:"/>
 					<h:panelGroup>
 						<h:inputText id="axisBeanSearchCategory" value="#{axisBean.search.category}"/>
@@ -57,15 +48,6 @@
 			</h:panelGroup>
 			
 			<h:dataTable id="axisBeanPageItems" styleClass="data-table" value="#{axisBean.pageItems}" var="_item">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Plan"/>
-					</f:facet>
-					<h:link outcome="/admin/axis/view">
-						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemPlan" value="#{_item.plan}"/>
-					</h:link>
-				</h:column>
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Category"/>
