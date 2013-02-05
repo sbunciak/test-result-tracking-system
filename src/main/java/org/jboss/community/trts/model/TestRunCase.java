@@ -30,7 +30,7 @@ public class TestRunCase extends TestSystemEntity {
 	private String title;
 
 	@OneToMany
-	private List<AxisCriteria> criterias;
+	private List<AxisConfig> criterias;
 
 	@ManyToOne
 	@NotNull
@@ -51,11 +51,11 @@ public class TestRunCase extends TestSystemEntity {
 	@Column
 	private String assignee;
 
-	public List<AxisCriteria> getCriterias() {
+	public List<AxisConfig> getCriterias() {
 		return criterias;
 	}
 
-	public void setCriterias(List<AxisCriteria> criterias) {
+	public void setCriterias(List<AxisConfig> criterias) {
 		this.criterias = criterias;
 	}
 

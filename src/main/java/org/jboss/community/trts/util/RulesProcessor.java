@@ -19,7 +19,7 @@ import org.drools.command.CommandFactory;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.jboss.community.trts.model.Axis;
-import org.jboss.community.trts.model.AxisCriteria;
+import org.jboss.community.trts.model.AxisConfig;
 import org.jboss.community.trts.model.TestPlan;
 import org.jboss.community.trts.model.TestRunCase;
 
@@ -30,7 +30,7 @@ public class RulesProcessor {
 
 	@SuppressWarnings("unchecked")
 	public List<TestRunCase> filterTestRunCases(TestPlan plan,
-			List<TestRunCase> runCases, Map<Axis, Set<AxisCriteria>> axisMap) {
+			List<TestRunCase> runCases, Map<Axis, Set<AxisConfig>> axisMap) {
 
 		if (plan.getRules().isEmpty())
 			return runCases;
@@ -66,9 +66,9 @@ public class RulesProcessor {
 		ksession.execute(CommandFactory.newInsert(plan));
 		ksession.execute(CommandFactory.newInsertElements(runCases));
 		ksession.execute(CommandFactory.newInsertElements(axisMap.keySet()));
-		List<Set<AxisCriteria>> l = new ArrayList<Set<AxisCriteria>>(
+		List<Set<AxisConfig>> l = new ArrayList<Set<AxisConfig>>(
 				axisMap.values());
-		for (Set<AxisCriteria> s : l) {
+		for (Set<AxisConfig> s : l) {
 			ksession.execute(CommandFactory.newInsertElements(s));
 		}
 
@@ -82,7 +82,8 @@ public class RulesProcessor {
 		StringBuilder strBuilder = new StringBuilder();
 		strBuilder.append("import org.jboss.community.trts.model.TestPlan;" + "\n");
 		strBuilder.append("import org.jboss.community.trts.model.TestRunCase;" + "\n");
-		strBuilder.append("import org.jboss.community.trts.model.AxisCriteria;" + "\n");
+		strBuilder.append("import org.jboss.community.trts.model.AxisConfig;" + "\n");
+		strBuilder.append("import org.jboss.community.trts.model.AxisValue;" + "\n");
 		strBuilder.append("import org.jboss.community.trts.model.Axis;" + "\n");
 
 		strBuilder.append("global java.util.List runCases;" + "\n");

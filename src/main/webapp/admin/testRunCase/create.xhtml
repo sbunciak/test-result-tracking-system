@@ -42,20 +42,29 @@
 					<h:dataTable id="testRunCaseBeanTestRunCaseCriterias" styleClass="data-table" value="#{_collection}" var="_item">
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Axis"/>
+								<h:outputText value="Product Version"/>
 							</f:facet>
-							<h:link outcome="/admin/axisCriteria/view">
+							<h:link outcome="/admin/axisConfig/view">
 								<f:param name="id" value="#{_item.id}"/>
-								<h:outputText id="itemAxis" value="#{_item.axis}"/>
+								<h:outputText id="itemProductVersion" value="#{_item.productVersion}"/>
 							</h:link>
 						</h:column>
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Priority"/>
 							</f:facet>
-							<h:link outcome="/admin/axisCriteria/view">
+							<h:link outcome="/admin/axisConfig/view">
 								<f:param name="id" value="#{_item.id}"/>
 								<h:outputText id="itemPriority" value="#{_item.priority}"/>
+							</h:link>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Axis Value"/>
+							</f:facet>
+							<h:link outcome="/admin/axisConfig/view">
+								<f:param name="id" value="#{_item.id}"/>
+								<h:outputText id="itemAxisValue" value="#{_item.axisValue}"/>
 							</h:link>
 						</h:column>
 						<h:column footerClass="remove-column" headerClass="remove-column">
@@ -63,11 +72,11 @@
 						</h:column>
 					</h:dataTable>
 					<h:panelGrid columnClasses=",remove-column" columns="2" styleClass="data-table-footer">
-						<h:selectOneMenu converter="#{axisCriteriaBean.converter}" id="testRunCaseBeanTestRunCaseCriteriasSelect" value="#{requestScope['testRunCaseBeanTestRunCaseCriteriasSelect']}">
+						<h:selectOneMenu converter="#{axisConfigBean.converter}" id="testRunCaseBeanTestRunCaseCriteriasSelect" value="#{requestScope['testRunCaseBeanTestRunCaseCriteriasSelect']}">
 							<f:selectItem/>
-							<f:selectItems value="#{axisCriteriaBean.all}"/>
+							<f:selectItems value="#{axisConfigBean.all}"/>
 						</h:selectOneMenu>
-						<h:commandLink action="#{_collection.add(requestScope['testRunCaseBeanTestRunCaseCriteriasSelect'])}" id="testRunCaseBeanTestRunCaseCriteriasAdd" onclick="if (document.getElementById(document.forms[0].id+':testRunCaseBeanTestRunCaseCriteriasSelect').selectedIndex &lt; 1) { alert('Must select a Axis Criteria'); return false; }" styleClass="add-button"/>
+						<h:commandLink action="#{_collection.add(requestScope['testRunCaseBeanTestRunCaseCriteriasSelect'])}" id="testRunCaseBeanTestRunCaseCriteriasAdd" onclick="if (document.getElementById(document.forms[0].id+':testRunCaseBeanTestRunCaseCriteriasSelect').selectedIndex &lt; 1) { alert('Must select a Axis Config'); return false; }" styleClass="add-button"/>
 					</h:panelGrid>
 				</h:panelGroup>
 				<h:outputText/>

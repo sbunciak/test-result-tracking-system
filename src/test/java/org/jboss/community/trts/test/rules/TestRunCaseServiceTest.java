@@ -9,8 +9,11 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jboss.community.trts.model.Axis;
-import org.jboss.community.trts.model.AxisCriteria;
+import org.jboss.community.trts.model.AxisConfig;
 import org.jboss.community.trts.model.AxisPriority;
+import org.jboss.community.trts.model.AxisValue;
+import org.jboss.community.trts.model.Product;
+import org.jboss.community.trts.model.ProductVersion;
 import org.jboss.community.trts.model.TestCase;
 import org.jboss.community.trts.model.TestPlan;
 import org.jboss.community.trts.model.TestRun;
@@ -38,13 +41,20 @@ public class TestRunCaseServiceTest {
 					"	- title 'Manual Tests'" + "\n" +
 					"There is an Axis with" + "\n" +
 					"	- category 'Java'"+ "\n" +
-					"There is an AxisCriteria with"+ "\n" +
+					"There is an AxisConfig with"+ "\n" +
 					"	- appropriate axis"+ "\n" +
 					"	- value '1.6'"+ "\n" +
-					"The AxisCriteria has been used"+ "\n" +
+					"The AxisConfig has been used"+ "\n" +
 				"then" + "\n"+
 					"filter this TestRunCase" + "\n" +
 				"end";
+		
+		Product product = new Product();
+		product.setName("SOA");
+		
+		ProductVersion version = new ProductVersion();
+		version.setProduct(product);
+		version.setProductVersion("6.0.0");
 		
 		TestPlan plan = new TestPlan();
 		plan.setDescription("Integration tests for SOA 6.");
@@ -68,34 +78,54 @@ public class TestRunCaseServiceTest {
 		axis.setCategory("Java");
 		axis.setDescription("Test axis to meet Java requirements.");
 
-		AxisCriteria criteria1 = new AxisCriteria();
-		criteria1.setAxis(axis);
-		criteria1.setPriority(AxisPriority.P1);
-		criteria1.setValue("1.6");
+		AxisValue value1 = new AxisValue();
+		value1.setAxis(axis);
+		value1.setValue("1.6");
+		
+		AxisValue value2 = new AxisValue();
+		value2.setAxis(axis);
+		value2.setValue("1.7");
+		
+		AxisConfig config1 = new AxisConfig();
+		config1.setAxisValue(value1);
+		config1.setPriority(AxisPriority.P1);
+		config1.setProductVersion(version);
 
-		AxisCriteria criteria2 = new AxisCriteria();
-		criteria2.setAxis(axis);
-		criteria2.setPriority(AxisPriority.P1);
-		criteria2.setValue("1.7");
+		AxisConfig config2 = new AxisConfig();
+		config2.setAxisValue(value2);
+		config2.setPriority(AxisPriority.P1);
+		config2.setProductVersion(version);
 
 		Axis axis2 = new Axis();
 		axis2.setCategory("OS");
 		axis2.setDescription("Test axis to meet OS requirements.");
 
-		AxisCriteria criteria3 = new AxisCriteria();
-		criteria3.setAxis(axis2);
-		criteria3.setPriority(AxisPriority.P2);
-		criteria3.setValue("RHEL");
+		AxisValue value3 = new AxisValue();
+		value3.setAxis(axis2);
+		value3.setValue("RHEL");
+		
+		AxisValue value4 = new AxisValue();
+		value4.setAxis(axis2);
+		value4.setValue("Windows");
+		
+		AxisValue value5 = new AxisValue();
+		value5.setAxis(axis2);
+		value5.setValue("MacOS");
+		
+		AxisConfig config3 = new AxisConfig();
+		config3.setAxisValue(value3);
+		config3.setPriority(AxisPriority.P2);
+		config3.setProductVersion(version);
 
-		AxisCriteria criteria4 = new AxisCriteria();
-		criteria4.setAxis(axis2);
-		criteria4.setPriority(AxisPriority.P2);
-		criteria4.setValue("Windows");
+		AxisConfig config4 = new AxisConfig();
+		config4.setAxisValue(value4);
+		config4.setPriority(AxisPriority.P2);
+		config4.setProductVersion(version);
 
-		AxisCriteria criteria5 = new AxisCriteria();
-		criteria5.setAxis(axis2);
-		criteria5.setPriority(AxisPriority.P2);
-		criteria5.setValue("MacOS");
+		AxisConfig config5 = new AxisConfig();
+		config5.setAxisValue(value5);
+		config5.setPriority(AxisPriority.P2);
+		config5.setProductVersion(version);
 		
 		TestRun run = new TestRun();
 		run.setName("Test Run for " + plan.getName());
@@ -104,9 +134,9 @@ public class TestRunCaseServiceTest {
 		plan.setRules("");
 
 		// Create axisMap for cartesian product
-		Map<Axis, Set<AxisCriteria>> axisMap = new HashMap<Axis, Set<AxisCriteria>>();
-		axisMap.put(axis, Sets.newHashSet(criteria1, criteria2));
-		axisMap.put(axis2, Sets.newHashSet(criteria3, criteria4, criteria5));
+		Map<Axis, Set<AxisConfig>> axisMap = new HashMap<Axis, Set<AxisConfig>>();
+		axisMap.put(axis, Sets.newHashSet(config1, config2));
+		axisMap.put(axis2, Sets.newHashSet(config3, config4, config5));
 
 		List<TestRunCase> generatedCases = TestRunHelper.generateTestRunCases(
 				run, Arrays.asList(case1, case2), axisMap);

@@ -9,10 +9,16 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.community.trts.model.Axis;
-import org.jboss.community.trts.model.AxisCriteria;
+import org.jboss.community.trts.model.AxisConfig;
 import org.jboss.community.trts.model.AxisPriority;
-import org.jboss.community.trts.service.AxisCriteriaService;
+import org.jboss.community.trts.model.AxisValue;
+import org.jboss.community.trts.model.Product;
+import org.jboss.community.trts.model.ProductVersion;
+import org.jboss.community.trts.service.AxisConfigService;
 import org.jboss.community.trts.service.AxisService;
+import org.jboss.community.trts.service.AxisValueService;
+import org.jboss.community.trts.service.ProductService;
+import org.jboss.community.trts.service.ProductVersionService;
 import org.jboss.community.trts.util.Resources;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -31,8 +37,17 @@ public class AxisServiceTest {
 	private AxisService axisService;
 	
 	@Inject
-	private AxisCriteriaService criteriaService;
+	private AxisValueService valueService;
+	
+	@Inject
+	private AxisConfigService configService;
 
+	@Inject
+	private ProductService productService;
+	
+	@Inject
+	private ProductVersionService versionService;
+	
 	@Deployment
 	public static Archive<?> createTestArchive() {
 		return ShrinkWrap
@@ -76,7 +91,7 @@ public class AxisServiceTest {
 	}
 	
 	@Test
-	public void canCreateUpdateDeleteAxisCriteria() {
+	public void canCreateUpdateDeleteAxisConfig() {
 		Axis axis = new Axis();
 		axis.setCategory("Java");
 		axis.setDescription("Test axis to meet Java requirements.");
@@ -85,29 +100,54 @@ public class AxisServiceTest {
 		
 		assertNotNull(axis.getId());
 		
-		AxisCriteria criteria = new AxisCriteria();
-		criteria.setAxis(axis);
-		criteria.setPriority(AxisPriority.P1);
-		criteria.setValue("1.6");
+		AxisValue val1 = new AxisValue();
+		val1.setAxis(axis);
+		val1.setValue("6");
 		
-		criteriaService.persist(criteria);
+		AxisValue val2 = new AxisValue();
+		val1.setAxis(axis);
+		val1.setValue("7");
 		
-		assertNotNull(criteria.getId());
+		valueService.persist(val1);
+		valueService.persist(val2);
 		
-		AxisCriteria dbCriteria = criteriaService.getAxisCriteriaById(criteria.getId());
+		assertNotNull(val1.getId());
+		assertNotNull(val2.getId());
 		
-		assertEquals(dbCriteria, criteria);
+		Product product = new Product();
+		product.setName("JBoss Developer Studio");
+
+		productService.persist(product);
 		
-		criteria.setPriority(AxisPriority.DISABLED);
+		ProductVersion version = new ProductVersion();
+		version.setProduct(product);
+		version.setProductVersion("6.0.0");
+
+		versionService.persist(version);
 		
-		criteriaService.update(criteria);
+		AxisConfig config = new AxisConfig();
+		config.setAxisValue(val1);
+		config.setPriority(AxisPriority.P1);
+		config.setProductVersion(version);
 		
-		dbCriteria = criteriaService.getAxisCriteriaById(criteria.getId());
+		configService.persist(config);
 		
-		assertEquals(dbCriteria.getPriority(), criteria.getPriority());
+		assertNotNull(config.getId());
 		
-		criteriaService.delete(dbCriteria);
+		AxisConfig dbconfig = configService.getAxisConfigById(config.getId());
 		
-		assertTrue(criteriaService.getAxisCriterias(axis).size() == 0);
+		assertEquals(dbconfig, config);
+		
+		config.setPriority(AxisPriority.DISABLED);
+		
+		configService.update(config);
+		
+		dbconfig = configService.getAxisConfigById(config.getId());
+		
+		assertEquals(dbconfig.getPriority(), config.getPriority());
+		
+		configService.delete(dbconfig);
+		
+		assertTrue(configService.getAxisConfigs(axis).size() == 0);
 	}
 }

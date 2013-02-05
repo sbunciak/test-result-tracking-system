@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.jboss.tools.trts</groupId>
+	<groupId>org.jboss.community.trts</groupId>
 	<artifactId>test-result-tracking-system </artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>

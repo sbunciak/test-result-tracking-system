@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jboss.community.trts.model.Axis;
-import org.jboss.community.trts.model.AxisCriteria;
+import org.jboss.community.trts.model.AxisConfig;
 import org.jboss.community.trts.model.TestCase;
 import org.jboss.community.trts.model.TestResult;
 import org.jboss.community.trts.model.TestRun;
@@ -17,16 +17,16 @@ import com.google.common.collect.Sets;
 public class TestRunHelper {
 
 	public static List<TestRunCase> generateTestRunCases(TestRun run,
-			List<TestCase> cases, Map<Axis, Set<AxisCriteria>> axisMap) {
+			List<TestCase> cases, Map<Axis, Set<AxisConfig>> axisMap) {
 
 		List<TestRunCase> resultCases = new ArrayList<TestRunCase>();
 
-		List<Set<AxisCriteria>> criteriasSets = new ArrayList<Set<AxisCriteria>>(
+		List<Set<AxisConfig>> criteriasSets = new ArrayList<Set<AxisConfig>>(
 				axisMap.values());
 
 		for (TestCase tCase : cases) {
 
-			for (List<AxisCriteria> crits : Sets
+			for (List<AxisConfig> crits : Sets
 					.cartesianProduct(criteriasSets)) {
 
 				TestRunCase rCase = createTestRunCase(run, tCase);
@@ -54,8 +54,8 @@ public class TestRunHelper {
 	public static boolean axisHasBeenUsed(TestRunCase runCase, Axis axis) {
 		boolean result = false;
 
-		for (AxisCriteria ac : runCase.getCriterias()) {
-			if (ac.getAxis().equals(axis))
+		for (AxisConfig ac : runCase.getCriterias()) {
+			if (ac.getAxisValue().getAxis().equals(axis))
 				result = true;
 		}
 

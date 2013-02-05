@@ -29,20 +29,29 @@
 			<h:dataTable id="testRunCaseBeanTestRunCaseCriterias" styleClass="data-table" value="#{testRunCaseBean.testRunCase.criterias}" var="_item">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Axis"/>
+						<h:outputText value="Product Version"/>
 					</f:facet>
-					<h:link outcome="/admin/axisCriteria/view">
+					<h:link outcome="/admin/axisConfig/view">
 						<f:param name="id" value="#{_item.id}"/>
-						<h:outputText id="itemAxis" value="#{_item.axis}"/>
+						<h:outputText id="itemProductVersion" value="#{_item.productVersion}"/>
 					</h:link>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Priority"/>
 					</f:facet>
-					<h:link outcome="/admin/axisCriteria/view">
+					<h:link outcome="/admin/axisConfig/view">
 						<f:param name="id" value="#{_item.id}"/>
 						<h:outputText id="itemPriority" value="#{_item.priority}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Axis Value"/>
+					</f:facet>
+					<h:link outcome="/admin/axisConfig/view">
+						<f:param name="id" value="#{_item.id}"/>
+						<h:outputText id="itemAxisValue" value="#{_item.axisValue}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>
