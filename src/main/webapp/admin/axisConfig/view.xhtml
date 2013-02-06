@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{axisConfigBean.id}"/>
+		<f:event type="preRenderView" listener="#{axisConfigBean.retrieve}"/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Axis Config"/>
+
+	<ui:define name="header">
+		Axis Config
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Axis Config
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="axisConfigBeanAxisConfigProductVersion" value="Product Version:"/>
+			<h:link id="axisConfigBeanAxisConfigProductVersion" outcome="/admin/productVersion/view" value="#{axisConfigBean.axisConfig.productVersion}">
+				<f:param name="id" value="#{axisConfigBean.axisConfig.productVersion.id}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="axisConfigBeanAxisConfigPriority" value="Priority:"/>
+			<h:outputText id="axisConfigBeanAxisConfigPriority" value="#{axisConfigBean.axisConfig.priority}"/>
+			<h:outputText/>
+			<h:outputLabel for="axisConfigBeanAxisConfigAxisValue" value="Axis Value:"/>
+			<h:link id="axisConfigBeanAxisConfigAxisValue" outcome="/admin/axisValue/view" value="#{axisConfigBean.axisConfig.axisValue}">
+				<f:param name="id" value="#{axisConfigBean.axisConfig.axisValue.id}"/>
+			</h:link>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true"/>
+			<h:link value="Create New" outcome="create"/>
+		</div>
+	</ui:define>
+
+</ui:composition>
