@@ -15,7 +15,7 @@ import org.jboss.community.trts.service.ProductService;
 
 @RequestScoped
 @Path("/products")
-public class ProductRESTService {
+public class ProductREST {
 
 	@Inject
 	private ProductService service;

@@ -12,7 +12,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.community.trts.model.Product;
 import org.jboss.community.trts.rest.JaxRsActivator;
-import org.jboss.community.trts.rest.ProductRESTService;
+import org.jboss.community.trts.rest.ProductREST;
 import org.jboss.community.trts.service.ProductService;
 import org.jboss.community.trts.util.Resources;
 import org.jboss.resteasy.client.ClientResponse;
@@ -32,7 +32,7 @@ public class ProductRESTServiceTest {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
 				.addPackage(Product.class.getPackage())
-				.addClasses(ProductService.class, ProductRESTService.class,
+				.addClasses(ProductService.class, ProductREST.class,
 						JaxRsActivator.class, Resources.class)
 				.addAsResource("import.sql")
 				.addAsResource("META-INF/test-persistence.xml",
