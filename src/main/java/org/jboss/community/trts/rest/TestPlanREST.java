@@ -13,26 +13,38 @@ import javax.ws.rs.core.MediaType;
 
 import org.jboss.community.trts.model.ProductVersion;
 import org.jboss.community.trts.model.TestPlan;
+import org.jboss.community.trts.service.ProductVersionService;
 import org.jboss.community.trts.service.TestPlanService;
 
 @RequestScoped
-@Path("/test/plans")
+@Path("/products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/testplans")
 public class TestPlanREST {
 
 	@Inject
 	private TestPlanService service;
 
+	@Inject
+	private ProductVersionService versionService;
+
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<TestPlan> getTestPlansByProduct(ProductVersion version) {
-		return service.getTestPlansByProductVersion(version);
+	public List<TestPlan> getTestPlansByProduct(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid) {
+		ProductVersion ver = versionService.getProductVersionById(vid);
+
+		if (ver != null) {
+			return service.getTestPlansByProductVersion(ver);
+		} else {
+			return null;
+		}
 	}
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public TestPlan getTestPlan(@PathParam("id") Long id) {
+	public TestPlan getTestPlan(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("id") Long id) {
 		return service.getTestPlanById(id);
 	}
 }

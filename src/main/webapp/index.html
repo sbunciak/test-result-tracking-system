@@ -1,7 +1,28 @@
 <!-- Plain HTML page that kicks us into the app -->
 
 <html>
-<head>
-<meta http-equiv="Refresh" content="0; URL=index.jsf">
-</head>
+<title>Test Result Tracking System</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=0" />
+<script type="text/javascript"
+	src="resources/js/libs/modernizr-2.0.6.js"></script>
+<!--
+A simple check on the client. For touch devices or small-resolution screens)
+show the mobile client. By enabling the mobile client on a small-resolution screen
+we allow for testing outside a mobile device (like for example the Mobile Browser
+simulator in JBoss Tools and JBoss Developer Studio).
+-->
+<script type="text/javascript">
+	var loader = document.createElement("script")
+	loader.setAttribute("src", "resources/js/libs/require.js");
+	if (Modernizr.touch || Modernizr.mq("only all and (max-width: 480px)")) {
+		environment = "mobile"
+	} else {
+		environment = "desktop"
+	};
+	loader.setAttribute("data-main","resources/js/configurations/" + environment);
+	document.head.appendChild(loader)
+</script>
+
 </html>

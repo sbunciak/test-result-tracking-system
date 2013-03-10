@@ -26,6 +26,7 @@ public class TestPlan extends TestSystemEntity {
 	@NotEmpty
 	private String name;
 
+	@NotNull
 	@ManyToOne
 	private ProductVersion productVersion;
 

@@ -27,9 +27,9 @@ public class ProductREST {
 	}
 	
 	@GET
-	@Path("/{id:[0-9][0-9]*}")
+	@Path("/{pid:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Product getProduct(@PathParam("id") Long id) {
+	public Product getProduct(@PathParam("pid") Long id) {
 		return service.getProductById(id);
 	}
 	

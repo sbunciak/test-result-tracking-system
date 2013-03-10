@@ -15,31 +15,48 @@ import javax.ws.rs.core.MediaType;
 import org.jboss.community.trts.model.TestRun;
 import org.jboss.community.trts.model.TestRunCase;
 import org.jboss.community.trts.service.TestRunCaseService;
+import org.jboss.community.trts.service.TestRunService;
 
 @RequestScoped
-@Path("/test/runs/cases")
+@Path("products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/testplans/{tid:[0-9][0-9]*}/runs/{rid:[0-9][0-9]*}/cases")
 public class TestRunCaseREST {
 
 	@Inject
-	private TestRunCaseService service;
+	private TestRunCaseService runCaseService;
+
+	@Inject
+	private TestRunService runService;
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public TestRunCase getTestRunCase(@PathParam("id") Long id) {
-		return service.getTestRunCaseById(id);
+	public TestRunCase getTestRunCase(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
+			@PathParam("rid") Long rid, @PathParam("id") Long id) {
+		return runCaseService.getTestRunCaseById(id);
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateTestRunCase(TestRunCase rCase) {
-		service.update(rCase);
+	public void updateTestRunCase(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
+			@PathParam("rid") Long rid, TestRunCase rCase) {
+		runCaseService.update(rCase);
 	}
 
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<TestRunCase> getTestRunCasessOfTestRun(TestRun run) {
-		return service.getTestRunCasesByTestRun(run);
+	public List<TestRunCase> getTestRunCasesOfTestRun(
+			@PathParam("pid") Long pid, @PathParam("vid") Long vid,
+			@PathParam("tid") Long tid, @PathParam("rid") Long rid) {
+
+		TestRun run = runService.getTestRunById(rid);
+
+		if (run != null) {
+			return runCaseService.getTestRunCasesByTestRun(run);
+		} else {
+			return null;
+		}
 	}
 }

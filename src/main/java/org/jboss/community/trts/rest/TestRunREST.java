@@ -14,32 +14,46 @@ import javax.ws.rs.core.MediaType;
 
 import org.jboss.community.trts.model.TestPlan;
 import org.jboss.community.trts.model.TestRun;
+import org.jboss.community.trts.service.TestPlanService;
 import org.jboss.community.trts.service.TestRunService;
 
 @RequestScoped
-@Path("/test/runs/")
+@Path("products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/testplans/{tid:[0-9][0-9]*}/runs")
 public class TestRunREST {
 
 	@Inject
-	private TestRunService service;
+	private TestRunService runService;
+
+	@Inject
+	private TestPlanService planService;
 
 	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<TestRun> getTestRuns(TestPlan plan) {
-		return service.getTestRunsOfTestPlan(plan);
+	public List<TestRun> getTestRuns(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("tid") Long tid) {
+
+		TestPlan plan = planService.getTestPlanById(tid);
+
+		if (plan != null) {
+			return runService.getTestRunsOfTestPlan(plan);
+		} else {
+			return null;
+		}
 	}
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public TestRun getTestRun(@PathParam("id") Long id) {
-		return service.getTestRunById(id);
+	public TestRun getTestRun(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
+			@PathParam("id") Long id) {
+		return runService.getTestRunById(id);
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateTestRun(TestRun run) {
-		service.update(run);
+	public void updateTestRun(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("tid") Long tid, TestRun run) {
+		runService.update(run);
 	}
 }
