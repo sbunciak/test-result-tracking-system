@@ -20,7 +20,7 @@ public class AxisValueService extends BaseEntityService<AxisValue> {
 	public List<AxisValue> getAxisValues(Axis a) {
 		TypedQuery<AxisValue> query = em.createNamedQuery(
 				"AxisValue.findByAxis", AxisValue.class);
-		query.setParameter(0, a);
+		query.setParameter("axis", a);
 		return query.getResultList();
 	}
 }
