@@ -21,6 +21,8 @@ public class TestRun extends TestSystemEntity {
 	@NotNull
 	private TestPlan testPlan;
 
+	// TODO: link to ProductBuild
+	
 	@Column
 	@NotEmpty
 	private String name;

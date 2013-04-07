@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -16,7 +18,7 @@ import org.jboss.community.trts.service.TestCaseService;
 import org.jboss.community.trts.service.TestPlanService;
 
 @RequestScoped
-@Path("products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/testplans/{tid:[0-9][0-9]*}/cases")
+@Path("/products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/testplans/{tid:[0-9][0-9]*}/cases")
 public class TestCaseREST {
 
 	@Inject
@@ -37,6 +39,18 @@ public class TestCaseREST {
 		} else {
 			return null;
 		}
+
+	}
+
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void addTestCase(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
+			TestCase tcase) {
+
+		TestPlan plan = planService.getTestPlanById(tid);
+		tcase.setTestPlan(plan);
+		caseService.persist(tcase);
 
 	}
 

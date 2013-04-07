@@ -4,25 +4,52 @@
 $(document).ready(function() {
 	// table sorter
 	$(".tablesorter").tablesorter();
-	// equal height
-	//$('.column').equalHeight();
 
 	$('form').submit(function() {
-
-        addProduct($('form').serializeObject());
-        
+        addTestPlan($('form').serializeObject());
         return false;
     });
-	
-	listProducts();
+
+	$('#product_id').change(function() {
+		var prd_id = $('#product_id').val();
+
+		$.ajax({
+			url : "rest/products/" + prd_id + "/versions",
+			cache : false,
+			success : function(data) {
+				$('#product_version_id').empty().append(buildProductVersionOptions(data));
+			},
+			error : function(error) {
+				addMessage("error", "error fetching product versions -" + error.status);
+			}
+		});
+	});
+
+	$('#product_version_id').change(function() {
+		listTestPlans();
+	});
+		
+	$.ajax({
+		url : "rest/products",
+		cache : false,
+		success : function(data) {
+			$('#product_id').empty().append(buildProductOptions(data));
+		},
+		error : function(error) {
+			addMessage("error", "error fetching products -" + error.status);
+		}
+	});
 });
 
 </script>
 </head>
 
-
-	<h3>Products</h3>
-
+	<h3>Test plans</h3>
+	<fieldset>
+		<label>Product</label> <select name="product_id" id="product_id"></select>
+		
+		<label>Product version</label> <select name="product_version_id" id="product_version_id"></select>
+	</fieldset>
 
 
 <div class="tab_container">
@@ -31,12 +58,14 @@ $(document).ready(function() {
 			<thead>
 				<tr>
 					<th>Name</th>
+					<th>Type</th>
+					<th>Rules</th>
 					<th>Description</th>
 					<th>ID</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
-			<tbody id="products_content">
+			<tbody id="test_plans_content">
 				
 			</tbody>
 		</table>
@@ -48,15 +77,23 @@ $(document).ready(function() {
 <!-- end of .tab_container -->
 
 
-<form id="add_product_form" action="">
+<form action="">
 <div class="module_content">
-	<h3>Add new Product</h3>
+	<h3>Add new Test plan</h3>
+	
 	<fieldset>
 		<label>Name</label> <input type="text" name="name" id="name">
-	</fieldset>
-	<fieldset>
-		<label>Description</label>
-		<textarea name="description" id="description" rows="3"></textarea>
+		<label>Type</label> 
+			<select name="type" id="type">
+				<option value="SMOKE">SMOKE</option>
+				<option value="ACCEPTANCE">ACCEPTANCE</option>
+				<option value="INTEGRATION">INTEGRATION</option>
+				<option value="FUNCTIONAL">FUNCTIONAL</option>
+				<option value="INSTALLATION">INSTALLATION</option>
+				<option value="REGRESSION">REGRESSION</option>
+			</select>
+		<label>Rules</label> <textarea name="rules" id="rules"></textarea>
+		<label>Description</label> <textarea name="description" id="description"></textarea>
 	</fieldset>
 	<div class="clear"></div>
 </div>

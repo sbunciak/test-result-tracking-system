@@ -65,7 +65,8 @@ function addProductVersion(productVersionData) {
 			listProductVersions();
 		},
 		error : function(error) {
-			addMessage("error", "error creating new Product version -" + error.status);
+			addMessage("error", "error creating new Product version -"
+					+ error.status);
 		}
 	});
 }
@@ -73,9 +74,9 @@ function addProductVersion(productVersionData) {
 function addProductBuild(productBuildData) {
 	var prd_id = $('#product_id').val();
 	var ver_id = $('#product_version_id').val();
-	
+
 	$.ajax({
-		url : "rest/products/" + prd_id + "/versions/"+ver_id+"/builds",
+		url : "rest/products/" + prd_id + "/versions/" + ver_id + "/builds",
 		contentType : "application/json",
 		dataType : "json",
 		type : "PUT",
@@ -90,9 +91,67 @@ function addProductBuild(productBuildData) {
 			listProductBuilds();
 		},
 		error : function(error) {
-			addMessage("error", "error creating new Product build -" + error.status);
+			addMessage("error", "error creating new Product build -"
+					+ error.status);
 		}
 	});
+}
+
+function addTestPlan(testPlanData) {
+	var prd_id = $('#product_id').val();
+	var ver_id = $('#product_version_id').val();
+
+	$
+			.ajax({
+				url : "rest/products/" + prd_id + "/versions/" + ver_id
+						+ "/testplans",
+				contentType : "application/json",
+				dataType : "json",
+				type : "PUT",
+				data : JSON.stringify(testPlanData),
+				success : function(data) {
+					// clear input fields
+					$('form')[0].reset();
+
+					// mark success on the registration form
+					addMessage("success", "New Test plan sucessfully created.");
+
+					listTestPlans();
+				},
+				error : function(error) {
+					addMessage("error", "error creating new Test plan -"
+							+ error.status);
+				}
+			});
+}
+
+function addTestCase(testCaseData) {
+	var prd_id = $('#product_id').val();
+	var ver_id = $('#product_version_id').val();
+	var tpl_id = $('#test_plan_id').val();
+
+	$
+			.ajax({
+				url : "rest/products/" + prd_id + "/versions/" + ver_id
+						+ "/testplans/" + tpl_id + "/cases",
+				contentType : "application/json",
+				dataType : "json",
+				type : "PUT",
+				data : JSON.stringify(testCaseData),
+				success : function(data) {
+					// clear input fields
+					$('form')[0].reset();
+
+					// mark success on the registration form
+					addMessage("success", "New Test case sucessfully created.");
+
+					listTestCases();
+				},
+				error : function(error) {
+					addMessage("error", "error creating new Test case -"
+							+ error.status);
+				}
+			});
 }
 
 function addAxis(axisData) {
@@ -136,7 +195,44 @@ function addAxisValue(axisValueData) {
 			listAxisValues();
 		},
 		error : function(error) {
-			addMessage("error", "error creating new Axis value -" + error.status);
+			addMessage("error", "error creating new Axis value -"
+					+ error.status);
+		}
+	});
+}
+
+function addAxisValueConfiguration(configurationData) {
+	var a_id = $('#axis_id').val();
+	var pv_id = $('#product_version_id').val();
+
+	var jsonData = "[";
+	$.each(configurationData, function(index, element) {
+		jsonData += '{' + '"productVersionId":' + pv_id + ','
+				+ '"axisValueId":' + element.name + ',' + '"priority":"'
+				+ element.value + '"}';
+
+		jsonData += (index != configurationData.length - 1) ? ',' : ']';
+	});
+
+	$.ajax({
+		url : "rest/axis/" + a_id + "/configurations",
+		contentType : "application/json",
+		dataType : "json",
+		type : "PUT",
+		data : jsonData,
+		success : function(data) {
+			// clear input fields
+			$('form')[0].reset();
+
+			// mark success on the registration form
+			addMessage("success",
+					"New Axis configurations sucessfully created.");
+
+			listAxisValuesPriorities();
+		},
+		error : function(error) {
+			addMessage("error", "error creating new Axis configurations -"
+					+ error.status);
 		}
 	});
 }
@@ -171,8 +267,8 @@ function listProductVersions() {
 		url : "rest/products/" + prd_id + "/versions",
 		cache : false,
 		success : function(data) {
-			$('#product_versions_content').empty()
-					.append(buildProductVersionRows(data));
+			$('#product_versions_content').empty().append(
+					buildProductVersionRows(data));
 		},
 		error : function(error) {
 			addMessage("error", "error updating list -" + error.status);
@@ -183,13 +279,46 @@ function listProductVersions() {
 function listProductBuilds() {
 	var prd_id = $('#product_id').val();
 	var ver_id = $('#product_version_id').val();
-	
+
 	$.ajax({
-		url : "rest/products/" + prd_id + "/versions/"+ver_id+"/builds",
+		url : "rest/products/" + prd_id + "/versions/" + ver_id + "/builds",
 		cache : false,
 		success : function(data) {
-			$('#product_builds_content').empty()
-					.append(buildProductBuildRows(data));
+			$('#product_builds_content').empty().append(
+					buildProductBuildRows(data));
+		},
+		error : function(error) {
+			addMessage("error", "error updating list -" + error.status);
+		}
+	});
+}
+
+function listTestPlans() {
+	var prd_id = $('#product_id').val();
+	var ver_id = $('#product_version_id').val();
+
+	$.ajax({
+		url : "rest/products/" + prd_id + "/versions/" + ver_id + "/testplans",
+		cache : false,
+		success : function(data) {
+			$('#test_plans_content').empty().append(buildTestPlanRows(data));
+		},
+		error : function(error) {
+			addMessage("error", "error updating list -" + error.status);
+		}
+	});
+}
+
+function listTestCases() {
+	var prd_id = $('#product_id').val();
+	var ver_id = $('#product_version_id').val();
+	var tpl_id = $('#test_plan_id').val();
+
+	$.ajax({
+		url : "rest/products/" + prd_id + "/versions/" + ver_id + "/testplans/"+tpl_id+"/cases",
+		cache : false,
+		success : function(data) {
+			$('#test_cases_content').empty().append(buildTestCaseRows(data));
 		},
 		error : function(error) {
 			addMessage("error", "error updating list -" + error.status);
@@ -217,8 +346,23 @@ function listAxisValues() {
 		url : "rest/axis/" + prd_id + "/values",
 		cache : false,
 		success : function(data) {
-			$('#axis_values_content').empty()
-					.append(buildAxisValueRows(data));
+			$('#axis_values_content').empty().append(buildAxisValueRows(data));
+		},
+		error : function(error) {
+			addMessage("error", "error updating list -" + error.status);
+		}
+	});
+}
+
+function listAxisValuesPriorities() {
+	var prd_id = $('#axis_id').val();
+
+	$.ajax({
+		url : "rest/axis/" + prd_id + "/values",
+		cache : false,
+		success : function(data) {
+			$('#axis_conf_content').empty().append(
+					buildAxisValuePrioritiesRows(data));
 		},
 		error : function(error) {
 			addMessage("error", "error updating list -" + error.status);
@@ -262,8 +406,8 @@ function buildProductVersionOptions(versions) {
 	var body = "";
 
 	for ( var i = 0; i < versions.length; i++) {
-		body += '<option value="' + versions[i].id + '">' + versions[i].productVersion
-				+ '</option>';
+		body += '<option value="' + versions[i].id + '">'
+				+ versions[i].productVersion + '</option>';
 	}
 
 	return body;
@@ -295,6 +439,52 @@ function buildProductBuildRows(productBuilds) {
 		body += '<td><input type="image" src="images/icn_edit.png" title="Edit">'
 				+ '<input type="image"	src="images/icn_trash.png" title="Trash"></td>';
 		body += "</tr>";
+	}
+
+	return body;
+}
+
+function buildTestPlanRows(testPlans) {
+	var body = "";
+
+	for ( var i = 0; i < testPlans.length; i++) {
+		body += "<tr>";
+		body += "<td>" + testPlans[i].name + "</td>";
+		body += "<td>" + testPlans[i].type + "</td>";
+		body += "<td>" + testPlans[i].rules + "</td>";
+		body += "<td>" + testPlans[i].description + "</td>";
+		body += "<td>" + testPlans[i].id + "</td>";
+		body += '<td><input type="image" src="images/icn_edit.png" title="Edit">'
+				+ '<input type="image"	src="images/icn_trash.png" title="Trash"></td>';
+		body += "</tr>";
+	}
+
+	return body;
+}
+
+function buildTestCaseRows(testCases) {
+	var body = "";
+
+	for ( var i = 0; i < testCases.length; i++) {
+		body += "<tr>";
+		body += "<td>" + testCases[i].title + "</td>";
+		body += "<td>" + testCases[i].defaultTester + "</td>";
+		body += "<td>" + testCases[i].ciLink + "</td>";
+		body += "<td>" + testCases[i].id + "</td>";
+		body += '<td><input type="image" src="images/icn_edit.png" title="Edit">'
+				+ '<input type="image"	src="images/icn_trash.png" title="Trash"></td>';
+		body += "</tr>";
+	}
+
+	return body;
+}
+
+function buildTestPlanOptions(testPlans) {
+	var body = "";
+
+	for ( var i = 0; i < testPlans.length; i++) {
+		body += '<option value="' + testPlans[i].id + '">' + testPlans[i].name
+				+ '</option>';
 	}
 
 	return body;
@@ -336,6 +526,26 @@ function buildAxisValueRows(axisValues) {
 		body += "<td>" + axisValues[i].id + "</td>";
 		body += '<td><input type="image" src="images/icn_edit.png" title="Edit">'
 				+ '<input type="image"	src="images/icn_trash.png" title="Trash"></td>';
+		body += "</tr>";
+	}
+
+	return body;
+}
+
+function buildAxisValuePrioritiesRows(axisValues) {
+	var body = "";
+
+	for ( var i = 0; i < axisValues.length; i++) {
+		body += "<tr>";
+		body += "<td>" + axisValues[i].value + "</td>";
+		body += "<td>" + '<input type="radio" name="' + axisValues[i].id
+				+ '" value="P1" />' + "</td>";
+		body += "<td>" + '<input type="radio" name="' + axisValues[i].id
+				+ '" value="P2" />' + "</td>";
+		body += "<td>" + '<input type="radio" name="' + axisValues[i].id
+				+ '" value="P3" />' + "</td>";
+		body += "<td>" + '<input type="radio" name="' + axisValues[i].id
+				+ '" value="DISABLED" checked="checked" />' + "</td>";
 		body += "</tr>";
 	}
 

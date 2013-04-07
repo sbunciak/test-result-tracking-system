@@ -5,10 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
+@XmlRootElement
 @NamedQueries({ @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p") })
 public class Product extends TestSystemEntity {
 
