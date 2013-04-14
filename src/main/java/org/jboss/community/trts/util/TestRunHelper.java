@@ -18,7 +18,7 @@ public class TestRunHelper {
 
 	public static List<TestRunCase> generateTestRunCases(TestRun run,
 			List<TestCase> cases, Map<Axis, Set<AxisConfig>> axisMap) {
-
+		
 		List<TestRunCase> resultCases = new ArrayList<TestRunCase>();
 
 		List<Set<AxisConfig>> criteriasSets = new ArrayList<Set<AxisConfig>>(
@@ -26,8 +26,7 @@ public class TestRunHelper {
 
 		for (TestCase tCase : cases) {
 
-			for (List<AxisConfig> crits : Sets
-					.cartesianProduct(criteriasSets)) {
+			for (List<AxisConfig> crits : Sets.cartesianProduct(criteriasSets)) {
 
 				TestRunCase rCase = createTestRunCase(run, tCase);
 				rCase.setCriterias(crits);
@@ -51,7 +50,7 @@ public class TestRunHelper {
 		return rCase;
 	}
 
-	public static boolean axisHasBeenUsed(TestRunCase runCase, Axis axis) {
+	public boolean axisHasBeenUsed(TestRunCase runCase, Axis axis) {
 		boolean result = false;
 
 		for (AxisConfig ac : runCase.getCriterias()) {

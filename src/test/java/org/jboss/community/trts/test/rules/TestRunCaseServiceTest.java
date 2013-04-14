@@ -135,26 +135,28 @@ public class TestRunCaseServiceTest {
 
 		// Create axisMap for cartesian product
 		Map<Axis, Set<AxisConfig>> axisMap = new HashMap<Axis, Set<AxisConfig>>();
-		axisMap.put(axis, Sets.newHashSet(config1, config2));
-		axisMap.put(axis2, Sets.newHashSet(config3, config4, config5));
-
+		
 		List<TestRunCase> generatedCases = TestRunHelper.generateTestRunCases(
 				run, Arrays.asList(case1, case2), axisMap);
-
+		
 		// Should prevent from processing empty filter rules in prod
 		List<TestRunCase> resultCases = rulesProc.filterTestRunCases(plan,
 				generatedCases, axisMap);
 
-		//System.out.println(resultCases);
+		// without filtering and axis configs
+		assertTrue(resultCases.size() == 2);
 
-		assertTrue(resultCases.size() == 12);
-
+		// Add Axis Configs
+		axisMap.put(axis, Sets.newHashSet(config1, config2));
+		axisMap.put(axis2, Sets.newHashSet(config3, config4, config5));
+		
+		// Add rules
 		plan.setRules(rules);
 
+		generatedCases = TestRunHelper.generateTestRunCases(
+				run, Arrays.asList(case1, case2), axisMap);
 		resultCases = rulesProc.filterTestRunCases(plan, generatedCases, axisMap);
 
-		//System.out.println(resultCases);
-		
 		assertTrue(generatedCases.size() == 9);
 	}
 }
