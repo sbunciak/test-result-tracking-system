@@ -23,11 +23,24 @@ import org.jboss.community.trts.model.AxisConfig;
 import org.jboss.community.trts.model.TestPlan;
 import org.jboss.community.trts.model.TestRunCase;
 
+/**
+ * Utility class to process Drools rules specified in custom DSL
+ * 
+ * @author sbunciak
+ *
+ */
 @Named
 @Stateless
 @RequestScoped
 public class RulesProcessor {
 
+	/**
+	 * 
+	 * @param TestPlan plan
+	 * @param List of Test Run Cases
+	 * @param Map of Axis configurations
+	 * @return test run cases processed by test plan rules 
+	 */
 	@SuppressWarnings("unchecked")
 	public List<TestRunCase> filterTestRunCases(TestPlan plan,
 			List<TestRunCase> runCases, Map<Axis, Set<AxisConfig>> axisMap) {
@@ -77,6 +90,12 @@ public class RulesProcessor {
 		return runCases;
 	}
 
+	/**
+	 * Append default header to rules
+	 * 
+	 * @param rules of specific test plan
+	 * @return merged rules
+	 */
 	private String buildRules(String planRules) {
 		
 		StringBuilder strBuilder = new StringBuilder();

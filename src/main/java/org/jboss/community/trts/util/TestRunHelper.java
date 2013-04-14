@@ -14,8 +14,22 @@ import org.jboss.community.trts.model.TestRunCase;
 
 import com.google.common.collect.Sets;
 
+/**
+ * Helper class for easy generating of TestRunCase-s  
+ * 
+ * @author sbunciak
+ *
+ */
 public class TestRunHelper {
 
+	/**
+	 * Generates TestRunCase-s from TestCase-s by producing cartesian product of TestCase and AxisConfigs
+	 * 
+	 * @param TestRun
+	 * @param TestCases
+	 * @param AxisConfigurations
+	 * @return List of TestRunCase-s
+	 */
 	public static List<TestRunCase> generateTestRunCases(TestRun run,
 			List<TestCase> cases, Map<Axis, Set<AxisConfig>> axisMap) {
 		
@@ -39,6 +53,13 @@ public class TestRunHelper {
 		return resultCases;
 	}
 
+	/**
+	 * Clone TestCase to TestRunCase and set default values
+	 * 
+	 * @param TestRun
+	 * @param TestCase
+	 * @return TestRunCase
+	 */
 	public static TestRunCase createTestRunCase(TestRun run, TestCase testCase) {
 		TestRunCase rCase = new TestRunCase();
 
@@ -48,16 +69,5 @@ public class TestRunHelper {
 		rCase.setCiLink(testCase.getCiLink());
 		rCase.setTestRun(run);
 		return rCase;
-	}
-
-	public boolean axisHasBeenUsed(TestRunCase runCase, Axis axis) {
-		boolean result = false;
-
-		for (AxisConfig ac : runCase.getCriterias()) {
-			if (ac.getAxisValue().getAxis().equals(axis))
-				result = true;
-		}
-
-		return result;
 	}
 }

@@ -5,6 +5,13 @@ import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+/**
+ * Base service class to perform basic CRUD operations on persistance layer
+ * 
+ * @author sbunciak
+ *
+ * @param <T>
+ */
 public abstract class BaseEntityService<T> {
 
 	@Inject
