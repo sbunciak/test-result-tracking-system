@@ -730,7 +730,7 @@ fieldset textarea {
 	background-position: 10px 6px;
 	margin: 0 0.5%;
 	display: block;
-	float: left;
+	/* float: left; */
 	width: 96%;
 	margin: 0 10px;
 }

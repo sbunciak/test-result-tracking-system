@@ -24,4 +24,9 @@ public class TestRunCaseService extends BaseEntityService<TestRunCase>{
 		return query.getResultList();
 	}
 	
+	public void persistAll(List<TestRunCase> cases) {
+		for (TestRunCase testRunCase : cases) {
+			this.persist(testRunCase);
+		}
+	}
 }

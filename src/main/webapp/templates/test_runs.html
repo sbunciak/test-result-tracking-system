@@ -36,12 +36,26 @@ $(document).ready(function() {
 				$('#test_plan_id').empty().append(buildTestPlanOptions(data));
 			},
 			error : function(error) {
-				addMessage("error", "error fetching test plans -" + error.status);
+				addMessage("error", "error fetching product values -" + error.status);
+			}
+		});
+		$.ajax({
+			url : "rest/products/" + prd_id + "/versions/"+prv_id+"/builds",
+			cache : false,
+			success : function(data) {
+				$('#product_build_id').empty().append(buildProductBuildOptions(data));
+			},
+			error : function(error) {
+				addMessage("error", "error fetching product values -" + error.status);
 			}
 		});
 	});
 
 	$('#test_plan_id').change(function() {
+		listTestRuns();
+	});
+
+	$('#product_build_id').change(function() {
 		listTestRuns();
 	});
 	
@@ -66,6 +80,8 @@ $(document).ready(function() {
 		
 		<label>Product version</label> <select name="product_version_id" id="product_version_id"></select>
 		
+		<label>Product build</label> <select name="product_build_id" id="product_build_id"></select>
+		
 		<label>Test plan</label> <select name="test_plan_id" id="test_plan_id"></select>
 	</fieldset>
 
@@ -75,9 +91,7 @@ $(document).ready(function() {
 		<table class="tablesorter">
 			<thead>
 				<tr>
-					<th>Title</th>
-					<th>Tester</th>
-					<th>CI Link</th>
+					<th>Name</th>
 					<th>ID</th>
 					<th>Actions</th>
 				</tr>
@@ -99,9 +113,7 @@ $(document).ready(function() {
 	<h3>Add new Test run</h3>
 	
 	<fieldset>
-		<label>Title</label> <input type="text" name="title" id="title"/>
-		<label>Tester</label> <input type="text" name="defaultTester" id="defaultTester"/>
-		<label>CI Link</label> <input type="text" name="ciLink" id="ciLink"/>
+		<label>Name</label> <input type="text" name="name" id="name"/>
 	</fieldset>
 	<div class="clear"></div>
 </div>

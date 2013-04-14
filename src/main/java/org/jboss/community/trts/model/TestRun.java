@@ -21,7 +21,9 @@ public class TestRun extends TestSystemEntity {
 	@NotNull
 	private TestPlan testPlan;
 
-	// TODO: link to ProductBuild
+	@ManyToOne
+	@NotNull
+	private ProductBuild productBuild;
 	
 	@Column
 	@NotEmpty
@@ -43,6 +45,14 @@ public class TestRun extends TestSystemEntity {
 		this.name = name;
 	}
 
+	public ProductBuild getProductBuild() {
+		return productBuild;
+	}
+	
+	public void setProductBuild(ProductBuild productBuild) {
+		this.productBuild = productBuild;
+	}
+	
 	@Override
 	public String toString() {
 		String result = "";

@@ -24,28 +24,23 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class ProductRESTServiceTest {
 
-	private static final String REST_URL_PRODUCTS = "http://localhost:8080/test/rest/products/";
+	private String REST_URL_PRODUCTS = "http://localhost:8080/test/rest/products/";
 
 	@Inject
 	private ProductService productService;
-	
+
 	@Deployment
 	public static WebArchive create() {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
 				.addPackage(Product.class.getPackage())
 				.addPackage(ProductService.class.getPackage())
-				.addClasses(ProductREST.class, JaxRsActivator.class, Resources.class)
+				.addClasses(ProductREST.class, JaxRsActivator.class,
+						Resources.class)
 				.addAsResource("META-INF/test-persistence.xml",
 						"META-INF/persistence.xml")
 				.addAsWebInfResource("test-ds.xml", "test-ds.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-	}
-
-	@Test
-	public void canCreateProduct() {
-		// Using the RESTEasy libraries, initiate a client request
-		ClientRequest request = new ClientRequest(REST_URL_PRODUCTS);
 	}
 
 	@Test
@@ -58,7 +53,8 @@ public class ProductRESTServiceTest {
 		assertNotNull(product.getId());
 
 		// Using the RESTEasy libraries, initiate a client request
-		ClientRequest request = new ClientRequest(REST_URL_PRODUCTS + product.getId());
+		ClientRequest request = new ClientRequest(REST_URL_PRODUCTS
+				+ product.getId());
 
 		// Be sure to set the mediatype of the request
 		request.accept(MediaType.APPLICATION_JSON);
@@ -67,7 +63,7 @@ public class ProductRESTServiceTest {
 		try {
 			ClientResponse<Product> response = request.get(Product.class);
 			assertTrue("Failed request", response.getStatus() == 200);
-			
+
 			Product responseEntity = response.getEntity(Product.class);
 			assertTrue("Object are not equal", responseEntity.equals(product));
 		} catch (Exception e) {

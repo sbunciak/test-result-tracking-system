@@ -154,6 +154,36 @@ function addTestCase(testCaseData) {
 			});
 }
 
+function addTestRun(testRunData) {
+	var prd_id = $('#product_id').val();
+	var ver_id = $('#product_version_id').val();
+	var bld_id = $('#product_build_id').val();
+	var tpl_id = $('#test_plan_id').val();
+
+	$
+			.ajax({
+				url : "rest/products/" + prd_id + "/versions/" + ver_id
+						+ "/builds/"+bld_id+"/testplans/" + tpl_id + "/runs",
+				contentType : "application/json",
+				dataType : "json",
+				type : "PUT",
+				data : JSON.stringify(testRunData),
+				success : function(data) {
+					// clear input fields
+					$('form')[0].reset();
+
+					// mark success on the registration form
+					addMessage("success", "New Test run sucessfully created.");
+
+					listTestRuns();
+				},
+				error : function(error) {
+					addMessage("error", "error creating new Test run -"
+							+ error.status);
+				}
+			});
+}
+
 function addAxis(axisData) {
 	$.ajax({
 		url : 'rest/axis',
@@ -309,13 +339,33 @@ function listTestPlans() {
 	});
 }
 
+function listTestRuns() {
+	var prd_id = $('#product_id').val();
+	var ver_id = $('#product_version_id').val();
+	var bld_id = $('#product_build_id').val();
+	var tpl_id = $('#test_plan_id').val();
+
+	$.ajax({
+		url : "rest/products/" + prd_id + "/versions/" + ver_id
+		+ "/builds/"+bld_id+"/testplans/" + tpl_id + "/runs",
+		cache : false,
+		success : function(data) {
+			$('#test_runs_content').empty().append(buildTestRunRows(data));
+		},
+		error : function(error) {
+			addMessage("error", "error updating list -" + error.status);
+		}
+	});
+}
+
 function listTestCases() {
 	var prd_id = $('#product_id').val();
 	var ver_id = $('#product_version_id').val();
 	var tpl_id = $('#test_plan_id').val();
 
 	$.ajax({
-		url : "rest/products/" + prd_id + "/versions/" + ver_id + "/testplans/"+tpl_id+"/cases",
+		url : "rest/products/" + prd_id + "/versions/" + ver_id + "/testplans/"
+				+ tpl_id + "/cases",
 		cache : false,
 		success : function(data) {
 			$('#test_cases_content').empty().append(buildTestCaseRows(data));
@@ -444,6 +494,17 @@ function buildProductBuildRows(productBuilds) {
 	return body;
 }
 
+function buildProductBuildOptions(productBuilds) {
+	var body = "";
+
+	for ( var i = 0; i < productBuilds.length; i++) {
+		body += '<option value="' + productBuilds[i].id + '">'
+				+ productBuilds[i].label + '</option>';
+	}
+
+	return body;
+}
+
 function buildTestPlanRows(testPlans) {
 	var body = "";
 
@@ -454,6 +515,21 @@ function buildTestPlanRows(testPlans) {
 		body += "<td>" + testPlans[i].rules + "</td>";
 		body += "<td>" + testPlans[i].description + "</td>";
 		body += "<td>" + testPlans[i].id + "</td>";
+		body += '<td><input type="image" src="images/icn_edit.png" title="Edit">'
+				+ '<input type="image"	src="images/icn_trash.png" title="Trash"></td>';
+		body += "</tr>";
+	}
+
+	return body;
+}
+
+function buildTestRunRows(testRuns) {
+	var body = "";
+
+	for ( var i = 0; i < testRuns.length; i++) {
+		body += "<tr>";
+		body += "<td>" + testRuns[i].name + "</td>";
+		body += "<td>" + testRuns[i].id + "</td>";
 		body += '<td><input type="image" src="images/icn_edit.png" title="Edit">'
 				+ '<input type="image"	src="images/icn_trash.png" title="Trash"></td>';
 		body += "</tr>";
