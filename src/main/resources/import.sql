@@ -23,6 +23,7 @@ insert into AxisValue (id, value, axis_id) values (2, 'Linux', 1)
 insert into AxisValue (id, value, axis_id) values (3, 'Windows', 1)
 
 insert into TestPlan (id, description, name, rules, type, productVersion_id) values (0, 'Dummy description', 'Test plan for JBDS 6', '', 'SMOKE', 0)
+insert into TestPlan (id, description, name, rules, type, productVersion_id) values (1, 'Dummy description', 'Test plan for JBDS 7', '', 'SMOKE', 1)
 
 insert into TestCase (id, ciLink, defaultTester, title, testPlan_id) values (0, 'http://jenkins.brq.redhat.com', 'sbunciak', 'JBDS can be installed without errors', 0)
 

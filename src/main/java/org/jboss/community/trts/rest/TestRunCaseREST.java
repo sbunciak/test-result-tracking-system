@@ -45,7 +45,6 @@ public class TestRunCaseREST {
 	}
 
 	@GET
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<TestRunCase> getTestRunCasesOfTestRun(
 			@PathParam("pid") Long pid, @PathParam("vid") Long vid,

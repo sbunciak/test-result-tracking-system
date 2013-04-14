@@ -163,7 +163,8 @@ function addTestRun(testRunData) {
 	$
 			.ajax({
 				url : "rest/products/" + prd_id + "/versions/" + ver_id
-						+ "/builds/"+bld_id+"/testplans/" + tpl_id + "/runs",
+						+ "/builds/" + bld_id + "/testplans/" + tpl_id
+						+ "/runs",
 				contentType : "application/json",
 				dataType : "json",
 				type : "PUT",
@@ -346,14 +347,34 @@ function listTestRuns() {
 	var tpl_id = $('#test_plan_id').val();
 
 	$.ajax({
-		url : "rest/products/" + prd_id + "/versions/" + ver_id
-		+ "/builds/"+bld_id+"/testplans/" + tpl_id + "/runs",
+		url : "rest/products/" + prd_id + "/versions/" + ver_id + "/builds/"
+				+ bld_id + "/testplans/" + tpl_id + "/runs",
 		cache : false,
 		success : function(data) {
 			$('#test_runs_content').empty().append(buildTestRunRows(data));
 		},
 		error : function(error) {
 			addMessage("error", "error updating list -" + error.status);
+		}
+	});
+}
+
+function listTestRunCases() {
+	var prd_id = $('#product_id').val();
+	var ver_id = $('#product_version_id').val();
+	var bld_id = $('#product_build_id').val();
+	var tpl_id = $('#test_plan_id').val();
+	var run_id = $('#test_run_id').val();
+
+	$.ajax({
+		url : "rest/products/" + prd_id + "/versions/" + ver_id + "/builds/"
+				+ bld_id + "/testplans/" + tpl_id + "/runs/" + run_id,
+		cache : false,
+		success : function(data) {
+			$('#test_run_cases_content').empty().append(buildTestRunCaseRows(data));
+		},
+		error : function(error) {
+			addMessage("error", "error fetching test run cases -" + error.status);
 		}
 	});
 }
@@ -533,6 +554,37 @@ function buildTestRunRows(testRuns) {
 		body += '<td><input type="image" src="images/icn_edit.png" title="Edit">'
 				+ '<input type="image"	src="images/icn_trash.png" title="Trash"></td>';
 		body += "</tr>";
+	}
+
+	return body;
+}
+
+function buildTestRunCaseRows(testRunCases) {
+	var body = "";
+
+	for ( var i = 0; i < testRunCases.length; i++) {
+		body += "<tr>";
+		body += "<td>" + testRunCases[i].title + "</td>";
+		//body += "<td>" + testRunCases[i].criterias + "</td>";
+		//body += "<td>" + testRunCases[i].assignee + "</td>";
+		//body += "<td>" + testRunCases[i].ciLink + "</td>";
+		//body += "<td>" + testRunCases[i].bugTrLink + "</td>";
+		//body += "<td>" + testRunCases[i].result + "</td>";
+		//body += "<td>" + testRunCases[i].id + "</td>";
+		body += '<td><input type="image" src="images/icn_edit.png" title="Edit">'
+				+ '<input type="image"	src="images/icn_trash.png" title="Trash"></td>';
+		body += "</tr>";
+	}
+	
+	return body;
+}
+
+function buildTestRunOptions(testRuns) {
+	var body = "";
+
+	for ( var i = 0; i < testRuns.length; i++) {
+		body += '<option value="' + testRuns[i].id + '">' + testRuns[i].name
+				+ '</option>';
 	}
 
 	return body;
