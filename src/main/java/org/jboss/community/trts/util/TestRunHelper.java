@@ -70,4 +70,16 @@ public class TestRunHelper {
 		rCase.setTestRun(run);
 		return rCase;
 	}
+	
+
+	public static boolean axisHasBeenUsed(TestRunCase runCase, Axis axis) {
+		boolean result = false;
+
+		for (AxisConfig ac : runCase.getCriterias()) {
+			if (ac.getAxisValue().getAxis().equals(axis))
+				result = true;
+		}
+
+		return result;
+	}
 }

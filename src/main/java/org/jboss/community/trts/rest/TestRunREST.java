@@ -61,11 +61,7 @@ public class TestRunREST {
 
 		TestPlan plan = planService.getTestPlanById(tid);
 
-		if (plan != null) {
-			return runService.getTestRunsOfTestPlan(plan);
-		} else {
-			return null;
-		}
+		return runService.getTestRunsOfTestPlan(plan);
 	}
 
 	@GET

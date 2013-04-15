@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -29,7 +31,8 @@ public class TestRunCase extends TestSystemEntity {
 	@NotEmpty
 	private String title;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
+	//@JoinColumn(name="criterias_id")
 	private List<AxisConfig> criterias;
 
 	@ManyToOne

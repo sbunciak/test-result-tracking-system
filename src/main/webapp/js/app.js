@@ -368,7 +368,7 @@ function listTestRunCases() {
 
 	$.ajax({
 		url : "rest/products/" + prd_id + "/versions/" + ver_id + "/builds/"
-				+ bld_id + "/testplans/" + tpl_id + "/runs/" + run_id,
+				+ bld_id + "/testplans/" + tpl_id + "/runs/" + run_id + "/cases",
 		cache : false,
 		success : function(data) {
 			$('#test_run_cases_content').empty().append(buildTestRunCaseRows(data));
@@ -565,12 +565,12 @@ function buildTestRunCaseRows(testRunCases) {
 	for ( var i = 0; i < testRunCases.length; i++) {
 		body += "<tr>";
 		body += "<td>" + testRunCases[i].title + "</td>";
-		//body += "<td>" + testRunCases[i].criterias + "</td>";
-		//body += "<td>" + testRunCases[i].assignee + "</td>";
-		//body += "<td>" + testRunCases[i].ciLink + "</td>";
-		//body += "<td>" + testRunCases[i].bugTrLink + "</td>";
-		//body += "<td>" + testRunCases[i].result + "</td>";
-		//body += "<td>" + testRunCases[i].id + "</td>";
+		body += "<td>" + testRunCases[i].criterias + "</td>";
+		body += "<td>" + testRunCases[i].assignee + "</td>";
+		body += "<td>" + testRunCases[i].ciLink + "</td>";
+		body += "<td>" + testRunCases[i].bugTrLink + "</td>";
+		body += "<td>" + testRunCases[i].result + "</td>";
+		body += "<td>" + testRunCases[i].id + "</td>";
 		body += '<td><input type="image" src="images/icn_edit.png" title="Edit">'
 				+ '<input type="image"	src="images/icn_trash.png" title="Trash"></td>';
 		body += "</tr>";
