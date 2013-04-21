@@ -32,7 +32,7 @@ public class TestRunCase extends TestSystemEntity {
 	private String title;
 
 	@OneToMany(fetch = FetchType.EAGER)
-	//@JoinColumn(name="criterias_id")
+	@JoinColumn(name="criterias_id")
 	private List<AxisConfig> criterias;
 
 	@ManyToOne

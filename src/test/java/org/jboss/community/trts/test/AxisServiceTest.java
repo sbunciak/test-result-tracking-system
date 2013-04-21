@@ -105,8 +105,8 @@ public class AxisServiceTest {
 		val1.setValue("6");
 		
 		AxisValue val2 = new AxisValue();
-		val1.setAxis(axis);
-		val1.setValue("7");
+		val2.setAxis(axis);
+		val2.setValue("7");
 		
 		valueService.persist(val1);
 		valueService.persist(val2);
@@ -148,6 +148,6 @@ public class AxisServiceTest {
 		
 		configService.delete(dbconfig);
 		
-		assertTrue(configService.getAxisConfigs(axis).size() == 0);
+		assertTrue(configService.getAxisConfigById(config.getId()) == null);
 	}
 }

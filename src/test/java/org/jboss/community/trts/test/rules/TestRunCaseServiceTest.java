@@ -32,7 +32,7 @@ public class TestRunCaseServiceTest {
 	@Test
 	public void canGenerateTestRunCase() {
 
-		// Custom DSL
+		// TODO: load from file, Custom DSL
 		String rules = 
 				"rule 'Filter java 1.6'" + "\n"+
 				"when" + "\n"+
@@ -48,7 +48,7 @@ public class TestRunCaseServiceTest {
 				"then" + "\n"+
 					"filter this TestRunCase" + "\n" +
 				"end";
-		
+
 		Product product = new Product();
 		product.setName("SOA");
 		

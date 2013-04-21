@@ -533,7 +533,7 @@ function buildTestPlanRows(testPlans) {
 		body += "<tr>";
 		body += "<td>" + testPlans[i].name + "</td>";
 		body += "<td>" + testPlans[i].type + "</td>";
-		body += "<td>" + testPlans[i].rules + "</td>";
+		body += "<td><pre>" + testPlans[i].rules + "</pre></td>";
 		body += "<td>" + testPlans[i].description + "</td>";
 		body += "<td>" + testPlans[i].id + "</td>";
 		body += '<td><input type="image" src="images/icn_edit.png" title="Edit">'

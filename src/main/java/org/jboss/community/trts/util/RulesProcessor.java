@@ -105,7 +105,7 @@ public class RulesProcessor {
 		strBuilder.append("import org.jboss.community.trts.model.AxisValue;" + "\n");
 		strBuilder.append("import org.jboss.community.trts.model.Axis;" + "\n");
 
-		strBuilder.append("global java.util.List runCases;" + "\n");
+		strBuilder.append("global java.util.List<TestRunCase> runCases;" + "\n");
 		strBuilder.append(planRules);
 		
 		return strBuilder.toString();

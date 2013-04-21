@@ -37,18 +37,6 @@ public class AxisConfigurationREST {
 	@Inject
 	private ProductVersionService versionService;
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<AxisConfig> getAxisConfigurations(@PathParam("aid") Long aid) {
-		Axis a = service.getAxisById(aid);
-		
-		if (a != null) {
-			return configService.getAxisConfigs(a);
-		} else {
-			return null;
-		}		
-	}
-	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addAxisConfig(@PathParam("aid") Long aid, AxisConfigDataHolder[] config) {
