@@ -20,11 +20,11 @@ rule 'Filter Java 1.6'
 		There is an Axis with
 			- category 'Java'
 		
-		There is an AxisCriteria with
+		There is an AxisConfig with
 			- appropriate axis
 			- value '1.6'
 			
-		The AxisCriteria has been used
+		The AxisConfig has been used
 	then
 		filter this TestRunCase
 end

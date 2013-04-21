@@ -368,13 +368,16 @@ function listTestRunCases() {
 
 	$.ajax({
 		url : "rest/products/" + prd_id + "/versions/" + ver_id + "/builds/"
-				+ bld_id + "/testplans/" + tpl_id + "/runs/" + run_id + "/cases",
+				+ bld_id + "/testplans/" + tpl_id + "/runs/" + run_id
+				+ "/cases",
 		cache : false,
 		success : function(data) {
-			$('#test_run_cases_content').empty().append(buildTestRunCaseRows(data));
+			$('#test_run_cases_content').empty().append(
+					buildTestRunCaseRows(data));
 		},
 		error : function(error) {
-			addMessage("error", "error fetching test run cases -" + error.status);
+			addMessage("error", "error fetching test run cases -"
+					+ error.status);
 		}
 	});
 }
@@ -575,7 +578,7 @@ function buildTestRunCaseRows(testRunCases) {
 				+ '<input type="image"	src="images/icn_trash.png" title="Trash"></td>';
 		body += "</tr>";
 	}
-	
+
 	return body;
 }
 
