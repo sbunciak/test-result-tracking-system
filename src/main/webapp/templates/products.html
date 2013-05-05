@@ -1,25 +1,9 @@
 <html>
-<head>
-<script type="text/javascript">
-$(document).ready(function() {
+<head></head>
 
-	$('form').submit(function() {
+<h3>Products</h3>
 
-        addProduct($('form').serializeObject());
-        
-        return false;
-    });
-	
-	listProducts();
-});
-
-</script>
-</head>
-
-
-	<h3>Products</h3>
-
-
+<p><a href="#/products/new">Create new product &gt;&gt;</a></p>
 
 <div class="tab_container">
 	<div class="tab_content">
@@ -33,35 +17,26 @@ $(document).ready(function() {
 				</tr>
 			</thead>
 			<tbody id="products_content">
-				
+
+			<% _.each(products, function (p) { %>
+            <tr>
+                <td><%= p.attributes.name %></td>
+                <td><%= p.attributes.description %></td>
+                <td><%= p.attributes.id %></td>
+                <td>
+                	<a href="#/products/<%=p.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=p.attributes.id%>" title="Trash" />
+				</td>
+            </tr>
+            <% }); %>
+			
 			</tbody>
 		</table>
 	</div>
 	<!-- end of tab -->
 
-	
+
 </div>
 <!-- end of .tab_container -->
-
-
-<form id="add_product_form" action="">
-<div class="module_content">
-	<h3>Add new Product</h3>
-	<fieldset>
-		<label>Name</label> <input type="text" name="name" id="name">
-	</fieldset>
-	<fieldset>
-		<label>Description</label>
-		<textarea name="description" id="description" rows="3"></textarea>
-	</fieldset>
-	<div class="clear"></div>
-</div>
-<footer>
-	<div class="submit_link">
-		<input type="submit" value="Save" class="alt_btn" /> 
-		<input type="reset" value="Reset" />
-	</div>
-</footer>
-</form>
 
 </html>

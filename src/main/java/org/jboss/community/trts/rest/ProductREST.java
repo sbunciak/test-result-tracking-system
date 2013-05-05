@@ -5,7 +5,9 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -35,10 +37,22 @@ public class ProductREST {
 		return service.getProductById(id);
 	}
 	
-	@PUT
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addProduct(Product p) {
 		service.persist(p);
 	}
 	
+	@PUT
+	@Path("/{pid:[0-9][0-9]*}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void saveProduct(@PathParam("pid") Long id, Product p) {
+		service.update(p);
+	}
+	
+	@DELETE
+	@Path("/{pid:[0-9][0-9]*}")
+	public void deleteProduct(@PathParam("pid") Long id) {
+		service.delete(service.getProductById(id));
+	}
 }

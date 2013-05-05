@@ -29,7 +29,7 @@ function addProduct(productData) {
 		url : 'rest/products',
 		contentType : "application/json",
 		dataType : "json",
-		type : "PUT",
+		type : "POST",
 		data : JSON.stringify(productData),
 		success : function(data) {
 			// clear input fields
@@ -681,17 +681,4 @@ function buildAxisValuePrioritiesRows(axisValues) {
 	}
 
 	return body;
-}
-
-/**
- * @param type :
- *            warning | error | success | info
- * @param text
- *            to display
- */
-function addMessage(type, text) {
-	$(".alert_" + type).html(
-			text + ' - <a href="#" onclick="closeMessages()">close</a>');
-	$(".alert_" + type).fadeIn();
-	$(".alert_" + type).delay(5000).fadeOut('slow');
 }

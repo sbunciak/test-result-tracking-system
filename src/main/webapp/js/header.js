@@ -1,20 +1,15 @@
-$(document).ready(function() {
-
-	// When page loads...
-	closeMessages();
-
-	// On Click Event
-	$("#sidebar .toggle a").click(function() {
-
-		var page = $(this).attr("href"); // Find the href
-		page = page.replace('#','');
-		loadPage("templates/"+page+".html");
-		
-		return false;
-	});
-
-	
-});
+/**
+ * @param type :
+ *            warning | error | success | info
+ * @param text
+ *            to display
+ */
+function addMessage(type, text) {
+	$(".alert_" + type).html(
+			text + ' - <a href="#" onclick="closeMessages()">close</a>');
+	$(".alert_" + type).fadeIn();
+	$(".alert_" + type).delay(5000).fadeOut('slow');
+}
 
 function closeMessages() {
 	$(".alert_info").hide(); // Hide info message
