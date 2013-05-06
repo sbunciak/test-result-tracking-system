@@ -1,10 +1,10 @@
 require([ "app/models/Product" , 
           "app/collections/Products", 
-          "app/views/ProductsView",
-          "app/views/CreateProductView",
+          "app/views/ProductListView",
+          "app/views/ProductCreateUpdateView",
           "app/views/HomeView", ],
 
-function(Product, Products, ProductsView, CreateProductView, HomeView) {
+function(Product, Products, ProductListView, ProductCreateUpdateView, HomeView) {
 
 	var AppRouter = Backbone.Router.extend({
 		routes : {
@@ -16,9 +16,9 @@ function(Product, Products, ProductsView, CreateProductView, HomeView) {
 		},
 
 		editProduct : function(product_id) {
-			var product =new Product({id : product_id}); 
+			var product = new Product({id : product_id}); 
 			
-			var view = new CreateProductView({
+			var view = new ProductCreateUpdateView({
 				el : $("#page_loader"),
 				model : product
 			});
@@ -28,7 +28,7 @@ function(Product, Products, ProductsView, CreateProductView, HomeView) {
 		
 		createProduct : function() {
 			
-			var view = new CreateProductView({
+			var view = new ProductCreateUpdateView({
 				el : $("#page_loader"),
 				model : new Product()
 			});
@@ -39,7 +39,7 @@ function(Product, Products, ProductsView, CreateProductView, HomeView) {
 		showProducts : function() {
 			var products = new Products(); 
 			
-			var view = new ProductsView({
+			var view = new ProductListView({
 				el : $("#page_loader"),
 				model : products
 			});
