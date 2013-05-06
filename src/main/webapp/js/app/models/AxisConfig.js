@@ -1,8 +1,9 @@
 define([], function() {
 
-	var Axis = Backbone.Model.extend({
+	var AxisConfig = Backbone.Model.extend({
 
-		urlRoot : 'rest/axis',
+		// will be overwritten
+		urlRoot : '',
 		
 		initialize : function() {
 			this.bind("error", function(model, error) {
@@ -12,5 +13,5 @@ define([], function() {
 		}
 	});
 
-	return Axis;
+	return AxisConfig;
 });

@@ -9,12 +9,26 @@ function(Product, Products, ProductListView, ProductCreateUpdateView, HomeView) 
 	var AppRouter = Backbone.Router.extend({
 		routes : {
 			"" : "home", // index page
-			"products" : "showProducts", // list of products
+			"products" : "listProducts", // list of products
 			"products/new" : "createProduct", // create product
 			"products/:id" : "editProduct", // create product
-
+			"axis" : "listAxis", // list of axis
+			"products/:id/versions" : "listProductVersions", // list of product versions
 		},
 
+		listProductVersions : function(pid) {
+			var productVersions = new ProductVersions({
+				urlRoot : "rest/products/"+pid+"versions/"
+			}); 
+			
+			var view = new ProductVersionListView({
+				el : $("#page_loader"),
+				model : productVersions
+			});
+			
+			productVersions.fetch();
+		},
+		
 		editProduct : function(product_id) {
 			var product = new Product({id : product_id}); 
 			
@@ -36,7 +50,7 @@ function(Product, Products, ProductListView, ProductCreateUpdateView, HomeView) 
 			view.render();
 		},
 		
-		showProducts : function() {
+		listProducts : function() {
 			var products = new Products(); 
 			
 			var view = new ProductListView({
