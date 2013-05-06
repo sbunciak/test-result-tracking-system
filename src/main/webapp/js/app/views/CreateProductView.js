@@ -22,22 +22,29 @@ define([ "app/models/Product",
 		},
 
 		saveProduct : function(event) {
-			// TODO: create/update collision
 			// get attributes from the form
 			var productAttributes = {
-					name : $('#name').val(),
-					description : $('#description').val()
-			}; 
+				name : $('#name').val(),
+				description : $('#description').val()
+			};
 
-			//this.model.set(productAttributes);
-						
-			this.model.save(productAttributes, {
-				success : function(product) {
-					addMessage("success", "Product successfully saved.");
-					console.log(product);
-					//	app.navigate("showProducts", {trigger: true});
-				}
-			})
+			if (this.model.isNew()) {
+				// creating a new product
+				this.model.set(productAttributes);
+				this.model.save(null, {
+					success : function(product) {
+						addMessage("success", "Product successfully created.");
+					}
+				})
+			} else {
+				// updating existing product
+				this.model.save(productAttributes, {
+					success : function(product) {
+						addMessage("success", "Product successfully saved.");
+					}
+				})
+			}
+
 		}
 	});
 

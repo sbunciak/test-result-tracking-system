@@ -23,7 +23,7 @@ define([ "app/collections/Products",
 
 		deleteProduct : function(event) {
 			var id = $(event.currentTarget).data("tm-id");
-			this.model.models[id].destroy({
+			this.model.get(id).destroy({
 				success : function() {
 					addMessage("success", "Product successfully removed.");
 				}
@@ -32,5 +32,4 @@ define([ "app/collections/Products",
 	});
 
 	return ProductsView;
-
 });
