@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.community.trts.model.Product;
+import org.jboss.community.trts.rest.BaseEntityREST;
 import org.jboss.community.trts.rest.JaxRsActivator;
 import org.jboss.community.trts.rest.ProductREST;
 import org.jboss.community.trts.service.ProductService;
@@ -35,8 +36,8 @@ public class ProductRESTServiceTest {
 				.create(WebArchive.class, "test.war")
 				.addPackage(Product.class.getPackage())
 				.addPackage(ProductService.class.getPackage())
-				.addClasses(ProductREST.class, JaxRsActivator.class,
-						Resources.class)
+				.addClasses(BaseEntityREST.class, ProductREST.class,
+						JaxRsActivator.class, Resources.class)
 				.addAsResource("META-INF/test-persistence.xml",
 						"META-INF/persistence.xml")
 				.addAsWebInfResource("test-ds.xml", "test-ds.xml")

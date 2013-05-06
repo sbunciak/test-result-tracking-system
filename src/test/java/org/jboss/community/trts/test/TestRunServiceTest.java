@@ -97,7 +97,7 @@ public class TestRunServiceTest {
 		run.setName("Changed name");
 		runService.update(run);
 
-		run = runService.getTestRunById(run.getId());
+		run = runService.getById(run.getId());
 
 		assertEquals(run.getName(), "Changed name");
 

@@ -31,7 +31,7 @@ public class TestPlanREST {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<TestPlan> getTestPlansByProduct(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid) {
-		ProductVersion ver = versionService.getProductVersionById(vid);
+		ProductVersion ver = versionService.getById(vid);
 
 		if (ver != null) {
 			return service.getTestPlansByProductVersion(ver);
@@ -44,7 +44,7 @@ public class TestPlanREST {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addTestPlan(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, TestPlan p) {
-		ProductVersion ver = versionService.getProductVersionById(vid);
+		ProductVersion ver = versionService.getById(vid);
 
 		p.setProductVersion(ver);
 		service.persist(p);
@@ -55,6 +55,6 @@ public class TestPlanREST {
 	@Produces(MediaType.APPLICATION_JSON)
 	public TestPlan getTestPlan(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("id") Long id) {
-		return service.getTestPlanById(id);
+		return service.getById(id);
 	}
 }

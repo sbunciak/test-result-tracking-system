@@ -43,8 +43,8 @@ public class AxisConfigurationREST {
 		
 		for (AxisConfigDataHolder c : config) {
 			AxisConfig ac = new AxisConfig();
-			ac.setAxisValue(valueService.getAxisValueById(c.getAxisValueId()));
-			ac.setProductVersion(versionService.getProductVersionById(c.getProductVersionId()));
+			ac.setAxisValue(valueService.getById(c.getAxisValueId()));
+			ac.setProductVersion(versionService.getById(c.getProductVersionId()));
 			ac.setPriority(AxisPriority.valueOf(c.getPriority()));
 			
 			configService.persist(ac);

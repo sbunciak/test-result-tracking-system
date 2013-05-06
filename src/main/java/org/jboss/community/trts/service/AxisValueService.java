@@ -13,10 +13,6 @@ import org.jboss.community.trts.model.AxisValue;
 @RequestScoped
 public class AxisValueService extends BaseEntityService<AxisValue> {
 
-	public AxisValue getAxisValueById(Long id) {
-		return em.find(AxisValue.class, id);
-	}
-
 	public List<AxisValue> getAxisValues(Axis a) {
 		TypedQuery<AxisValue> query = em.createNamedQuery(
 				"AxisValue.findByAxis", AxisValue.class);

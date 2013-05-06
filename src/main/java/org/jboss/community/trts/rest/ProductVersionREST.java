@@ -32,7 +32,7 @@ public class ProductVersionREST {
 	public List<ProductVersion> getProductVersionsOfProduct(
 			@PathParam("pid") Long id) {
 
-		Product p = productService.getProductById(id);
+		Product p = productService.getById(id);
 
 		if (p != null) {
 			return versionService.getProductVersionByProduct(p);
@@ -46,7 +46,7 @@ public class ProductVersionREST {
 	public void addProductVersionsOfProduct(
 			@PathParam("pid") Long id, ProductVersion pv) {
 
-		Product p = productService.getProductById(id);
+		Product p = productService.getById(id);
 		pv.setProduct(p);
 
 		versionService.persist(pv);

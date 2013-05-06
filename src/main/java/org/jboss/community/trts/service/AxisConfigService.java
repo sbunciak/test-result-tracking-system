@@ -13,10 +13,6 @@ import org.jboss.community.trts.model.ProductVersion;
 @RequestScoped
 public class AxisConfigService extends BaseEntityService<AxisConfig> {
 
-	public AxisConfig getAxisConfigById(Long id) {
-		return em.find(AxisConfig.class, id);
-	}
-
 	public List<AxisConfig> getAxisConfigs(ProductVersion version) {
 		TypedQuery<AxisConfig> query = em.createNamedQuery("AxisConfig.findByProductVersion",
 				AxisConfig.class);

@@ -32,7 +32,7 @@ public class TestCaseREST {
 	public List<TestCase> getTestCases(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("tid") Long tid) {
 
-		TestPlan plan = planService.getTestPlanById(tid);
+		TestPlan plan = planService.getById(tid);
 
 		if (plan != null) {
 			return caseService.getTestCasesByTestPlan(plan);
@@ -48,7 +48,7 @@ public class TestCaseREST {
 			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
 			TestCase tcase) {
 
-		TestPlan plan = planService.getTestPlanById(tid);
+		TestPlan plan = planService.getById(tid);
 		tcase.setTestPlan(plan);
 		caseService.persist(tcase);
 
@@ -59,7 +59,7 @@ public class TestCaseREST {
 	public TestCase getTestCase(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
 			@PathParam("id") Long id) {
-		return caseService.getTestCaseById(id);
+		return caseService.getById(id);
 	}
 
 }

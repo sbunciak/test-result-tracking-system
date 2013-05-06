@@ -72,7 +72,7 @@ public class AxisServiceTest {
 		
 		assertNotNull(axis.getId());
 		
-		Axis axisFromDB = axisService.getAxisById(axis.getId());
+		Axis axisFromDB = axisService.getById(axis.getId());
 		
 		assertEquals(axis, axisFromDB);
 		
@@ -81,13 +81,13 @@ public class AxisServiceTest {
 		
 		axisService.update(axis);
 		
-		axisFromDB = axisService.getAxisById(axis.getId());
+		axisFromDB = axisService.getById(axis.getId());
 		assertEquals(axis.getCategory(), axisFromDB.getCategory());
 		assertEquals(axis.getDescription(), axisFromDB.getDescription());
 		
 		axisService.delete(axisFromDB);
 		
-		assertTrue(axisService.getAllAxis().size() == 0);
+		assertTrue(axisService.getAll().size() == 0);
 	}
 	
 	@Test
@@ -134,7 +134,7 @@ public class AxisServiceTest {
 		
 		assertNotNull(config.getId());
 		
-		AxisConfig dbconfig = configService.getAxisConfigById(config.getId());
+		AxisConfig dbconfig = configService.getById(config.getId());
 		
 		assertEquals(dbconfig, config);
 		
@@ -142,12 +142,12 @@ public class AxisServiceTest {
 		
 		configService.update(config);
 		
-		dbconfig = configService.getAxisConfigById(config.getId());
+		dbconfig = configService.getById(config.getId());
 		
 		assertEquals(dbconfig.getPriority(), config.getPriority());
 		
 		configService.delete(dbconfig);
 		
-		assertTrue(configService.getAxisConfigById(config.getId()) == null);
+		assertTrue(configService.getById(config.getId()) == null);
 	}
 }

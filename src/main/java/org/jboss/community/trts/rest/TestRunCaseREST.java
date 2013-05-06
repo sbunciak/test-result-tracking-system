@@ -34,7 +34,7 @@ public class TestRunCaseREST {
 			@PathParam("vid") Long vid, @PathParam("bid") Long bid,
 			@PathParam("tid") Long tid, @PathParam("rid") Long rid,
 			@PathParam("id") Long id) {
-		return runCaseService.getTestRunCaseById(id);
+		return runCaseService.getById(id);
 	}
 
 	@POST
@@ -53,7 +53,7 @@ public class TestRunCaseREST {
 			@PathParam("bid") Long bid, @PathParam("tid") Long tid,
 			@PathParam("rid") Long rid) {
 
-		TestRun run = runService.getTestRunById(rid);
+		TestRun run = runService.getById(rid);
 		return runCaseService.getTestRunCasesByTestRun(run);
 	}
 }

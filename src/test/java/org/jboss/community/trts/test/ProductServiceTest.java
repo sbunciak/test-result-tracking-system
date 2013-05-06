@@ -63,13 +63,13 @@ public class ProductServiceTest {
 
 		productService.update(product);
 
-		product = productService.getProductById(product.getId());
+		product = productService.getById(product.getId());
 
 		assertEquals(product.getDescription(), "Eclipse-base IDE by Red Hat");
 
 		productService.delete(product);
 
-		assertTrue(productService.getAllProducts().size() == 0);
+		assertTrue(productService.getAll().size() == 0);
 	}
 
 	@Test
@@ -91,7 +91,7 @@ public class ProductServiceTest {
 
 		versionService.update(version);
 
-		version = versionService.getProductVersionById(version.getId());
+		version = versionService.getById(version.getId());
 
 		assertEquals(version.getDescription(), "Latest-greates version of JBDS");
 
@@ -127,7 +127,7 @@ public class ProductServiceTest {
 
 		buildService.update(build);
 
-		build = buildService.getProductBuildById(build.getId());
+		build = buildService.getById(build.getId());
 
 		assertEquals(build.getLabel(), "Final");
 

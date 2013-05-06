@@ -30,7 +30,7 @@ public class AxisValueREST {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<AxisValue> getAxisValuesOfAxis(@PathParam("aid") Long aid) {
-		Axis a = service.getAxisById(aid);
+		Axis a = service.getById(aid);
 
 		if (a != null) {
 			return valueService.getAxisValues(a);
@@ -43,7 +43,7 @@ public class AxisValueREST {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addProductBuildAxisValue(@PathParam("aid") Long aid,
 			AxisValue value) {
-		value.setAxis(service.getAxisById(aid));
+		value.setAxis(service.getById(aid));
 
 		valueService.persist(value);
 	}

@@ -98,13 +98,13 @@ public class TestPlanServiceTest {
 
 		planService.update(plan);
 
-		TestPlan dbPlan = planService.getTestPlanById(plan.getId());
+		TestPlan dbPlan = planService.getById(plan.getId());
 
 		assertEquals(dbPlan.getType(), plan.getType());
 
 		planService.delete(dbPlan);
 
-		assertTrue(planService.getAllTestPlans().size() == 0);
+		assertTrue(planService.getAll().size() == 0);
 	}
 
 	@Test
@@ -148,7 +148,7 @@ public class TestPlanServiceTest {
 		case1.setTitle("Smoke Tests");
 		caseService.update(case1);
 		
-		case1 = caseService.getTestCaseById(case1.getId());
+		case1 = caseService.getById(case1.getId());
 		
 		assertTrue(case1.getTitle().equals("Smoke Tests"));
 		

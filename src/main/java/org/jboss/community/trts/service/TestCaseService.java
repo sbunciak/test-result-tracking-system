@@ -13,10 +13,6 @@ import org.jboss.community.trts.model.TestPlan;
 @RequestScoped
 public class TestCaseService extends BaseEntityService<TestCase>{
 
-	public TestCase getTestCaseById(Long id) {
-		return em.find(TestCase.class, id);
-	}
-
 	public List<TestCase> getTestCasesByTestPlan(TestPlan plan) {
 		TypedQuery<TestCase> query = em.createNamedQuery("TestCase.findAll",
 				TestCase.class);

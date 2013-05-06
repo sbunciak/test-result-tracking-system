@@ -32,7 +32,7 @@ public class ProductBuildREST {
 	public List<ProductBuild> getProductBuildsOfVersion(
 			@PathParam("pid") Long pid, @PathParam("vid") Long vid) {
 
-		ProductVersion ver = versionService.getProductVersionById(vid);
+		ProductVersion ver = versionService.getById(vid);
 
 		if (ver != null) {
 			return buildService.getProductBuildsByProductVersion(ver);
@@ -46,7 +46,7 @@ public class ProductBuildREST {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addProductBuild(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, ProductBuild build) {
-		build.setProductVersion(versionService.getProductVersionById(vid)); 
+		build.setProductVersion(versionService.getById(vid)); 
 		
 		buildService.persist(build);
 	}
@@ -56,6 +56,6 @@ public class ProductBuildREST {
 	@Produces(MediaType.APPLICATION_JSON)
 	public ProductBuild getProductBuildById(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("bid") Long id) {
-		return buildService.getProductBuildById(id);
+		return buildService.getById(id);
 	}
 }

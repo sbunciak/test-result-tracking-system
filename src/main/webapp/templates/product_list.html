@@ -1,0 +1,42 @@
+<html>
+<head></head>
+
+<h3>Products</h3>
+
+<p><a href="#/products/new">Create new product &gt;&gt;</a></p>
+
+<div class="tab_container">
+	<div class="tab_content">
+		<table class="tablesorter">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>ID</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody id="products_content">
+
+			<% _.each(products, function (p) { %>
+            <tr>
+                <td><%= p.attributes.name %></td>
+                <td><%= p.attributes.description %></td>
+                <td><%= p.attributes.id %></td>
+                <td>
+                	<a href="#/products/<%=p.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=p.attributes.id%>" title="Trash" />
+				</td>
+            </tr>
+            <% }); %>
+			
+			</tbody>
+		</table>
+	</div>
+	<!-- end of tab -->
+
+
+</div>
+<!-- end of .tab_container -->
+
+</html>

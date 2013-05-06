@@ -59,7 +59,7 @@ public class TestRunREST {
 			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
 			@PathParam("bid") Long bid) {
 
-		TestPlan plan = planService.getTestPlanById(tid);
+		TestPlan plan = planService.getById(tid);
 
 		return runService.getTestRunsOfTestPlan(plan);
 	}
@@ -70,7 +70,7 @@ public class TestRunREST {
 	public TestRun getTestRun(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
 			@PathParam("bid") Long bid, @PathParam("id") Long id) {
-		return runService.getTestRunById(id);
+		return runService.getById(id);
 	}
 
 	@PUT
@@ -79,8 +79,8 @@ public class TestRunREST {
 			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
 			@PathParam("bid") Long bid, TestRun run) {
 
-		TestPlan plan = planService.getTestPlanById(tid);
-		ProductBuild build = buildService.getProductBuildById(bid);
+		TestPlan plan = planService.getById(tid);
+		ProductBuild build = buildService.getById(bid);
 		
 		run.setTestPlan(plan);
 		run.setProductBuild(build);

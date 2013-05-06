@@ -12,10 +12,6 @@ import org.jboss.community.trts.model.ProductVersion;
 @Stateless
 @RequestScoped
 public class ProductBuildService extends BaseEntityService<ProductBuild> {
-	
-	public ProductBuild getProductBuildById(Long id) {
-		return em.find(ProductBuild.class, id);
-	}
 
 	public List<ProductBuild> getProductBuildsByProductVersion(ProductVersion version) {
 		TypedQuery<ProductBuild> query = em.createNamedQuery(
