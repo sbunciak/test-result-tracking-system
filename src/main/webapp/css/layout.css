@@ -181,12 +181,15 @@ article.breadcrumbs {
 	color: #222222;
 }
 
-.breadcrumb_divider {
+.breadcrumbs div {
 	display: inline-block;
+}
+
+.breadcrumb_divider {
 	width: 12px;
 	height: 24px;
 	background: url(../images/breadcrumb_divider.png) no-repeat;
-	float: left;
+	/* float: left; */
 	margin: 0 5px;
 }
 
