@@ -22,49 +22,56 @@ import org.jboss.community.trts.service.AxisValueService;
 import org.jboss.community.trts.service.ProductVersionService;
 
 @RequestScoped
-@Path("/axis/{aid:[0-9][0-9]*}/configurations")
+@Path("/axis/{aid:[0-9][0-9]*}/version/{vid:[0-9][0-9]*}/configurations")
 public class AxisConfigurationREST {
-	
+
 	@Inject
 	private AxisService service;
-	
+
 	@Inject
 	private AxisValueService valueService;
-	
+
 	@Inject
 	private AxisConfigService configService;
-	
+
 	@Inject
 	private ProductVersionService versionService;
-	
+
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void addAxisConfig(@PathParam("aid") Long aid, AxisConfigDataHolder[] config) {
-		
+	public void addAxisConfig(@PathParam("aid") Long aid,
+			AxisConfigDataHolder[] config) {
+
 		for (AxisConfigDataHolder c : config) {
 			AxisConfig ac = new AxisConfig();
 			ac.setAxisValue(valueService.getById(c.getAxisValueId()));
 			ac.setProductVersion(versionService.getById(c.getProductVersionId()));
 			ac.setPriority(AxisPriority.valueOf(c.getPriority()));
-			
+
 			configService.persist(ac);
 		}
-		
+
 	}
-	
+
+	@GET
+	public List<AxisConfig> listConfigurations(@PathParam("aid") Long aid,
+			@PathParam("vid") Long vid) {
+		return configService.getAxisConfigs(versionService.getById(vid));
+	}
+
 }
 
 /**
  * 
  * @author sbunciak
- *
+ * 
  */
 @XmlRootElement
 class AxisConfigDataHolder {
 	private Long axisValueId;
 	private Long productVersionId;
 	private String priority;
-	
+
 	public AxisConfigDataHolder() {
 		// Auto-generated constructor stub
 	}
@@ -91,5 +98,5 @@ class AxisConfigDataHolder {
 
 	public void setPriority(String priority) {
 		this.priority = priority;
-	}	
+	}
 }

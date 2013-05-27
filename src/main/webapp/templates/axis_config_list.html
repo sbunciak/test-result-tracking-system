@@ -4,7 +4,7 @@
 <h3>Axis configuration</h3>
 
 <form action="">
-<div class="tab_container">
+	<div class="tab_container">
 		<div class="tab_content">
 			<table class="tablesorter">
 				<thead>
@@ -18,22 +18,36 @@
 				</thead>
 				<tbody id="axis_conf_content">
 
+					<% _.each(configs, function (c) { %>
+					<tr>
+						<td><%= c.attributes.axisValue.value %></td>
+						<td><input type="radio" value="P1" name="c.attributes.value.id" /></td>
+						<td><input type="radio" value="P2" name="c.attributes.value.id" /></td>
+						<td><input type="radio" value="P3" name="c.attributes.value.id" /></td>
+						<td><input type="radio" value="DISABLED" name="c.attributes.value.id" /></td>
+						<td>
+							<a href="#/axis/<%=c.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a> 
+							<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=c.attributes.id%>" title="Trash" />
+						</td>
+					</tr>
+					<% }); %>
+
 				</tbody>
 			</table>
 		</div>
 		<!-- end of tab -->
 
-	
-</div>
-<!-- end of .tab_container -->
 
-
-<footer>
-	<div class="submit_link">
-		<input type="submit" value="Save" class="alt_btn" /> <input
-			type="reset" value="Reset" />
 	</div>
-</footer>
+	<!-- end of .tab_container -->
+
+
+	<footer>
+		<div class="submit_link">
+			<input type="submit" value="Save" class="alt_btn" /> <input
+				type="reset" value="Reset" />
+		</div>
+	</footer>
 
 </form>
 </html>

@@ -17,6 +17,19 @@
 			</thead>
 			<tbody id="test_cases_content">
 
+			<% _.each(cases, function (c) { %>
+            <tr>
+                <td><%= c.attributes.title %></td>
+                <td><%= c.attributes.defaultTester %></td>
+                <td><%= c.attributes.ciLink %></td>
+                <td><%= c.attributes.id %></td>
+                <td>
+                	<a href="#/products/<%=c.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=c.attributes.id%>" title="Trash" />
+				</td>
+            </tr>
+            <% }); %>
+
 			</tbody>
 		</table>
 	</div>

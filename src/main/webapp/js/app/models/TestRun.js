@@ -3,7 +3,7 @@ define([], function() {
 	var TestRun = Backbone.Model.extend({
 
 		// will be overwritten
-		urlRoot : '',
+		urlRoot : 'rest/',
 		
 		initialize : function() {
 			this.bind("error", function(model, error) {

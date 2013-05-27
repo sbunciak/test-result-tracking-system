@@ -16,8 +16,23 @@
 			</thead>
 			<tbody id="axis_content">
 				
+			<% _.each(axiss, function (a) { %>
+            <tr>
+                <td><%= a.attributes.category %></td>
+                <td><%= a.attributes.description %></td>
+                <td><%= a.attributes.id %></td>
+                <td>
+                	<a href="#/axis/<%=a.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=a.attributes.id%>" title="Trash" />
+				</td>
+            </tr>
+            <% }); %>
+				
 			</tbody>
 		</table>
+		
+		<p><a href="#/axis/new">Create new axis &gt;&gt;</a></p>
+		
 	</div>
 	<!-- end of tab -->
 	

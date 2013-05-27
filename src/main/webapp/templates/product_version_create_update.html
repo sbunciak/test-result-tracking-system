@@ -6,17 +6,18 @@
 
 		<fieldset>
 			<label>Version</label> <input type="text" name="productVersion"
-				id="productVersion">
+				id="productVersion" value="<%= version.attributes.productVersion %>" />
 		</fieldset>
 		<fieldset>
 			<label>Description</label>
-			<textarea name="description" id="description" rows="3"></textarea>
+			<textarea name="description" id="description" rows="3"><%= version.attributes.description %></textarea>
 		</fieldset>
 		<div class="clear"></div>
 	</div>
 	<footer>
 		<div class="submit_link">
-			<input type="button" value="Save" class="alt_btn" /> 
+			<a href="#/product_versions">&lt;&lt; Back to product version list</a> 
+			<input type="button" value="Save" class="alt_btn" data-tm-role="create" /> 
 			<input type="reset" value="Reset" />
 		</div>
 	</footer>

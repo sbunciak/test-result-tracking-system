@@ -24,7 +24,8 @@
 
 <title>TRTS | Dashboard</title>
 
-<link rel="stylesheet" href="css/layout.css" type="text/css" media="screen" />	
+<link rel="stylesheet" href="css/layout.css" type="text/css"
+	media="screen" />
 <script data-main="js/main.js" src="js/lib/require-jquery.js"></script>
 </head>
 
@@ -48,31 +49,49 @@
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs">
-			
-				<!-- 
-				<label>Product</label> <select name="product_id" id="product_id"></select>
-				TODO: 
-				<label>Product version</label> <select name="product_version_id" id="product_version_id"></select>
-				
-				<label>Axis</label> <select name="axis_id" id="axis_id"></select>
-				 -->
-			
-				<div>
-					Navigation: &nbsp;
-					<select><option>Product</option></select>
-				</div>
-				
-				<div class="breadcrumb_divider"></div>
-				
-				<div>
-					<select><option>ProductVersion</option></select>
-				</div>
-				
-				<div class="breadcrumb_divider"></div>
-				
-				<div>
-					<select><option>ProductBuild</option></select>
-				</div>
+				<p class="breadcrumb_divider">
+					<select id="nav_product_id"><option>Product</option></select>
+				</p>
+
+				<p class="breadcrumb_divider">
+					<select id="nav_version_id"><option>Product version</option></select>
+				</p>
+ 
+				<p class="breadcrumb_divider">
+					<select id="nav_build_id"><option>Product build</option>
+					</select>
+				</p>
+
+				<p class="breadcrumb_divider">
+					<select id="nav_axis_id"><option>Axis</option>
+					</select>
+				</p>
+<!-- 
+				<p class="breadcrumb_divider">
+					<select id="nav_value_id"><option>Axis value</option>
+					</select>
+				</p>
+
+				<p class="breadcrumb_divider">
+					<select id="nav_config_id"><option>Axis config</option>
+					</select>
+				</p>
+ -->
+				<p class="breadcrumb_divider">
+					<select id="nav_plan_id"><option>Test plan</option>
+					</select>
+				</p>
+<!-- 
+				<p class="breadcrumb_divider">
+					<select id="nav_case_id"><option>Test case</option>
+					</select>
+				</p>
+ -->
+				<p class="breadcrumb_divider">
+					<select id="nav_run_id"><option>Test run</option>
+					</select>
+				</p>
+
 			</article>
 		</div>
 	</section>
@@ -92,7 +111,7 @@
 		<ul class="toggle">
 			<li class="icn_add_user"><a href="#/axis">Axis</a></li>
 			<li class="icn_profile"><a href="#/axis_values">Axis value</a></li>
-			<li class="icn_view_users"><a href="#/axis_conf">Axis
+			<li class="icn_view_users"><a href="#/axis_configs">Axis
 					configuration</a></li>
 		</ul>
 		<h3>Test planning</h3>

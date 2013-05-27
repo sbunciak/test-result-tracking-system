@@ -18,6 +18,20 @@
 			</thead>
 			<tbody id="test_plans_content">
 
+			<% _.each(plans, function (p) { %>
+            <tr>
+                <td><%= p.attributes.name %></td>
+                <td><%= p.attributes.type %></td>
+                <td><pre><%= p.attributes.rules %></pre></td>
+                <td><%= p.attributes.description %></td>
+                <td><%= p.attributes.id %></td>
+                <td>
+                	<a href="#/test_plans/<%=p.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=p.attributes.id%>" title="Trash" />
+				</td>
+            </tr>
+            <% }); %>
+
 			</tbody>
 		</table>
 	</div>

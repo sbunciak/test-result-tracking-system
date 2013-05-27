@@ -15,6 +15,17 @@
 			</thead>
 			<tbody id="test_runs_content">
 				
+			<% _.each(runs, function (r) { %>
+            <tr>
+                <td><%= r.attributes.name %></td>
+                <td><%= r.attributes.id %></td>
+                <td>
+                	<a href="#/products/<%=r.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=r.attributes.id%>" title="Trash" />
+				</td>
+            </tr>
+            <% }); %>
+				
 			</tbody>
 		</table>
 	</div>

@@ -26,16 +26,15 @@ import org.jboss.community.trts.service.BaseEntityService;
 public abstract class BaseEntityREST<T> {
 
 	@DELETE
-	@Path("/{pid:[0-9][0-9]*}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public void delete(@PathParam("pid") Long id) {
+	@Path("/{id:[0-9][0-9]*}")
+	public void delete(@PathParam("id") Long id) {
 		this.getService().delete(this.getService().getById(id));
 	}
 
 	@GET
-	@Path("/{pid:[0-9][0-9]*}")
+	@Path("/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public T getById(@PathParam("pid") Long id) {
+	public T getById(@PathParam("id") Long id) {
 		return this.getService().getById(id);
 	}
 

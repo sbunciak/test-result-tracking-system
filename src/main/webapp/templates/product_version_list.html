@@ -16,8 +16,23 @@
 			</thead>
 			<tbody id="product_versions_content">
 
+			<% _.each(versions, function (v) { %>
+            <tr>
+                <td><%= v.attributes.productVersion %></td>
+                <td><%= v.attributes.description %></td>
+                <td><%= v.attributes.id %></td>
+                <td>
+                	<a href="#/product_versions/<%=v.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=v.attributes.id%>" title="Trash" />
+				</td>
+            </tr>
+            <% }); %>
+
 			</tbody>
 		</table>
+		
+		<p><a href="#/product_versions/new">Create new product version &gt;&gt;</a></p>
+		
 	</div>
 	<!-- end of tab -->
 

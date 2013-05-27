@@ -2,8 +2,7 @@ define([], function() {
 
 	var ProductVersion = Backbone.Model.extend({
 
-		// will be overwritten
-		urlRoot : '',
+		urlRoot : '', // needs to be set dynamically
 		
 		initialize : function() {
 			this.bind("error", function(model, error) {

@@ -6,6 +6,7 @@ insert into Product (id, name, description) values (1, 'SOA-P', 'SOA Platform');
 -- Insert Product versions
 insert into ProductVersion (id, description, productVersion, product_id) values (0, 'Latest stable' , '6.0.0' ,0);
 insert into ProductVersion (id, description, productVersion, product_id) values (1, 'Latest nightly' , '7.0.0' ,0);
+insert into ProductVersion (id, description, productVersion, product_id) values (2, 'CAN BE DELETED' , '7.0.1' ,0);
 -- Insert Product version builds
 insert into ProductBuild (id, label, productVersion_id) values (0, 'Alpha1' , 0);
 insert into ProductBuild (id, label, productVersion_id) values (1, 'Alpha2' , 0);

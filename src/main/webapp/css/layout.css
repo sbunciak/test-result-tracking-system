@@ -186,10 +186,12 @@ article.breadcrumbs {
 }
 
 .breadcrumb_divider {
-	width: 12px;
+	padding-right: 12px;
 	height: 24px;
 	background: url(../images/breadcrumb_divider.png) no-repeat;
-	/* float: left; */
+	background-position:right;
+	/* display: inline; */
+	float: left;
 	margin: 0 5px;
 }
 
