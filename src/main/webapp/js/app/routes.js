@@ -112,7 +112,8 @@ function(
 			var testRunCases = new TestRunCases(); 
 			testRunCases.url = "rest/products/" + prd_id + "/versions/" + ver_id + "/builds/" + bld_id + "/testplans/" + tpl_id + "/runs/" + run_id + "/cases";
 			
-			var view = new TestRunCaseListView({
+			currentView.close();
+			currentView = new TestRunCaseListView({
 				el : $("#page_loader"),
 				model : testRunCases
 			});
@@ -131,7 +132,8 @@ function(
 			var testRuns = new TestRuns(); 
 			testRuns.url = "rest/products/" + prd_id + "/versions/" + ver_id + "/builds/" + bld_id + "/testplans/" + tpl_id + "/runs";
 			
-			var view = new TestRunListView({
+			currentView.close();
+			currentView = new TestRunListView({
 				el : $("#page_loader"),
 				model : testRuns
 			});
@@ -149,7 +151,8 @@ function(
 			var testCases = new TestCases(); 
 			testCases.url = "rest/products/" + prd_id + "/versions/" + ver_id + "/testplans/" + tpl_id + "/cases";
 			
-			var view = new TestCaseListView({
+			currentView.close();
+			currentView = new TestCaseListView({
 				el : $("#page_loader"),
 				model : testCases
 			});
@@ -166,7 +169,8 @@ function(
 			var testPlans = new TestPlans(); 
 			testPlans.url = "rest/products/" + prd_id + "/versions/" + ver_id + "/testplans";
 			
-			var view = new TestPlanListView({
+			currentView.close();
+			currentView = new TestPlanListView({
 				el : $("#page_loader"),
 				model : testPlans
 			});
@@ -183,7 +187,8 @@ function(
 			var axisConfigs = new AxisConfigs(); 
 			axisConfigs.url = 'rest/axis/' + aid + '/version/' + ver_id + '/configurations';
 			
-			var view = new AxisConfigListView({
+			currentView.close();
+			currentView = new AxisConfigListView({
 				el : $("#page_loader"),
 				model : axisConfigs
 			});
@@ -199,7 +204,8 @@ function(
 			var axisValues = new AxisValues(); 
 			axisValues.url = 'rest/axis/' + aid + '/values';
 			
-			var view = new AxisValueListView({
+			currentView.close();
+			currentView = new AxisValueListView({
 				el : $("#page_loader"),
 				model : axisValues
 			});
@@ -212,7 +218,8 @@ function(
 		listAxis : function() {
 			var axiss = new Axiss(); 
 			
-			var view = new AxisListView({
+			currentView.close();
+			currentView = new AxisListView({
 				el : $("#page_loader"),
 				model : axiss
 			});
@@ -228,7 +235,8 @@ function(
 			var productBuilds = new ProductBuilds();
 			productBuilds.url = 'rest/products/' + pid + '/versions/' + vid + '/builds';
 			
-			var view = new ProductBuildListView({
+			currentView.close();
+			currentView = new ProductBuildListView({
 				el : $("#page_loader"),
 				model : productBuilds
 			});
@@ -243,7 +251,8 @@ function(
 			var productVersion = new ProductVersion({id : version_id});
 			productVersion.urlRoot = "rest/products/"+pid+"/versions/";
 			
-			var view = new ProductVersionCreateUpdateView({
+			currentView.close();
+			currentView = new ProductVersionCreateUpdateView({
 				el : $("#page_loader"),
 				model : productVersion
 			});
@@ -256,12 +265,13 @@ function(
 			var productVersion = new ProductVersion();
 			productVersion.urlRoot = "rest/products/"+pid+"/versions/";
 			
-			var view = new ProductVersionCreateUpdateView({
+			currentView.close();
+			currentView = new ProductVersionCreateUpdateView({
 				el : $("#page_loader"),
 				model : productVersion
 			});
 			
-			view.render();
+			currentView.render();
 		},
 		
 		listProductVersions : function() {
@@ -269,7 +279,8 @@ function(
 			var productVersions = new ProductVersions();
 			productVersions.url = 'rest/products/' + pid + '/versions';
 			
-			var view = new ProductVersionListView({
+			currentView.close();
+			currentView = new ProductVersionListView({
 				el : $("#page_loader"),
 				model : productVersions
 			});
@@ -280,7 +291,8 @@ function(
 		editProduct : function(product_id) {
 			var product = new Product({id : product_id}); 
 			
-			var view = new ProductCreateUpdateView({
+			currentView.close();
+			currentView = new ProductCreateUpdateView({
 				el : $("#page_loader"),
 				model : product
 			});
@@ -289,18 +301,20 @@ function(
 		},
 		
 		createProduct : function() {
-			var view = new ProductCreateUpdateView({
+			currentView.close();
+			currentView = new ProductCreateUpdateView({
 				el : $("#page_loader"),
 				model : new Product()
 			});
 			
-			view.render();
+			currentView.render();
 		},
 		
 		listProducts : function() {
+			currentView.close();
 			var products = new Products(); 
 			
-			var view = new ProductListView({
+			currentView = new ProductListView({
 				el : $("#page_loader"),
 				model : products
 			});
@@ -309,11 +323,27 @@ function(
 		},
 		// ====== HOME ====== //
 		home : function() {
-			var homeView = new HomeView({
+			currentView.close();
+			currentView = new HomeView({
 				el : $("#page_loader")
 			});
 		}
 	});
+	
+	// just not to be null
+	var currentView = new HomeView();
+	
+	Backbone.View.prototype.close = function() {
+		$(this.el).empty();
+		this.undelegateEvents();
+		//this.remove();
+		//$(this.el).unbind();
+        //$(this.el).remove();
+		
+		if (this.onClose) {
+			this.onClose();
+		}
+	};
 
 	// Instantiate the router
 	var app_router = new AppRouter;

@@ -23,7 +23,7 @@ define([ "lib/text!../../../templates/product_version_create_update.html" ], fun
 		saveVersion : function(event) {
 			// get attributes from the form
 			var productAttributes = {
-				name : $('#productVersion').val(),
+				productVersion : $('#productVersion').val(),
 				description : $('#description').val()
 			};
 
