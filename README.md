@@ -27,3 +27,13 @@ New DSL (Domain Specific Language) for JBoss Drools was introduced during implem
 		then
 			filter this TestRunCase
 	end
+
+	
+<security-domain name="trts-realm">
+                    <authentication>
+                        <login-module code="UsersRoles" flag="required">
+                            <module-option name="usersProperties" value="users.properties"/>
+                            <module-option name="rolesProperties" value="roles.properties"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>

@@ -1,0 +1,22 @@
+<html>
+<form action="">
+	<div class="module_content">
+		<h3>Add new Test case</h3>
+
+		<fieldset>
+			<label>Title</label> <input type="text" name="title" id="title" value="<%= c.attributes.title %>" /> 
+			<label>Tester</label> <input type="text" name="defaultTester" id="defaultTester" value="<%= c.attributes.defaultTester %>" /> 
+			<label>CI Link</label> <input type="text" name="ciLink" id="ciLink" value="<%= c.attributes.ciLink %>" />
+		</fieldset>
+		<div class="clear"></div>
+	</div>
+	<footer>
+		<div class="submit_link">
+			<a href="#/test_cases">&lt;&lt; Back to test case list</a> 
+			<input type="button" value="Save" class="alt_btn" data-tm-role="create" /> 
+			<input type="reset" value="Reset" />
+		</div>
+	</footer>
+</form>
+
+</html>

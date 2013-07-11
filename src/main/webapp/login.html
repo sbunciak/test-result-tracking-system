@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>TRTS | Login</title>
+
+<link rel="stylesheet" href="css/layout.css" type="text/css"
+	media="screen" />
+</head>
+
+</head>
+<body>
+
+	<header id="header">
+		<hgroup>
+			<h1 class="site_title">
+				<a href="">Test result tracking system</a>
+			</h1>
+			<h2 class="section_title">Login</h2>
+		</hgroup>
+	</header>
+	<!-- end of header bar -->
+
+	<section id="secondary_bar">
+		<div class="user">
+			<p id="nav_user_id"> &nbsp; </p> <!-- Placeholder for user -->
+			<!-- <a class="logout_user" href="#" title="Logout">Logout</a> -->
+		</div>
+		<div class="breadcrumbs_container"></div>
+	</section>
+	<!-- end of secondary bar -->
+
+	<aside id="sidebar" class="column"></aside>
+
+	<section id="main" class="column">
+	<div style="padding-top: 10%; padding-right: 40%; text-align: right">
+	<p>Please enter your credentials:</p>
+      <form method="POST" action="j_security_check">
+         <label for="username">user name:</label>
+         <input id="username" autofocus="autofocus" placeholder="user name" required="required" type="text" name="j_username"/>
+         <br/>
+         <label for="password">password:</label>
+         <input id="password" placeholder="password" required="required" type="password" name="j_password"/>
+         <br/>
+         <button type="submit">Login</button>
+      </form>
+      </div>
+     </section>
+   </body>
+</html>

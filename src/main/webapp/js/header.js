@@ -5,8 +5,7 @@
  *            to display
  */
 function addMessage(type, text) {
-	$(".alert_" + type).html(
-			text + ' - <a href="#" onclick="closeMessages()">close</a>');
+	$(".alert_" + type).html(text);
 	$(".alert_" + type).fadeIn();
 	$(".alert_" + type).delay(5000).fadeOut('slow');
 }
@@ -16,6 +15,15 @@ function closeMessages() {
 	$(".alert_warning").hide(); // Hide warning message
 	$(".alert_error").hide(); // Hide error message
 	$(".alert_success").hide(); // Hide success message
+}
+
+function addLoggedUserInfo() {
+	$.ajax({
+		url : "rest/user",
+		success : function(data) {
+			$('#nav_user_id').empty().append("Logged as: " + data);
+		}
+	});
 }
 
 function buildTestRunOptions(testRuns) {

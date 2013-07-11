@@ -1,4 +1,4 @@
-define([ "lib/text!../../../templates/axis_config_list.html" ], function(
+define([ "lib/text!../../../templates/axis_config_list_html" ], function(
 		axisTemplate) {
 
 	var AxisConfigListView = Backbone.View.extend({
@@ -20,7 +20,7 @@ define([ "lib/text!../../../templates/axis_config_list.html" ], function(
 			this.$el.html(template);
 		},
 
-		deleteAxis : function(event) {
+		deleteAxisConfig : function(event) {
 			var id = $(event.currentTarget).data("tm-id");
 			this.model.get(id).destroy({
 				success : function() {

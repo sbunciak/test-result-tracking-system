@@ -1,4 +1,4 @@
-define([ "lib/text!../../../templates/axis_value_list.html" ], function(
+define([ "lib/text!../../../templates/axis_value_list_html" ], function(
 		axisTemplate) {
 
 	var AxisValueListView = Backbone.View.extend({
@@ -20,11 +20,11 @@ define([ "lib/text!../../../templates/axis_value_list.html" ], function(
 			this.$el.html(template);
 		},
 
-		deleteAxis : function(event) {
+		deleteAxisValue : function(event) {
 			var id = $(event.currentTarget).data("tm-id");
 			this.model.get(id).destroy({
 				success : function() {
-					addMessage("success", "Axis Value successfully removed.");
+					addMessage("success", "Axis value successfully removed.");
 				}
 			});
 		}

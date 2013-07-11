@@ -1,4 +1,4 @@
-define([ "lib/text!../../../templates/test_case_list.html" ], function(
+define([ "lib/text!../../../templates/test_case_list_html" ], function(
 		testTemplate) {
 
 	var TestCaseListView = Backbone.View.extend({

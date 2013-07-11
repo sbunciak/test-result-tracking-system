@@ -1,0 +1,45 @@
+<html>
+<head></head>
+
+<h3>Axis configuration</h3>
+
+	<div class="tab_container">
+		<div class="tab_content">
+			<table class="tablesorter">
+				<thead>
+					<tr>
+						<th>Axis value</th>
+						<th>Priority 1</th>
+						<th>Priority 2</th>
+						<th>Priority 3</th>
+						<th>Disabled</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody id="axis_conf_content">
+
+					<% _.each(configs, function (c) { %>
+					<tr>
+						<td><%= c.attributes.axisValue.value %></td>
+						<td><input type="radio" value="P1" disabled="disabled" <%= _.isEqual(c.attributes.priority,"P1") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="P2" disabled="disabled" <%= _.isEqual(c.attributes.priority,"P2") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="P3" disabled="disabled" <%= _.isEqual(c.attributes.priority,"P3") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="DISABLED" disabled="disabled" <%= _.isEqual(c.attributes.priority,"DISABLED") ?  'checked="checked"' : '' %>/></td>
+						<td>
+							<a href="#/axis_configs/<%=c.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a> 
+							<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=c.attributes.id%>" title="Trash" />
+						</td>
+					</tr>
+					<% }); %>
+
+				</tbody>
+			</table>
+		</div>
+		<!-- end of tab -->
+
+		<p><a href="#/axis_configs/new">Create new axis configuration &gt;&gt;</a></p>
+
+	</div>
+	<!-- end of .tab_container -->
+	
+</html>

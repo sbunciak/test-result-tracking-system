@@ -1,4 +1,4 @@
-define([ "lib/text!../../../templates/product_version_create_update.html" ], function(
+define([ "lib/text!../../../templates/product_version_create_update_html" ], function(
 		productsTemplate) {
 
 	var ProductVersionCreateUpdateView = Backbone.View.extend({

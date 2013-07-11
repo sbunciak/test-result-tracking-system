@@ -1,4 +1,4 @@
-define([ "lib/text!../../../templates/product_list.html" ], function(
+define([ "lib/text!../../../templates/product_list_html" ], function(
 		productsTemplate) {
 
 	var ProductListView = Backbone.View.extend({

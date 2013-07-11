@@ -1,0 +1,47 @@
+<html>
+<head></head>
+
+<h3>Axis configuration</h3>
+
+<form action="">
+	<div class="tab_container">
+		<div class="tab_content">
+			<table class="tablesorter">
+				<thead>
+					<tr>
+						<th>Axis value</th>
+						<th>Priority 1</th>
+						<th>Priority 2</th>
+						<th>Priority 3</th>
+						<th>Disabled</th>
+					</tr>
+				</thead>
+				<tbody id="axis_conf_content">
+
+					<tr>
+						<td><input type="hidden" value="<%= c.attributes.id %>" name="id" /><%= c.attributes.axisValue.value %></td>
+						<td><input type="radio" value="P1" name="<%= c.attributes.id %>" <%= _.isEqual(c.attributes.priority,"P1") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="P2" name="<%= c.attributes.id %>" <%= _.isEqual(c.attributes.priority,"P2") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="P3" name="<%= c.attributes.id %>" <%= _.isEqual(c.attributes.priority,"P3") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="DISABLED" name="<%= c.attributes.id %>" <%= _.isEqual(c.attributes.priority,"DISABLED") ?  'checked="checked"' : '' %>/></td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<!-- end of tab -->
+		
+
+	</div>
+	<!-- end of .tab_container -->
+	
+	<footer>
+		<div class="submit_link">
+			<a href="#/axis_configs">&lt;&lt; Back to Axis Config list</a>
+			<input type="button" value="Save" class="alt_btn" data-tm-role="create" /> 
+			<input type="reset" value="Reset" />
+		</div>
+	</footer>
+	
+</form>
+</html>

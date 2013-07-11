@@ -1,4 +1,4 @@
-define([ "lib/text!../../../templates/test_plan_list.html" ], function(
+define([ "lib/text!../../../templates/test_plan_list_html" ], function(
 		testTemplate) {
 
 	var TestPlanListView = Backbone.View.extend({

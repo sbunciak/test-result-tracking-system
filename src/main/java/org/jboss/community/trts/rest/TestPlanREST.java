@@ -2,10 +2,13 @@ package org.jboss.community.trts.rest;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,6 +21,7 @@ import org.jboss.community.trts.service.ProductVersionService;
 import org.jboss.community.trts.service.TestPlanService;
 
 @RequestScoped
+@RolesAllowed({"Tester, Admin"})
 @Path("/products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/testplans")
 public class TestPlanREST {
 
@@ -39,8 +43,8 @@ public class TestPlanREST {
 			return null;
 		}
 	}
-	
-	@PUT
+
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addTestPlan(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, TestPlan p) {
@@ -56,5 +60,20 @@ public class TestPlanREST {
 	public TestPlan getTestPlan(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("id") Long id) {
 		return service.getById(id);
+	}
+
+	@PUT
+	@Path("/{id:[0-9][0-9]*}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void editTestPlan(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("id") Long id, TestPlan p) {
+		service.update(p);
+	}
+
+	@DELETE
+	@Path("/{id:[0-9][0-9]*}")
+	public void removeTestPlan(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("id") Long id) {
+		service.delete(service.getById(id));
 	}
 }

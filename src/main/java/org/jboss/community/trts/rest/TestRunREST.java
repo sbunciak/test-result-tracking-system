@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -32,6 +34,7 @@ import org.jboss.community.trts.util.TestRunHelper;
 import com.google.common.collect.Sets;
 
 @RequestScoped
+@RolesAllowed({"Tester, Admin"})
 @Path("products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/builds/{bid:[0-9][0-9]*}/testplans/{tid:[0-9][0-9]*}/runs")
 public class TestRunREST {
 
@@ -73,7 +76,7 @@ public class TestRunREST {
 		return runService.getById(id);
 	}
 
-	@PUT
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void createTestRun(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
@@ -110,5 +113,14 @@ public class TestRunREST {
 				generatedCases, axisMap);
 
 		runCaseService.persistAll(resultCases);
+	}
+	
+	@PUT
+	@Path("/{id:[0-9][0-9]*}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void updateTestRun(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
+			@PathParam("bid") Long bid, @PathParam("id") Long id, TestRun run) {
+		runService.update(run);
 	}
 }

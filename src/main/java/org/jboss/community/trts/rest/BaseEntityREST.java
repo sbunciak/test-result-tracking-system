@@ -2,6 +2,7 @@ package org.jboss.community.trts.rest;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -23,6 +24,7 @@ import org.jboss.community.trts.service.BaseEntityService;
  * @param <T>
  *            entity
  */
+@RolesAllowed({"Tester, Admin"})
 public abstract class BaseEntityREST<T> {
 
 	@DELETE

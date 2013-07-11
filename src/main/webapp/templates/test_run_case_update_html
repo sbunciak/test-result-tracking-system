@@ -1,0 +1,31 @@
+<html>
+<form action="">
+<div class="module_content">
+	<h3>Test run case</h3>
+	
+	<fieldset>
+		<label>Title</label> <input type="text" name="title" id="title" disabled="disabled" value="<%= c.attributes.title %>"/>
+		<label>Assignee</label> <input type="text" name="assignee" id="assignee" value="<%= c.attributes.assignee %>"/>
+		<label>CI Link</label> <input type="text" name="ciLink" id="ciLink" value="<%= c.attributes.ciLink %>"/>
+		<label>Bug Tracking Link</label> <input type="text" name="bugTrLink" id="bugTrLink" value="<%= c.attributes.bugTrLink %>"/>
+		<label>Result</label> <input type="text" name="result" id="result" value="<%= c.attributes.result %>"/>
+			<select	name="result" id="result">
+				<option value="PASSED" <%= _.isEqual(c.attributes.result,"PASSED") ?  'checked="checked"' : '' %> >PASSED</option>
+				<option value="WAIVED" <%= _.isEqual(c.attributes.result,"WAIVED") ?  'checked="checked"' : '' %> >WAIVED</option>
+				<option value="FAILED" <%= _.isEqual(c.attributes.result,"FAILED") ?  'checked="checked"' : '' %> >FAILED</option>
+				<option value="BLOCKED" <%= _.isEqual(c.attributes.result,"BLOCKED") ?  'checked="checked"' : '' %> >BLOCKED</option>
+				<option value="ERROR" <%= _.isEqual(c.attributes.result,"ERROR") ?  'checked="checked"' : '' %> >ERROR</option>
+				<option value="RUNNING" <%= _.isEqual(c.attributes.result,"RUNNING") ?  'checked="checked"' : '' %> >RUNNING</option>
+			</select>
+	</fieldset>
+	<div class="clear"></div>
+</div>
+<footer>
+	<div class="submit_link">
+		<a href="#/test_run_cases">&lt;&lt; Back to Test run case list</a> 
+		<input type="button" value="Save" class="alt_btn" data-tm-role="create" /> 
+		<input type="reset" value="Reset" />
+	</div>
+</footer>
+</form>
+</html>

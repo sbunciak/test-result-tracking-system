@@ -2,6 +2,7 @@ package org.jboss.community.trts.rest;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -20,6 +21,7 @@ import org.jboss.community.trts.service.ProductService;
 import org.jboss.community.trts.service.ProductVersionService;
 
 @RequestScoped
+@RolesAllowed({"Tester, Admin"})
 @Path("/products/{pid:[0-9][0-9]*}/versions")
 public class ProductVersionREST {
 

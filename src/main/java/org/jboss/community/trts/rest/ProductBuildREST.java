@@ -2,10 +2,12 @@ package org.jboss.community.trts.rest;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,6 +20,7 @@ import org.jboss.community.trts.service.ProductBuildService;
 import org.jboss.community.trts.service.ProductVersionService;
 
 @RequestScoped
+@RolesAllowed({"Tester, Admin"})
 @Path("/products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/builds")
 public class ProductBuildREST {
 
@@ -42,13 +45,24 @@ public class ProductBuildREST {
 
 	}
 
-	@PUT
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addProductBuild(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, ProductBuild build) {
-		build.setProductVersion(versionService.getById(vid)); 
-		
+		build.setProductVersion(versionService.getById(vid));
+
 		buildService.persist(build);
+	}
+
+	@PUT
+	@Path("/{bid:[0-9][0-9]*}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void editProductBuild(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("bid") Long id,
+			ProductBuild build) {
+		build.setProductVersion(versionService.getById(vid));
+
+		buildService.update(build);
 	}
 
 	@GET

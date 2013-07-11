@@ -1,4 +1,4 @@
-define ([ "lib/text!../../../templates/main.html" ], function(
+define ([ "lib/text!../../../templates/main_html" ], function(
 		mainTemplate) {
 
 	var HomeView = Backbone.View.extend({

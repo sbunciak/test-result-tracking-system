@@ -1,0 +1,20 @@
+<html>
+<form action="">
+<div class="module_content">
+	<h3>Add new Axis value</h3>
+	
+	<fieldset>
+		<label>Value</label> <input type="text" name="value" id="value" value="<%= axis.attributes.value %>" />
+	</fieldset>
+	
+	<div class="clear"></div>
+</div>
+<footer>
+	<div class="submit_link">
+		<a href="#/axis_values">&lt;&lt; Back to axis value list</a> 
+		<input type="button" value="Save" class="alt_btn" data-tm-role="create" /> 
+		<input type="reset" value="Reset" />
+	</div>
+</footer>
+</form>
+</html>

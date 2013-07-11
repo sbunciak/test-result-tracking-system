@@ -1,0 +1,21 @@
+<html>
+
+<form action="">
+<div class="module_content">
+	<h3>Add new Product build</h3>
+	
+	<fieldset>
+		<label>Build label</label> <input type="text" name="label" id="label" value="<%= build.attributes.label %>"/>
+	</fieldset>
+	<div class="clear"></div>
+</div>
+<footer>
+	<div class="submit_link">
+		<a href="#/product_builds">&lt;&lt; Back to product build list</a> 
+		<input type="button" value="Save" class="alt_btn" data-tm-role="create" /> 
+		<input type="reset" value="Reset" />
+	</div>
+</footer>
+</form>
+
+</html>

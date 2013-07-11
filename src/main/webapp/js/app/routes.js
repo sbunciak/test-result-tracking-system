@@ -29,7 +29,8 @@ require([ "app/models/Product",
           "app/views/AxisValueListView",
           "app/views/AxisValueCreateUpdateView",
           "app/views/AxisConfigListView",
-          "app/views/AxisConfigCreateUpdateView",
+          "app/views/AxisConfigCreateView",
+          "app/views/AxisConfigUpdateView",
           "app/views/TestPlanListView",
           "app/views/TestPlanCreateUpdateView",
           "app/views/TestCaseListView",
@@ -48,7 +49,7 @@ function(
 		ProductBuildListView, ProductBuildCreateUpdateView, 
 		AxisListView, AxisCreateUpdateView, 
 		AxisValueListView, AxisValueCreateUpdateView, 
-		AxisConfigListView,	AxisConfigCreateUpdateView, 
+		AxisConfigListView,	AxisConfigCreateView, AxisConfigUpdateView,
 		TestPlanListView, TestPlanCreateUpdateView, 
 		TestCaseListView, TestCaseCreateUpdateView, 
 		TestRunListView, TestRunCreateUpdateView, 
@@ -98,6 +99,8 @@ function(
 			// Test run case
 			"test_run_cases" : "listTestRunCases", // list of test run cases
 			"test_run_cases/:id" : "editTestRunCase", // edit test run case
+			
+			// TODO: admin
 		},
 
 		// ====== TEST RUN CASE ====== //
@@ -121,7 +124,62 @@ function(
 			testRunCases.fetch();
 		},
 		
+		editTestRunCase : function(case_id) {
+			var prd_id = $('#nav_product_id').val();
+			var ver_id = $('#nav_version_id').val();
+			var bld_id = $('#nav_build_id').val();
+			var tpl_id = $('#nav_plan_id').val();
+			var run_id = $('#nav_run_id').val();
+
+			var testRunCase = new TestRunCase({id:case_id}); 
+			testRunCase.urlRoot = "rest/products/" + prd_id + "/versions/" + ver_id + "/builds/" + bld_id + "/testplans/" + tpl_id + "/runs/" + run_id + "/cases";
+			
+			currentView.close();
+			currentView = new TestRunCaseUpdateView({
+				el : $("#page_loader"),
+				model : testRunCase
+			});
+			
+			testRunCase.fetch();
+		},
+		
 		// ====== TEST RUN ====== //
+		
+		createTestRun : function() {
+			var prd_id = $('#nav_product_id').val();
+			var ver_id = $('#nav_version_id').val();
+			var bld_id = $('#nav_build_id').val();
+			var tpl_id = $('#nav_plan_id').val();
+			
+			var testRun = new TestRun(); 
+			testRun.urlRoot = "rest/products/" + prd_id + "/versions/" + ver_id + "/builds/" + bld_id + "/testplans/" + tpl_id + "/runs";
+			
+			currentView.close();
+			currentView = new TestRunCreateUpdateView({
+				el : $("#page_loader"),
+				model : testRun
+			});
+			
+			currentView.render();
+		},
+		
+		editTestRun : function(run_id) {
+			var prd_id = $('#nav_product_id').val();
+			var ver_id = $('#nav_version_id').val();
+			var bld_id = $('#nav_build_id').val();
+			var tpl_id = $('#nav_plan_id').val();
+			
+			var testRun = new TestRun({id : run_id}); 
+			testRun.urlRoot = "rest/products/" + prd_id + "/versions/" + ver_id + "/builds/" + bld_id + "/testplans/" + tpl_id + "/runs";
+			
+			currentView.close();
+			currentView = new TestRunCreateUpdateView({
+				el : $("#page_loader"),
+				model : testRun
+			});
+			
+			testRun.fetch();
+		},
 		
 		listTestRuns : function() {
 			var prd_id = $('#nav_product_id').val();
@@ -143,6 +201,40 @@ function(
 		
 		// ====== TEST CASE ====== //
 		
+		editTestCase : function(case_id) {
+			var prd_id = $('#nav_product_id').val();
+			var ver_id = $('#nav_version_id').val();
+			var tpl_id = $('#nav_plan_id').val();
+			
+			var testCase = new TestCase({id : case_id}); 
+			testCase.urlRoot = "rest/products/" + prd_id + "/versions/" + ver_id + "/testplans/" + tpl_id + "/cases";
+			
+			currentView.close();
+			currentView = new TestCaseCreateUpdateView({
+				el : $("#page_loader"),
+				model : testCase
+			});
+			
+			testCase.fetch();
+		},
+		
+		createTestCase : function() {
+			var prd_id = $('#nav_product_id').val();
+			var ver_id = $('#nav_version_id').val();
+			var tpl_id = $('#nav_plan_id').val();
+			
+			var testCase = new TestCase(); 
+			testCase.urlRoot = "rest/products/" + prd_id + "/versions/" + ver_id + "/testplans/" + tpl_id + "/cases";
+			
+			currentView.close();
+			currentView = new TestCaseCreateUpdateView({
+				el : $("#page_loader"),
+				model : testCase
+			});
+			
+			currentView.render();
+		},
+		
 		listTestCases : function() {
 			var prd_id = $('#nav_product_id').val();
 			var ver_id = $('#nav_version_id').val();
@@ -162,6 +254,38 @@ function(
 		
 		// ====== TEST PLAN ====== //
 		
+		editTestPlan : function(plan_id) {
+			var prd_id = $('#nav_product_id').val();
+			var ver_id = $('#nav_version_id').val();
+			
+			var testPlan = new TestPlan({id : plan_id}); 
+			testPlan.urlRoot = "rest/products/" + prd_id + "/versions/" + ver_id + "/testplans";
+			
+			currentView.close();
+			currentView = new TestPlanCreateUpdateView({
+				el : $("#page_loader"),
+				model : testPlan
+			});
+			
+			testPlan.fetch();
+		},
+		
+		createTestPlan : function() {
+			var prd_id = $('#nav_product_id').val();
+			var ver_id = $('#nav_version_id').val();
+			
+			var testPlan = new TestPlan(); 
+			testPlan.urlRoot = "rest/products/" + prd_id + "/versions/" + ver_id + "/testplans";
+			
+			currentView.close();
+			currentView = new TestPlanCreateUpdateView({
+				el : $("#page_loader"),
+				model : testPlan
+			});
+			
+			currentView.render();
+		},
+		
 		listTestPlans : function() {
 			var prd_id = $('#nav_product_id').val();
 			var ver_id = $('#nav_version_id').val();
@@ -180,6 +304,38 @@ function(
 		
 		// ====== AXIS CONFIG ====== //
 
+		createAxisConfig : function() {
+			var aid = $("#nav_axis_id").val();
+			var ver_id = $('#nav_version_id').val();
+			
+			var axisConfigs = new AxisConfigs(); 
+			axisConfigs.url = 'rest/axis/' + aid + '/version/' + ver_id + '/configurations';
+			
+			currentView.close();
+			currentView = new AxisConfigCreateView({
+				el : $("#page_loader"),
+				model : axisConfigs,
+			});
+			
+			axisConfigs.fetch();
+		},
+		
+		editAxisConfig : function(config_id) {
+			var aid = $("#nav_axis_id").val();
+			var ver_id = $('#nav_version_id').val();
+			
+			var axisConfig = new AxisConfig( {id: config_id} ); 
+			axisConfig.urlRoot = 'rest/axis/' + aid + '/version/' + ver_id + '/configurations';
+			
+			currentView.close();
+			currentView = new AxisConfigUpdateView({
+				el : $("#page_loader"),
+				model : axisConfig
+			});
+			
+			axisConfig.fetch();
+		},
+		
 		listAxisConfigs : function() {
 			var aid = $("#nav_axis_id").val();
 			var ver_id = $('#nav_version_id').val();
@@ -198,6 +354,36 @@ function(
 		
 		// ====== AXIS VALUE ====== //
 		
+		editAxisValue : function(value_id) {
+			var aid = $("#nav_axis_id").val();
+			
+			var axisValue = new AxisValue( {id: value_id} ); 
+			axisValue.urlRoot = 'rest/axis/' + aid + '/values';
+			
+			currentView.close();
+			currentView = new AxisValueCreateUpdateView({
+				el : $("#page_loader"),
+				model : axisValue
+			});
+			
+			axisValue.fetch();
+		},
+		
+		createAxisValue : function() {
+			var aid = $("#nav_axis_id").val();
+			
+			var axisValue = new AxisValue(); 
+			axisValue.urlRoot = 'rest/axis/' + aid + '/values';
+			
+			currentView.close();
+			currentView = new AxisValueCreateUpdateView({
+				el : $("#page_loader"),
+				model : axisValue
+			});
+			
+			currentView.render();
+		},
+		
 		listAxisValues : function() {
 			var aid = $("#nav_axis_id").val();
 			
@@ -215,6 +401,30 @@ function(
 		
 		// ====== AXIS ====== //
 		
+		editAxis : function(axis_id) {
+			var axis = new Axis({id : axis_id}); 
+			
+			currentView.close();
+			currentView = new AxisCreateUpdateView({
+				el : $("#page_loader"),
+				model : axis
+			});
+			
+			axis.fetch();
+		},
+		
+		createAxis : function() {
+			var axis = new Axis(); 
+			
+			currentView.close();
+			currentView = new AxisCreateUpdateView({
+				el : $("#page_loader"),
+				model : axis
+			});
+			
+			currentView.render();
+		},
+		
 		listAxis : function() {
 			var axiss = new Axiss(); 
 			
@@ -228,6 +438,36 @@ function(
 		},
 		
 		// ====== PRODUCT BUILD ====== //
+		
+		editProductBuild : function(build_id) {
+			var pid = $("#nav_product_id").val();
+			var vid = $("#nav_version_id").val();
+			var productBuild = new ProductBuild({id : build_id});
+			productBuild.urlRoot = 'rest/products/' + pid + '/versions/' + vid + '/builds';
+			
+			currentView.close();
+			currentView = new ProductBuildCreateUpdateView({
+				el : $("#page_loader"),
+				model : productBuild
+			});
+			
+			productBuild.fetch();
+		},
+		
+		createProductBuild : function() {
+			var pid = $("#nav_product_id").val();
+			var vid = $("#nav_version_id").val();
+			var productBuild = new ProductBuild();
+			productBuild.urlRoot = 'rest/products/' + pid + '/versions/' + vid + '/builds';
+			
+			currentView.close();
+			currentView = new ProductBuildCreateUpdateView({
+				el : $("#page_loader"),
+				model : productBuild
+			});
+			
+			currentView.render();
+		},
 		
 		listProductBuilds : function() {
 			var pid = $("#nav_product_id").val();
@@ -336,9 +576,6 @@ function(
 	Backbone.View.prototype.close = function() {
 		$(this.el).empty();
 		this.undelegateEvents();
-		//this.remove();
-		//$(this.el).unbind();
-        //$(this.el).remove();
 		
 		if (this.onClose) {
 			this.onClose();
@@ -350,4 +587,13 @@ function(
 
 	// Start Backbone history a necessary step for bookmarkable URL's
 	Backbone.history.start();
+	
+	// TODO: RESTfull-like urls to load specific entities (without having to manually create breadcrubms navigation)
+	
+	// TODO: axis configuration
+	
+	// TODO: refreshing
+	$('#nav_refresh').click(function() {
+		currentView.render();
+	});
 });

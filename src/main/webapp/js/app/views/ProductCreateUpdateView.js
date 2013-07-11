@@ -1,4 +1,4 @@
-define([ "lib/text!../../../templates/product_create_update.html" ], function(
+define([ "lib/text!../../../templates/product_create_update_html" ], function(
 		productsTemplate) {
 
 	var ProductCreateUpdateView = Backbone.View.extend({

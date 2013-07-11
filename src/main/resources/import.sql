@@ -22,6 +22,10 @@ insert into AxisValue (id, value, axis_id) values (0, '1.6', 0);
 insert into AxisValue (id, value, axis_id) values (1, '1.7', 0);
 insert into AxisValue (id, value, axis_id) values (2, 'Linux', 1);
 insert into AxisValue (id, value, axis_id) values (3, 'Windows', 1);
+-- Insert Axis configs
+insert into AxisConfig (id, axisValue_id, productVersion_id, priority) values (0, 0, 0, 0);
+insert into AxisConfig (id, axisValue_id, productVersion_id, priority) values (1, 1, 0, 5);
+
 -- Insert Test plan with rules
 insert into TestPlan (id, description, name, rules, type, productVersion_id) values (0, 'Dummy description', 'Test plan for JBDS 6', 
 'rule "Filter Java 1.6"

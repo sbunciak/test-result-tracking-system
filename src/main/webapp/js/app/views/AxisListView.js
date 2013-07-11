@@ -1,4 +1,4 @@
-define([ "lib/text!../../../templates/axis_list.html" ], function(
+define([ "lib/text!../../../templates/axis_list_html" ], function(
 		axisTemplate) {
 
 	var AxisListView = Backbone.View.extend({

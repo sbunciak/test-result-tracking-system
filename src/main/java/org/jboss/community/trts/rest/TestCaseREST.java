@@ -2,10 +2,13 @@ package org.jboss.community.trts.rest;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,6 +21,7 @@ import org.jboss.community.trts.service.TestCaseService;
 import org.jboss.community.trts.service.TestPlanService;
 
 @RequestScoped
+@RolesAllowed({"Tester, Admin"})
 @Path("/products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/testplans/{tid:[0-9][0-9]*}/cases")
 public class TestCaseREST {
 
@@ -42,7 +46,7 @@ public class TestCaseREST {
 
 	}
 
-	@PUT
+	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void addTestCase(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
@@ -54,12 +58,30 @@ public class TestCaseREST {
 
 	}
 
+	@PUT
+	@Path("/{id:[0-9][0-9]*}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void editTestCase(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
+			@PathParam("id") Long id, TestCase c) {
+		caseService.update(c);
+	}
+	
+	@GET
 	@Path("/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public TestCase getTestCase(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
 			@PathParam("id") Long id) {
 		return caseService.getById(id);
+	}
+	
+	@DELETE
+	@Path("/{id:[0-9][0-9]*}")
+	public void removeTestCase(@PathParam("pid") Long pid,
+			@PathParam("vid") Long vid, @PathParam("tid") Long tid,
+			@PathParam("id") Long id) {
+		caseService.delete(caseService.getById(id));
 	}
 
 }

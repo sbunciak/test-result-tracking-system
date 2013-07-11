@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "AxisConfig.findAll", query = "SELECT p FROM AxisConfig p"),
+		@NamedQuery(name = "AxisConfig.findByAxisAndProductVersion", query = "SELECT p FROM AxisConfig p WHERE p.productVersion = :productVersion AND p.axisValue.axis = :axis"),
 		@NamedQuery(name = "AxisConfig.findByProductVersion", query = "SELECT p FROM AxisConfig p WHERE p.productVersion = :productVersion") })
 public class AxisConfig extends TestSystemEntity {
 

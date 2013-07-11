@@ -3,7 +3,7 @@ define([], function() {
 	var AxisConfig = Backbone.Model.extend({
 
 		// will be overwritten
-		urlRoot : 'rest/',
+		urlRoot : '',
 		
 		initialize : function() {
 			this.bind("error", function(model, error) {

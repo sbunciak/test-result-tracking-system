@@ -1,0 +1,47 @@
+<html>
+<head></head>
+
+<h3>Test run cases</h3>
+
+<div class="tab_container">
+	<div class="tab_content">
+		<table class="tablesorter">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Criterias</th>
+					<th>Assignee</th>
+					<th>CI Link</th>
+					<th>Bug Tracking Link</th>
+					<th>Result</th>
+					<th>ID</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody id="test_run_cases_content">
+
+			<% _.each(cases, function (c) { %>
+            <tr>
+                <td><%= c.attributes.title %></td>
+                <td><%= c.attributes.criterias.axisValue %></td>
+                <td><%= c.attributes.assignee %></td>
+                <td><%= c.attributes.ciLink %></td>
+                <td><%= c.attributes.bugTrLink %></td>
+                <td><%= c.attributes.result %></td>
+                <td><%= c.attributes.id %></td>
+                <td>
+                	<a href="#/test_run_cases/<%=c.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=c.attributes.id%>" title="Trash" />
+				</td>
+            </tr>
+            <% }); %>
+
+			</tbody>
+		</table>
+	</div>
+	<!-- end of tab -->
+
+</div>
+<!-- end of .tab_container -->
+
+</html>
