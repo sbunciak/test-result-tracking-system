@@ -16,37 +16,17 @@
  */
 
 require([ "jquery", "lib/text", "lib/underscore", "lib/backbone",
-		"lib/hideshow", "header", "app/routes" ], function($, text, underscore,
-		backbone, hideshow, header, routes) {
+		"lib/hideshow", "util", "navigation", "app/routes" ], function($, text,
+		underscore, backbone, hideshow, util, navigation, routes) {
 
 	$(function() {
 		// Close all message 'windows' on startup
 		closeMessages();
 
 		// Add logged user info
-		addLoggedUserInfo()
+		addLoggedUserInfo();
 
 		// load navigations
-		loadProducts();
-		loadAxis();
-		// TODO: Refresh
-		$('#nav_product_id').change(function() {
-			loadProductVersions();
-		});
-
-		$('#nav_version_id').change(function() {
-			loadProductBuilds();
-			loadTestPlans();
-		});
-
-		$('#nav_build_id').change(function() {
-			loadTestRuns();
-		});
-
-		$('#nav_plan_id').change(function() {
-			loadTestRuns();
-		});
-
+		navigation.load();
 	});
-
 });

@@ -143,7 +143,7 @@ section#secondary_bar .breadcrumbs_container {
 }
 
 article.breadcrumbs {
-	float: left;
+	/* float: left; */
 	padding: 0 0px;
 	border: 1px solid #ccc;
 	-webkit-border-radius: 5px;
@@ -153,7 +153,7 @@ article.breadcrumbs {
 	-moz-box-shadow: 0 1px 0 #fff;
 	box-shadow: 0 1px 0 #fff;
 	height: 23px;
-	margin: 4px 3%;
+	margin: 4px 2%;
 }
 
 .breadcrumbs a {
@@ -186,13 +186,23 @@ article.breadcrumbs {
 }
 
 .breadcrumb_divider {
-	padding-right: 12px;
+	/* padding-right: 12px; */
 	height: 24px;
 	background: url(../images/breadcrumb_divider.png) no-repeat;
 	background-position:right;
 	/* display: inline; */
 	float: left;
 	margin: 0 5px;
+	width: 15%;
+}
+
+.breadcrumb_divider_last {
+	/* padding-right: 12px; */
+	height: 24px;
+	/* display: inline; */
+	float: left;
+	margin: 0 5px;
+	width: 15%;
 }
 
 .breadcrumbs select {
@@ -211,9 +221,9 @@ article.breadcrumbs {
 	display: block;
 	float: left;
 	width: 96%;
-	margin: 0 10px;
+	margin: 1.5px 10px;
+	width: 80%;
 }
-
 
 /* Sidebar */
 aside#sidebar {
@@ -486,6 +496,7 @@ section#main {
 .tablesorter {
 	width: 100%;
 	margin: -5px 0 0 0;
+	border-spacing: 0px;
 }
 
 .tablesorter td {
@@ -500,6 +511,10 @@ section#main {
 	text-align: left;
 	text-indent: 10px;
 	cursor: pointer;
+}
+
+.tablesorter tr:HOVER {
+	background-color: #77BACE;
 }
 
 .tablesorter td {

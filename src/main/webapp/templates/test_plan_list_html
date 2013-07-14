@@ -22,7 +22,7 @@
             <tr>
                 <td><%= p.attributes.name %></td>
                 <td><%= p.attributes.type %></td>
-                <td><pre><%= p.attributes.rules %></pre></td>
+                <td><a href="#" class="toggleLink">Hide</a><pre class="toggle"><%= p.attributes.rules %></pre></td>
                 <td><%= p.attributes.description %></td>
                 <td><%= p.attributes.id %></td>
                 <td>

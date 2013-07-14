@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/axis_create_update_html" ], function(
-		axisTemplate) {
+define([ "lib/text!../../../templates/axis_create_update_html", "../../navigation"], function(
+		axisTemplate, navigation) {
 
 	var AxisCreateUpdateView = Backbone.View.extend({
 		events : {
@@ -33,6 +33,7 @@ define([ "lib/text!../../../templates/axis_create_update_html" ], function(
 				this.model.save(null, {
 					success : function(axis) {
 						addMessage("success", "Axis successfully created.");
+						navigation.refresh();
 					}
 				})
 			} else {
@@ -40,6 +41,7 @@ define([ "lib/text!../../../templates/axis_create_update_html" ], function(
 				this.model.save(axisAttributes, {
 					success : function(axis) {
 						addMessage("success", "Axis successfully saved.");
+						navigation.refresh();
 					}
 				})
 			}

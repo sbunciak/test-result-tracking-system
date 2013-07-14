@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/product_version_list_html" ], function(
-		productsTemplate) {
+define([ "lib/text!../../../templates/product_version_list_html", "../../navigation" ], function(
+		productsTemplate, navigation) {
 
 	var ProductVersionListView = Backbone.View.extend({
 		events : {
@@ -27,6 +27,7 @@ define([ "lib/text!../../../templates/product_version_list_html" ], function(
 			this.model.get(id).destroy({
 				success : function() {
 					addMessage("success", "Product version successfully removed.");
+					navigation.refresh();
 				}
 			});
 		}

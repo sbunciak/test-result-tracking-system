@@ -39,7 +39,7 @@ require([ "app/models/Product",
           "app/views/TestRunCreateUpdateView",
           "app/views/TestRunCaseListView",
           "app/views/TestRunCaseUpdateView",
-          "app/views/HomeView", ],
+          "app/views/HomeView" ],
 
 function(
 		Product, ProductVersion, ProductBuild, Axis, AxisValue, AxisConfig,	TestPlan, TestCase, TestRun, TestRunCase, 
@@ -54,7 +54,7 @@ function(
 		TestCaseListView, TestCaseCreateUpdateView, 
 		TestRunListView, TestRunCreateUpdateView, 
 		TestRunCaseListView, TestRunCaseUpdateView,
-		HomeView) {
+		HomeView, AdminView) {
 
 	var AppRouter = Backbone.Router.extend({
 		routes : {
@@ -64,10 +64,12 @@ function(
 			"products" : "listProducts", // list of products
 			"products/new" : "createProduct", // create product
 			"products/:id" : "editProduct", // edit product
+			"products/clone/:id" : "cloneProduct", // clone product
 			// Product version
 			"product_versions" : "listProductVersions", // list of product versions
 			"product_versions/new" : "createProductVersion", // create product version
 			"product_versions/:id" : "editProductVersion", // edit product version
+			"product_versions/clone/:id" : "cloneProductVersion", // clone product version
 			// Product build
 			"product_builds" : "listProductBuilds", // list of product build
 			"product_builds/new" : "createProductBuild", // create product build
@@ -99,8 +101,6 @@ function(
 			// Test run case
 			"test_run_cases" : "listTestRunCases", // list of test run cases
 			"test_run_cases/:id" : "editTestRunCase", // edit test run case
-			
-			// TODO: admin
 		},
 
 		// ====== TEST RUN CASE ====== //
@@ -485,6 +485,28 @@ function(
 		},
 		
 		// ====== PRODUCT VERSION ====== //
+		cloneProductVersion : function(version_id) {
+			var pid = $("#nav_product_id").val();
+			var productVersion = new ProductVersion({id : version_id});
+			
+			productVersion.urlRoot = "rest/products/"+pid+"/versions/";
+			productVersion.fetch({
+				success: function() {
+				    var clone = productVersion.clone();
+				    clone.unset('id', {silent:true});
+				    clone.urlRoot = "rest/products/"+pid+"/versions/";
+				    delete clone.id;
+				    
+					currentView.close();
+					currentView = new ProductVersionCreateUpdateView({
+						el : $("#page_loader"),
+						model : clone
+					});
+					
+					currentView.render();
+				}
+			});
+		},
 		
 		editProductVersion : function(version_id) {
 			var pid = $("#nav_product_id").val();
@@ -528,6 +550,25 @@ function(
 			productVersions.fetch();
 		},
 		// ====== PRODUCT ====== //		
+		cloneProduct : function(product_id) {
+			var product = new Product({id : product_id});
+			product.fetch({
+				success: function() {
+				    var clone = product.clone();
+				    clone.unset('id', {silent:true});
+				    delete clone.id;
+				    
+					currentView.close();
+					currentView = new ProductCreateUpdateView({
+						el : $("#page_loader"),
+						model : clone
+					});
+					
+					currentView.render();
+				}
+			});
+		},
+		
 		editProduct : function(product_id) {
 			var product = new Product({id : product_id}); 
 			
@@ -588,11 +629,6 @@ function(
 	// Start Backbone history a necessary step for bookmarkable URL's
 	Backbone.history.start();
 	
-	// TODO: RESTfull-like urls to load specific entities (without having to manually create breadcrubms navigation)
-	
-	// TODO: axis configuration
-	
-	// TODO: refreshing
 	$('#nav_refresh').click(function() {
 		currentView.render();
 	});

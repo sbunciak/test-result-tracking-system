@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/test_plan_list_html" ], function(
-		testTemplate) {
+define([ "lib/text!../../../templates/test_plan_list_html", "../../navigation" ], function(
+		testTemplate, navigation) {
 
 	var TestPlanListView = Backbone.View.extend({
 		events : {
@@ -25,6 +25,7 @@ define([ "lib/text!../../../templates/test_plan_list_html" ], function(
 			this.model.get(id).destroy({
 				success : function() {
 					addMessage("success", "Test plan successfully removed.");
+					navigation.refresh();
 				}
 			});
 		}

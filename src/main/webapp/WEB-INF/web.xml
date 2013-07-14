@@ -11,30 +11,24 @@
 		<extension>ico</extension>
 		<mime-type>image/x-icon</mime-type>
 	</mime-mapping>
+	
+	<!-- Tester constraint -->
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>All Resources</web-resource-name>
 			<description>Protect all content</description>
 			<url-pattern>*.html</url-pattern>
 			<url-pattern>/js/*</url-pattern>
-			<url-pattern>/rest/*</url-pattern>
+			<url-pattern>/rest/*</url-pattern> <!-- Consider BASIC auth -->
 			<url-pattern>/templates/*</url-pattern>
 		</web-resource-collection>
 
 		<auth-constraint>
 			<role-name>Tester</role-name>
 		</auth-constraint>
-		<!--TODO: In real deployment, we should use HTTPS port and CONFIDENTIAL data transfer 
-		<user-data-constraint> 
-			<transport-guarantee>CONFIDENTIAL</transport-guarantee> 
-		</user-data-constraint> -->
 	</security-constraint>
 	
-	<!-- TODO: Admin constraint
-	<security-constraint></security-constraint>  -->
-	
 	<login-config>
-		<!-- <auth-method>BASIC</auth-method> -->
 		<auth-method>FORM</auth-method>
 		<realm-name>trts-realm</realm-name>
 		<form-login-config>
@@ -47,5 +41,8 @@
 		<description>All Testers</description>
 		<role-name>Tester</role-name>
 	</security-role>
-
+	<security-role>
+		<description>Test manager</description>
+		<role-name>Manager</role-name>
+	</security-role>
 </web-app>

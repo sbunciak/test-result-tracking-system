@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/test_run_create_update_html" ], function(
-		testTemplate) {
+define([ "lib/text!../../../templates/test_run_create_update_html", "../../navigation" ], function(
+		testTemplate, navigation) {
 
 	var TestRunCreateUpdateView = Backbone.View.extend({
 		events : {
@@ -35,6 +35,7 @@ define([ "lib/text!../../../templates/test_run_create_update_html" ], function(
 				this.model.save(null, {
 					success : function(product) {
 						addMessage("success", "Test Run successfully created.");
+						navigation.refresh();
 					}
 				})
 			} else {
@@ -42,6 +43,7 @@ define([ "lib/text!../../../templates/test_run_create_update_html" ], function(
 				this.model.save(runAttributes, {
 					success : function(product) {
 						addMessage("success", "Test Run successfully saved.");
+						navigation.refresh();
 					}
 				})
 			}

@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/product_create_update_html" ], function(
-		productsTemplate) {
+define([ "lib/text!../../../templates/product_create_update_html", "../../navigation" ], function(
+		productsTemplate, navigation) {
 
 	var ProductCreateUpdateView = Backbone.View.extend({
 		events : {
@@ -33,6 +33,7 @@ define([ "lib/text!../../../templates/product_create_update_html" ], function(
 				this.model.save(null, {
 					success : function(product) {
 						addMessage("success", "Product successfully created.");
+						navigation.refresh();
 					}
 				})
 			} else {
@@ -40,6 +41,7 @@ define([ "lib/text!../../../templates/product_create_update_html" ], function(
 				this.model.save(productAttributes, {
 					success : function(product) {
 						addMessage("success", "Product successfully saved.");
+						navigation.refresh();
 					}
 				})
 			}

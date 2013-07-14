@@ -23,6 +23,7 @@
                 <td><%= v.attributes.id %></td>
                 <td>
                 	<a href="#/product_versions/<%=v.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+                	<a href="#/product_versions/clone/<%=v.attributes.id%>"><img src="images/icn_view_users.png" alt="Clone" /></a>
 					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=v.attributes.id%>" title="Trash" />
 				</td>
             </tr>

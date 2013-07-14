@@ -1,4 +1,4 @@
-define([ "lib/text!../../../templates/axis_list_html" ], function(
+define([ "lib/text!../../../templates/axis_list_html", "../../navigation" ], function(
 		axisTemplate) {
 
 	var AxisListView = Backbone.View.extend({
@@ -25,6 +25,7 @@ define([ "lib/text!../../../templates/axis_list_html" ], function(
 			this.model.get(id).destroy({
 				success : function() {
 					addMessage("success", "Axis successfully removed.");
+					navigation.refresh();
 				}
 			});
 		}

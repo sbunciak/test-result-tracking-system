@@ -29,7 +29,7 @@ New DSL (Domain Specific Language) for JBoss Drools was introduced during implem
 	end
 
 	
-<security-domain name="trts-realm">
+				<security-domain name="trts-realm">
                     <authentication>
                         <login-module code="UsersRoles" flag="required">
                             <module-option name="usersProperties" value="users.properties"/>
@@ -37,3 +37,4 @@ New DSL (Domain Specific Language) for JBoss Drools was introduced during implem
                         </login-module>
                     </authentication>
                 </security-domain>
+                
