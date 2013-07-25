@@ -32,6 +32,9 @@ require.config({
     }
 });
 
+/*
+ * Application main entry point. Load all the modules, calls entry point for navigation and security module.
+ */
 require([ "jquery", "lib/underscore", "lib/text", "lib/backbone", "lib/hideshow",
 		"util", "navigation", "security", "app/routes" ], function($, _, text, Backbone,
 		hideshow, util, navigation, security, routes) {

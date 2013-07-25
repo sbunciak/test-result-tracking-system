@@ -1,3 +1,6 @@
+/*
+ * Security module - provides functionality to retrieve currently logged user and his permissions from REST. 
+ */
 define([ "jquery" ], function($) {
 
 	var security = {

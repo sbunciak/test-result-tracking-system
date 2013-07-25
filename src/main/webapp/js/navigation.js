@@ -1,3 +1,6 @@
+/*
+ * Navigation module - provides back-end functionality and rendering for the navigation bar. 
+ */
 define([ "jquery", "app/collections/Products",
 		"app/collections/ProductVersions", "app/collections/ProductBuilds",
 		"app/collections/Axiss", "app/collections/TestPlans",
@@ -162,6 +165,7 @@ define([ "jquery", "app/collections/Products",
 				navigation.refresh();
 			});
 		},
+		// refresh current view
 		refresh : function() {
 			Backbone.history.fragment = null;
 			Backbone.history.navigate(document.location.hash, true);

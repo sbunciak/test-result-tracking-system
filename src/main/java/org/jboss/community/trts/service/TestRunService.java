@@ -53,6 +53,13 @@ public class TestRunService extends BaseEntityService<TestRun> {
 		return query.getResultList();
 	}
 	
+	/**
+	 * Creates TestRun along with TestRunCase-s, subsequently processes associated TestPlan rules and applies them to the result (TestRunCase-s).
+	 * 
+	 * @param tid - TestPlan id
+	 * @param bid - ProductBuild id
+	 * @param run - TestRun
+	 */
 	public void createTestRun(Long tid, Long bid, TestRun run) {
 		TestPlan plan = planService.getById(tid);
 		ProductBuild build = buildService.getById(bid);

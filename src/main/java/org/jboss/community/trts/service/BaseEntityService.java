@@ -17,7 +17,7 @@ import javax.persistence.criteria.Root;
  * 
  * @author sbunciak
  * 
- * @param <T>
+ * @param <T> Entity class
  */
 public abstract class BaseEntityService<T> {
 
@@ -48,26 +48,47 @@ public abstract class BaseEntityService<T> {
 		entityClass = (Class<T>) attempt;
 	}
 
+	/**
+	 * @param entity
+	 * @see {@link javax.persistence.EntityManager#persist(Object)}
+	 */
 	public void persist(T entity) {
 		em.persist(entity);
 		log.info(this.getClass().getSimpleName() + ": " + entity
 				+ " persisted.");
 	}
 
+	/**
+	 * @param entity
+	 * @see {@link javax.persistence.EntityManager#remove(Object)}
+	 */
 	public void delete(T entity) {
 		em.remove(em.merge(entity));
 		log.info(this.getClass().getSimpleName() + ": " + entity + " deleted.");
 	}
 
+	/**
+	 * @param entity
+	 * @see {@link javax.persistence.EntityManager#merge(Object)}
+	 */
 	public void update(T entity) {
 		em.merge(entity);
 		log.info(this.getClass().getSimpleName() + ": " + entity + " updated.");
 	}
 
+	/**
+	 * 
+	 * @param id
+	 * @return entity
+	 * @see {@link javax.persistence.EntityManager#find(Class, Object)}
+	 */
 	public T getById(Long id) {
 		return em.find(entityClass, id);
 	}
 
+	/**
+	 * @return List of entities
+	 */
 	public List<T> getAll() {
 		final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		final CriteriaQuery<T> criteriaQuery = criteriaBuilder

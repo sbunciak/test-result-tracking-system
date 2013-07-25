@@ -33,6 +33,13 @@ public class ProductVersionService extends BaseEntityService<ProductVersion> {
 		return query.getResultList();
 	}
 
+	/**
+	 * Clones related entities to ProductVersion given as origin to ProductVersion given as clone
+	 * 
+	 * @param origin - ProductVersion to be cloned from
+	 * @param clone - ProductVersion to be cloned to
+	 * @param options - List of what to be cloned in cascade [configs | plans]
+	 */
 	public void cloneProductVersionCascade(ProductVersion origin, ProductVersion clone, List<String> options) {
 
 		clone = this.getById(clone.getId());

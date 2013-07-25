@@ -1,3 +1,9 @@
+/*
+ * Set of utility functions which are used throughout the application.
+ * 
+ * @author sbunciak
+ */
+
 /**
  * @param type :
  *            warning | error | success | info
