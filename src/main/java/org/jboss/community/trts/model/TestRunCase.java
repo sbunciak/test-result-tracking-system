@@ -2,6 +2,7 @@ package org.jboss.community.trts.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -33,8 +34,8 @@ public class TestRunCase extends TestSystemEntity {
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<AxisConfig> criterias;
 
-	@ManyToOne
 	@NotNull
+	@ManyToOne(cascade = CascadeType.ALL)
 	private TestRun testRun;
 
 	@Column

@@ -14,7 +14,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.jboss.community.trts.model.TestRun;
 import org.jboss.community.trts.model.TestRunCase;
 import org.jboss.community.trts.service.TestRunCaseService;
 import org.jboss.community.trts.service.TestRunService;
@@ -56,10 +55,7 @@ public class TestRunCaseREST {
 			@PathParam("pid") Long pid, @PathParam("vid") Long vid,
 			@PathParam("bid") Long bid, @PathParam("tid") Long tid,
 			@PathParam("rid") Long rid) {
-
-		TestRun run = runService.getById(rid);
-		List<TestRunCase> c = runCaseService.getTestRunCasesByTestRun(run);
-		return c;
+		return runCaseService.getTestRunCasesByTestRun(runService.getById(rid));
 	}
 	
 	@DELETE

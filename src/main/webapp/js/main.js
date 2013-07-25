@@ -15,28 +15,25 @@
     limitations under the License.
  */
 
-requirejs.config({
+require.config({
     shim: {
         'lib/backbone': {
             //These script dependencies should be loaded before loading
             //backbone.js
-            deps: ['lib/underscore', 'lib/jquery'],
-            //Once loaded, use the global 'Backbone' as the
-            //module value.
+            deps: ['lib/underscore', 'lib/jquery-1.9.1.min'],
             exports: 'Backbone'
         },
-        'lib/underscore': {
-            exports: '_'
-        },
         'app/routes': {
-            deps: ['util']
+            deps: ['util', 'lib/backbone']
+        },
+        'util': {
+            deps: ['lib/backbone']
         }
     }
 });
 
-// TODO: shim backbone (underscore), routes (util)
 require([ "jquery", "lib/underscore", "lib/text", "lib/backbone", "lib/hideshow",
-		"util", "navigation", "security", "app/routes" ], function($, _, text, backbone,
+		"util", "navigation", "security", "app/routes" ], function($, _, text, Backbone,
 		hideshow, util, navigation, security, routes) {
 
 	$(function() {

@@ -28,6 +28,10 @@ New DSL (Domain Specific Language) for JBoss Drools was introduced during implem
 			filter this TestRunCase
 	end
 
+To Run:
+
+Add mysql module to eap,
+add security domain to standalone.xml
 	
 				<security-domain name="trts-realm">
                     <authentication>

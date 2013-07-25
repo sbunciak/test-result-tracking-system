@@ -1,5 +1,6 @@
 package org.jboss.community.trts.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -18,8 +19,8 @@ public class TestCase extends TestSystemEntity {
 	@Transient
 	private static final long serialVersionUID = 4200795112916115715L;
 
-	@ManyToOne
 	@NotNull
+	@ManyToOne(cascade = CascadeType.ALL)
 	private TestPlan testPlan;
 
 	@Column
