@@ -133,12 +133,14 @@ define([ "jquery", "app/collections/Products",
 		// main entry point
 		load : function() {
 			this.products.bind("all", this.buildProductOptions(), this);
-			this.productVersions.bind("all", this.buildProductVersionOptions(), this);
-			this.productBuilds.bind("all", this.buildProductBuildOptions(), this);
+			this.productVersions.bind("all", this.buildProductVersionOptions(),
+					this);
+			this.productBuilds.bind("all", this.buildProductBuildOptions(),
+					this);
 			this.axiss.bind("all", this.buildAxisOptions(), this);
 			this.testPlans.bind("all", this.buildTestPlanOptions(), this);
 			this.testRuns.bind("all", this.buildTestRunOptions(), this);
-			
+
 			$('#nav_product_id').change(function() {
 				navigation.buildProductVersionOptions();
 			});
@@ -155,18 +157,14 @@ define([ "jquery", "app/collections/Products",
 			$('#nav_plan_id').change(function() {
 				navigation.buildTestRunOptions();
 			});
-			
-//			$('#nav_refresh').click(function() {
-//				currentView.render();
-//			});
+
+			$('#nav_refresh').click(function() {
+				navigation.refresh();
+			});
 		},
 		refresh : function() {
-			this.buildProductOptions();
-			this.buildProductVersionOptions();
-			this.buildProductBuildOptions();
-			this.buildAxisOptions();
-			this.buildTestPlanOptions();
-			this.buildTestRunOptions();
+			Backbone.history.fragment = null;
+			Backbone.history.navigate(document.location.hash, true);
 		}
 	};
 
