@@ -17,11 +17,11 @@
 				
 			<% _.each(runs, function (r) { %>
             <tr>
-                <td><%= r.attributes.name %></td>
-                <td><%= r.attributes.id %></td>
+                <td><%= r.escape('name') %></td>
+                <td><%= r.escape('id') %></td>
                 <td>
-                	<a href="#/test_runs/<%=r.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
-					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=r.attributes.id%>" title="Trash" />
+                	<a href="#/test_runs/<%=r.escape('id') %>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=r.escape('id') %>" title="Trash" />
 				</td>
             </tr>
             <% }); %>

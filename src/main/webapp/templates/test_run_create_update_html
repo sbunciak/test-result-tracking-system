@@ -4,7 +4,7 @@
 	<h3>Add new Test run</h3>
 	
 	<fieldset>
-		<label>Name</label> <input type="text" name="name" id="name" value="<%= run.attributes.name %>" />
+		<label>Name</label> <input type="text" name="name" id="name" value="<%= run.escape('name') %>" />
 	</fieldset>
 	<div class="clear"></div>
 </div>

@@ -21,11 +21,11 @@
 				<tbody id="axis_conf_content">
 					<% _.each(values, function (v) { %>
 					<tr>
-						<td><input type="hidden" value="<%= v.attributes.id %>" name="id" /><%= v.attributes.value %></td>
-						<td><input type="radio" value="P1" name="<%= v.attributes.id %>" /></td>
-						<td><input type="radio" value="P2" name="<%= v.attributes.id %>" /></td>
-						<td><input type="radio" value="P3" name="<%= v.attributes.id %>" /></td>
-						<td><input type="radio" value="DISABLED" name="<%= v.attributes.id %>" /></td>
+						<td><input type="hidden" value="<%= v.escape('id') %>" name="id" /><%= v.escape('value') %></td>
+						<td><input type="radio" value="P1" name="<%= v.escape('id') %>" /></td>
+						<td><input type="radio" value="P2" name="<%= v.escape('id') %>" /></td>
+						<td><input type="radio" value="P3" name="<%= v.escape('id') %>" /></td>
+						<td><input type="radio" value="DISABLED" name="<%= v.escape('id') %>" /></td>
 					</tr>
 					<% }); %>
 				</tbody>

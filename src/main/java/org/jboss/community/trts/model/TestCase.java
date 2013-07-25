@@ -74,4 +74,14 @@ public class TestCase extends TestSystemEntity {
 		return result;
 	}
 
+	@Override
+	public Object clone() {
+		TestCase clone = new TestCase();
+		clone.setCiLink(getCiLink());
+		clone.setDefaultTester(getDefaultTester());
+		clone.setTitle(getTitle());
+		clone.setTestPlan(getTestPlan());
+		
+		return clone;
+	}
 }

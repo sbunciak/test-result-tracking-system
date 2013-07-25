@@ -62,4 +62,13 @@ public class ProductVersion extends TestSystemEntity {
 		result += productVersion;
 		return result;
 	}
+	
+	@Override
+	public Object clone() {
+		ProductVersion clone = new ProductVersion();
+		clone.setDescription(getDescription());
+		clone.setProductVersion(getProductVersion());
+		clone.setProduct(getProduct());
+		return clone;
+	}
 }

@@ -142,8 +142,7 @@ section#secondary_bar .breadcrumbs_container {
 	height: 38px;
 }
 
-article.breadcrumbs {
-	/* float: left; */
+article.breadcrumbs { /* float: left; */
 	padding: 0 0px;
 	border: 1px solid #ccc;
 	-webkit-border-radius: 5px;
@@ -185,19 +184,17 @@ article.breadcrumbs {
 	display: inline-block;
 }
 
-.breadcrumb_divider {
-	/* padding-right: 12px; */
+.breadcrumb_divider { /* padding-right: 12px; */
 	height: 24px;
 	background: url(../images/breadcrumb_divider.png) no-repeat;
-	background-position:right;
+	background-position: right;
 	/* display: inline; */
 	float: left;
 	margin: 0 5px;
 	width: 15%;
 }
 
-.breadcrumb_divider_last {
-	/* padding-right: 12px; */
+.breadcrumb_divider_last { /* padding-right: 12px; */
 	height: 24px;
 	/* display: inline; */
 	float: left;
@@ -834,7 +831,7 @@ fieldset textarea:focus {
 
 /* Alerts */
 h4.alert_info {
-	display: block;
+	display: none;
 	width: 95%;
 	margin: 20px 3% 0 3%;
 	margin-top: 20px;
@@ -851,7 +848,7 @@ h4.alert_info {
 }
 
 h4.alert_warning {
-	display: block;
+	display: none;
 	width: 95%;
 	margin: 20px 3% 0 3%;
 	margin-top: 20px;
@@ -868,7 +865,7 @@ h4.alert_warning {
 }
 
 h4.alert_error {
-	display: block;
+	display: none;
 	width: 95%;
 	margin: 20px 3% 0 3%;
 	margin-top: 20px;
@@ -885,7 +882,7 @@ h4.alert_error {
 }
 
 h4.alert_success {
-	display: block;
+	display: none;
 	width: 95%;
 	margin: 20px 3% 0 3%;
 	margin-top: 20px;
@@ -899,4 +896,19 @@ h4.alert_success {
 	padding: 10px 0;
 	text-indent: 40px;
 	font-size: 14px;
+}
+
+/* Menus visibility according to user role */
+#menu_products, 
+#menu_versions,
+#menu_builds,
+#menu_axis,
+#menu_values,
+#menu_configs,
+#menu_plans,
+#menu_cases,
+#menu_runs,
+#menu_runcases,
+#smenu_testrep {
+	display: none;
 }

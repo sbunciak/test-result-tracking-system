@@ -13,7 +13,8 @@ define([ "lib/text!../../../templates/product_version_create_update_html", "../.
 		render : function() {
 			// Compile the template using underscore
 			var template = _.template(productsTemplate, {
-				version : this.model
+				version : this.model,
+				cloning : true
 			});
 
 			// Load the compiled HTML into the Backbone "el"
@@ -21,6 +22,15 @@ define([ "lib/text!../../../templates/product_version_create_update_html", "../.
 		},
 
 		saveVersion : function(event) {
+			var cloning_id = this.cloning_id;
+			var model = this.model;
+			
+			var cloneOptions = $('input[name="clone"]:checked').serializeObject();
+			if (cloneOptions.clone instanceof Array) {
+				// do nothing
+			} else {
+				cloneOptions.clone = new Array(cloneOptions.clone); // json array hack
+			}
 			
 			// get attributes from the form
 			var productAttributes = {
@@ -28,25 +38,21 @@ define([ "lib/text!../../../templates/product_version_create_update_html", "../.
 				description : $('#description').val()
 			};
 			
-			if (this.model.isNew()) {
-				// creating a new product
-				this.model.set(productAttributes);
-				this.model.save(null, {
-					success : function(productVersion) {
-						addMessage("success", "Product version successfully created.");
-						navigation.refresh();
-					}
-				})
-			} else {
-				// updating existing product
-				this.model.save(productAttributes, {
-					success : function(productVersion) {
-						addMessage("success", "Product version successfully saved.");
-						navigation.refresh();
-					}
-				})
-			}
-
+			this.model.set(productAttributes);
+			
+			cloneOptions.clonedVersion = this.model.attributes;
+			
+			// ommit backbone save, leave cloning to REST
+			$.ajax({
+				url : model.urlRoot+cloning_id+'/clone',
+				type : "POST",
+				data : JSON.stringify(cloneOptions),
+				contentType : "application/json",
+				success : function() {
+					addMessage("success", "Product version successfully cloned.");
+					navigation.refresh();
+				}
+			});
 		}
 	});
 

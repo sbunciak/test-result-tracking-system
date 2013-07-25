@@ -4,9 +4,9 @@
 		<h3>Add new Test case</h3>
 
 		<fieldset>
-			<label>Title</label> <input type="text" name="title" id="title" value="<%= c.attributes.title %>" /> 
-			<label>Tester</label> <input type="text" name="defaultTester" id="defaultTester" value="<%= c.attributes.defaultTester %>" /> 
-			<label>CI Link</label> <input type="text" name="ciLink" id="ciLink" value="<%= c.attributes.ciLink %>" />
+			<label>Title</label> <input type="text" name="title" id="title" value="<%= c.escape('title') %>" /> 
+			<label>Tester</label> <input type="text" name="defaultTester" id="defaultTester" value="<%= c.escape('defaultTester') %>" /> 
+			<label>CI Link</label> <input type="text" name="ciLink" id="ciLink" value="<%= c.escape('ciLink') %>" />
 		</fieldset>
 		<div class="clear"></div>
 	</div>

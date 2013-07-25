@@ -20,7 +20,7 @@ import org.jboss.community.trts.service.TestRunCaseService;
 import org.jboss.community.trts.service.TestRunService;
 
 @RequestScoped
-@RolesAllowed({"Tester, Admin"})
+@RolesAllowed({"Tester, Manager"})
 @Path("products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/builds/{bid:[0-9][0-9]*}/testplans/{tid:[0-9][0-9]*}/runs/{rid:[0-9][0-9]*}/cases")
 public class TestRunCaseREST {
 
@@ -58,7 +58,8 @@ public class TestRunCaseREST {
 			@PathParam("rid") Long rid) {
 
 		TestRun run = runService.getById(rid);
-		return runCaseService.getTestRunCasesByTestRun(run);
+		List<TestRunCase> c = runCaseService.getTestRunCasesByTestRun(run);
+		return c;
 	}
 	
 	@DELETE

@@ -24,7 +24,7 @@ import org.jboss.community.trts.service.BaseEntityService;
  * @param <T>
  *            entity
  */
-@RolesAllowed({"Tester, Admin"})
+@RolesAllowed({"Manager"})
 public abstract class BaseEntityREST<T> {
 
 	@DELETE
@@ -36,12 +36,14 @@ public abstract class BaseEntityREST<T> {
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
 	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed({"Tester, Manager"})
 	public T getById(@PathParam("id") Long id) {
 		return this.getService().getById(id);
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@RolesAllowed({"Tester, Manager"})
 	public List<T> getAll() {
 		return this.getService().getAll();
 	}

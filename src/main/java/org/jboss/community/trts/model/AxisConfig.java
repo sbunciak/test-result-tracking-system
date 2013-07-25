@@ -63,4 +63,13 @@ public class AxisConfig extends TestSystemEntity {
 				+ axisValue + ", priority=" + priority + "]";
 	}
 
+	@Override
+	public Object clone() {
+		AxisConfig clone = new AxisConfig();
+		clone.setAxisValue(getAxisValue());
+		clone.setPriority(getPriority());
+		clone.setProductVersion(getProductVersion());
+		
+		return clone;
+	}
 }

@@ -19,11 +19,11 @@
 				<tbody id="axis_conf_content">
 
 					<tr>
-						<td><input type="hidden" value="<%= c.attributes.id %>" name="id" /><%= c.attributes.axisValue.value %></td>
-						<td><input type="radio" value="P1" name="<%= c.attributes.id %>" <%= _.isEqual(c.attributes.priority,"P1") ?  'checked="checked"' : '' %> /></td>
-						<td><input type="radio" value="P2" name="<%= c.attributes.id %>" <%= _.isEqual(c.attributes.priority,"P2") ?  'checked="checked"' : '' %> /></td>
-						<td><input type="radio" value="P3" name="<%= c.attributes.id %>" <%= _.isEqual(c.attributes.priority,"P3") ?  'checked="checked"' : '' %> /></td>
-						<td><input type="radio" value="DISABLED" name="<%= c.attributes.id %>" <%= _.isEqual(c.attributes.priority,"DISABLED") ?  'checked="checked"' : '' %>/></td>
+						<td><input type="hidden" value="<%= c.escape('id') %>" name="id" /><%= _.escape(c.attributes.axisValue.value) %></td>
+						<td><input type="radio" value="P1" name="<%= c.escape('id') %>" <%= _.isEqual(c.escape('priority'),"P1") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="P2" name="<%= c.escape('id') %>" <%= _.isEqual(c.escape('priority'),"P2") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="P3" name="<%= c.escape('id') %>" <%= _.isEqual(c.escape('priority'),"P3") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="DISABLED" name="<%= c.escape('id') %>" <%= _.isEqual(c.escape('priority'),"DISABLED") ?  'checked="checked"' : '' %>/></td>
 					</tr>
 
 				</tbody>

@@ -1,0 +1,52 @@
+<html>
+<head></head>
+
+<h3>Test run results</h3>
+
+<div class="tab_container">
+	<div class="tab_content">
+
+		<table class="tablesorter">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Criterias</th>
+					<th>Assignee</th>
+					<th>CI Link</th>
+					<th>Bug Tracking Link</th>
+					<th>Result</th>
+					<th>ID</th>
+				</tr>
+			</thead>
+			<tbody id="test_run_cases_content">
+
+				<% _.each(runs, function(r) { %>
+				<tr>
+					<td colspan="7"><strong>Run: <%= r.escape('name') %>
+							for plan: <%= _.escape(r.attributes.testPlan.name) %></strong></td>
+				</tr>
+
+					<% _.each(r.get('cases'), function (c) { %>
+					<tr>
+						<td><%= c.escape('title') %></td>
+						<td><%= c.listCriterias() %></td>
+						<td><%= c.escape('assignee') %></td>
+						<td><%= c.escape('ciLink') %></td>
+						<td><%= c.escape('bugTrLink') %></td>
+						<td>
+							<img src="images/ico_<%= c.escape('result').toLowerCase() %>.png" title="<%= c.escape('result') %>" alt="<%= c.escape('result') %>" />
+						</td>
+						<td><%= c.escape('id') %></td>
+					</tr>
+					<% }); %> 
+				
+				<% }); %>
+			</tbody>
+		</table>
+	</div>
+	<!-- end of tab -->
+
+</div>
+<!-- end of .tab_container -->
+
+</html>

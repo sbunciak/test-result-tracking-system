@@ -20,7 +20,7 @@ import org.jboss.community.trts.service.ProductBuildService;
 import org.jboss.community.trts.service.ProductVersionService;
 
 @RequestScoped
-@RolesAllowed({"Tester, Admin"})
+@RolesAllowed({"Tester, Manager"})
 @Path("/products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/builds")
 public class ProductBuildREST {
 

@@ -15,18 +15,19 @@
     limitations under the License.
  */
 
-require([ "jquery", "lib/text", "lib/underscore", "lib/backbone",
-		"lib/hideshow", "util", "navigation", "app/routes" ], function($, text,
-		underscore, backbone, hideshow, util, navigation, routes) {
+// TODO: shim backbone (underscore), routes (util)
+require([ "jquery", "lib/underscore", "lib/text", "lib/backbone", "lib/hideshow",
+		"util", "navigation", "security", "app/routes" ], function($, _, text, backbone,
+		hideshow, util, navigation, security, routes) {
 
 	$(function() {
 		// Close all message 'windows' on startup
-		closeMessages();
-
-		// Add logged user info
-		addLoggedUserInfo();
+		// closeMessages();
 
 		// load navigations
 		navigation.load();
+		
+		// display selected menus according to user's role
+		security.load();
 	});
 });

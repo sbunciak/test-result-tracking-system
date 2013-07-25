@@ -48,4 +48,5 @@ public class Product extends TestSystemEntity {
 			result += " " + description;
 		return result;
 	}
+	
 }

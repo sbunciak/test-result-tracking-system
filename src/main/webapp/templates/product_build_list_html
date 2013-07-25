@@ -17,11 +17,11 @@
 
 			<% _.each(builds, function (b) { %>
             <tr>
-                <td><%= b.attributes.label %></td>
-                <td><%= b.attributes.id %></td>
+                <td><%= b.escape('label') %></td>
+                <td><%= b.escape('id') %></td>
                 <td>
-                	<a href="#/product_builds/<%=b.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
-					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=b.attributes.id%>" title="Trash" />
+                	<a href="#/product_builds/<%= b.escape('id') %>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%= b.escape('id') %>" title="Trash" />
 				</td>
             </tr>
             <% }); %>

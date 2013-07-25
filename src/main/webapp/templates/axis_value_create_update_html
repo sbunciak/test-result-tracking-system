@@ -4,7 +4,7 @@
 	<h3>Add new Axis value</h3>
 	
 	<fieldset>
-		<label>Value</label> <input type="text" name="value" id="value" value="<%= axis.attributes.value %>" />
+		<label>Value</label> <input type="text" name="value" id="value" value="<%= axis.escape('value') %>" />
 	</fieldset>
 	
 	<div class="clear"></div>

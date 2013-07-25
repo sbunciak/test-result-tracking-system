@@ -5,7 +5,7 @@
 	<h3>Add new Product build</h3>
 	
 	<fieldset>
-		<label>Build label</label> <input type="text" name="label" id="label" value="<%= build.attributes.label %>"/>
+		<label>Build label</label> <input type="text" name="label" id="label" value="<%= build.escape('label') %>"/>
 	</fieldset>
 	<div class="clear"></div>
 </div>

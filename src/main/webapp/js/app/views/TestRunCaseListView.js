@@ -3,7 +3,8 @@ define([ "lib/text!../../../templates/test_run_case_list_html" ], function(
 
 	var TestRunCaseListView = Backbone.View.extend({
 		events : {
-			"click input[data-tm-role='delete']" : "deleteCase"
+			"click input[data-tm-role='delete']" : "deleteCase",
+			"click input[data-tm-role='status']" : "changeStatus"
 		},
 
 		initialize : function() {
@@ -27,7 +28,25 @@ define([ "lib/text!../../../templates/test_run_case_list_html" ], function(
 					addMessage("success", "Test run case successfully removed.");
 				}
 			});
+		},
+		
+		changeStatus : function(event) {
+			var id = $(event.currentTarget).data("tm-id");
+			var status = $(event.currentTarget).data("tm-status");
+			var attributes = {
+					result : status 
+			}
+			
+			// updating existing product
+			this.model.get(id).save(attributes, {
+				success : function() {
+					addMessage("success", "Test Run Case result updated.");
+					$('#'+id+'_status_img').attr('src', 'images/ico_'+status.toLowerCase()+'.png');
+				}
+			})
 		}
+		
+		
 	});
 
 	return TestRunCaseListView;

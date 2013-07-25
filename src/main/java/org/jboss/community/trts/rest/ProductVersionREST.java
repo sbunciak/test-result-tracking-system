@@ -1,5 +1,6 @@
 package org.jboss.community.trts.rest;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -21,7 +22,7 @@ import org.jboss.community.trts.service.ProductService;
 import org.jboss.community.trts.service.ProductVersionService;
 
 @RequestScoped
-@RolesAllowed({"Tester, Admin"})
+@RolesAllowed({ "Manager" })
 @Path("/products/{pid:[0-9][0-9]*}/versions")
 public class ProductVersionREST {
 
@@ -33,12 +34,15 @@ public class ProductVersionREST {
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
+	@RolesAllowed({ "Tester, Manager" })
 	@Produces(MediaType.APPLICATION_JSON)
-	public ProductVersion getById(@PathParam("pid") Long pid, @PathParam("id") Long id) {
+	public ProductVersion getById(@PathParam("pid") Long pid,
+			@PathParam("id") Long id) {
 		return versionService.getById(id);
 	}
-	
+
 	@GET
+	@RolesAllowed({ "Tester, Manager" })
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<ProductVersion> getProductVersionsOfProduct(
 			@PathParam("pid") Long id) {
@@ -51,28 +55,62 @@ public class ProductVersionREST {
 			return null;
 		}
 	}
-	
+
 	@PUT
 	@Path("/{id:[0-9][0-9]*}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void update(@PathParam("pid") Long pid, @PathParam("id") Long id, ProductVersion pv) {
+	public void update(@PathParam("pid") Long pid, @PathParam("id") Long id,
+			ProductVersion pv) {
 		versionService.update(pv);
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void addProductVersionsOfProduct(
-			@PathParam("pid") Long id, ProductVersion pv) {
+	public void addProductVersionsOfProduct(@PathParam("pid") Long id,
+			ProductVersion pv) {
 
 		Product p = productService.getById(id);
 		pv.setProduct(p);
 
 		versionService.persist(pv);
 	}
-    
+
 	@DELETE
 	@Path("/{id:[0-9][0-9]*}")
 	public void delete(@PathParam("pid") Long pid, @PathParam("id") Long id) {
 		this.versionService.delete(this.versionService.getById(id));
+	}
+
+	@POST
+	@Path("/{id:[0-9][0-9]*}/clone")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void cloneCascade(@PathParam("pid") Long pid,
+			@PathParam("id") Long id, CloningOptions options) {
+		
+		ProductVersion pv = options.getClonedVersion();
+		versionService.persist(pv);
+		versionService.cloneProductVersionCascade(versionService.getById(id),
+				pv, Arrays.asList(options.getClone()));
+	}
+}
+
+class CloningOptions {
+	private String[] clone;
+	private ProductVersion clonedVersion;
+
+	public ProductVersion getClonedVersion() {
+		return clonedVersion;
+	}
+
+	public void setClonedVersion(ProductVersion clonedVersion) {
+		this.clonedVersion = clonedVersion;
+	}
+
+	public String[] getClone() {
+		return clone;
+	}
+
+	public void setClone(String[] clone) {
+		this.clone = clone;
 	}
 }

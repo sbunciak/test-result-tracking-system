@@ -19,11 +19,11 @@
 				
 			<% _.each(values, function (v) { %>
             <tr>
-                <td><%= v.attributes.value %></td>
-                <td><%= v.attributes.id %></td>
+                <td><%= v.escape('value') %></td>
+                <td><%= v.escape('id') %></td>
                 <td>
-                	<a href="#/axis_values/<%=v.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
-					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=v.attributes.id%>" title="Trash" />
+                	<a href="#/axis_values/<%=v.escape('id')%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=v.escape('id')%>" title="Trash" />
 				</td>
             </tr>
             <% }); %>

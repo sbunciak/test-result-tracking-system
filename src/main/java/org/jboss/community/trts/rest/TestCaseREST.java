@@ -21,7 +21,7 @@ import org.jboss.community.trts.service.TestCaseService;
 import org.jboss.community.trts.service.TestPlanService;
 
 @RequestScoped
-@RolesAllowed({"Tester, Admin"})
+@RolesAllowed({"Manager"})
 @Path("/products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/testplans/{tid:[0-9][0-9]*}/cases")
 public class TestCaseREST {
 
@@ -32,6 +32,7 @@ public class TestCaseREST {
 	private TestPlanService planService;
 
 	@GET
+	@RolesAllowed({"Tester, Manager"})
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<TestCase> getTestCases(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("tid") Long tid) {
@@ -69,6 +70,7 @@ public class TestCaseREST {
 	
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
+	@RolesAllowed({"Tester, Manager"})
 	@Produces(MediaType.APPLICATION_JSON)
 	public TestCase getTestCase(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("tid") Long tid,

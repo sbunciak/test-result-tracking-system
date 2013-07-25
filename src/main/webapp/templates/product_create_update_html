@@ -6,11 +6,11 @@
 		<h3>Add new Product</h3>
 		<fieldset>
 			<label>Name</label> <input type="text" name="name" id="name"
-				value="<%= product.attributes.name %>" />
+				value="<%= product.escape('name') %>" />
 		</fieldset>
 		<fieldset>
 			<label>Description</label>
-			<textarea name="description" id="description" rows="3"><%= product.attributes.description %></textarea>
+			<textarea name="description" id="description" rows="3"><%= product.escape('description') %></textarea>
 		</fieldset>
 		<div class="clear"></div>
 	</div>

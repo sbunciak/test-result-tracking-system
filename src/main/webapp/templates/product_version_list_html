@@ -18,13 +18,13 @@
 
 			<% _.each(versions, function (v) { %>
             <tr>
-                <td><%= v.attributes.productVersion %></td>
-                <td><%= v.attributes.description %></td>
-                <td><%= v.attributes.id %></td>
+                <td><%= v.escape('productVersion') %></td>
+                <td><%= v.escape('description') %></td>
+                <td><%= v.escape('id') %></td>
                 <td>
-                	<a href="#/product_versions/<%=v.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
-                	<a href="#/product_versions/clone/<%=v.attributes.id%>"><img src="images/icn_view_users.png" alt="Clone" /></a>
-					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=v.attributes.id%>" title="Trash" />
+                	<a href="#/product_versions/<%=v.escape('id')%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+                	<a href="#/product_versions/clone/<%=v.escape('id')%>"><img src="images/icn_view_users.png" alt="Clone" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=v.escape('id')%>" title="Trash" />
 				</td>
             </tr>
             <% }); %>

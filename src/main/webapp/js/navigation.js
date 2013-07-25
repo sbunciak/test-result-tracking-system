@@ -22,7 +22,7 @@ define([ "jquery", "app/collections/Products",
 					+ "/versions/" + $('#nav_version_id').val() + "/builds/"
 					+ $('#nav_build_id').val() + "/testplans/"
 					+ $('#nav_plan_id').val() + "/runs";
-			this.testPlans.fetch({
+			this.testRuns.fetch({
 				success : function() {
 					for ( var i = 0; i < testRuns.length; i++) {
 						body += '<option value="' + testRuns[i].get('id')
@@ -31,7 +31,6 @@ define([ "jquery", "app/collections/Products",
 					$('#nav_run_id').empty().append(body);
 				}
 			});
-
 		},
 
 		buildTestPlanOptions : function() {
@@ -156,6 +155,10 @@ define([ "jquery", "app/collections/Products",
 			$('#nav_plan_id').change(function() {
 				navigation.buildTestRunOptions();
 			});
+			
+//			$('#nav_refresh').click(function() {
+//				currentView.render();
+//			});
 		},
 		refresh : function() {
 			this.buildProductOptions();

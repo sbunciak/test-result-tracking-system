@@ -7,7 +7,7 @@
 function addMessage(type, text) {
 	$(".alert_" + type).html(text);
 	$(".alert_" + type).fadeIn();
-	$(".alert_" + type).delay(5000).fadeOut('slow');
+	$(".alert_" + type).delay(3000).fadeOut('slow');
 }
 
 function closeMessages() {
@@ -15,15 +15,6 @@ function closeMessages() {
 	$(".alert_warning").hide(); // Hide warning message
 	$(".alert_error").hide(); // Hide error message
 	$(".alert_success").hide(); // Hide success message
-}
-
-function addLoggedUserInfo() {
-	$.ajax({
-		url : "rest/user",
-		success : function(data) {
-			$('#nav_user_id').empty().append("Logged as: " + data);
-		}
-	});
 }
 
 // auxiliary function to serialize html forms to json objects
@@ -41,4 +32,22 @@ $.fn.serializeObject = function() {
 		}
 	});
 	return o;
+};
+
+// extend Backbone view with close() function
+Backbone.View.prototype.close = function() {
+	$(this.el).empty();
+	this.undelegateEvents();
+
+	if (this.onClose) {
+		this.onClose();
+	}
+};
+
+//extend Backbone model with cloneWithoutId() function
+Backbone.Model.prototype.cloneWithoutId = function() {
+	var clone = this.clone();
+	clone.unset('id', {silent : true});
+	delete clone.id;
+	return clone;
 };

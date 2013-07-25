@@ -21,7 +21,7 @@ import org.jboss.community.trts.service.AxisService;
 import org.jboss.community.trts.service.AxisValueService;
 
 @RequestScoped
-@RolesAllowed({"Tester, Admin"})
+@RolesAllowed({"Manager"})
 @Path("/axis/{aid:[0-9][0-9]*}/values")
 public class AxisValueREST {
 
@@ -32,6 +32,7 @@ public class AxisValueREST {
 	private AxisValueService valueService;
 
 	@GET
+	@RolesAllowed({"Tester, Manager"})
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<AxisValue> getAxisValuesOfAxis(@PathParam("aid") Long aid) {
 		Axis a = service.getById(aid);
@@ -45,6 +46,7 @@ public class AxisValueREST {
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
+	@RolesAllowed({"Tester, Manager"})
 	@Produces(MediaType.APPLICATION_JSON)
 	public AxisValue getById(@PathParam("aid") Long aid,
 			@PathParam("id") Long id) {

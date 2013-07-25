@@ -18,12 +18,12 @@
 				
 			<% _.each(axiss, function (a) { %>
             <tr>
-                <td><%= a.attributes.category %></td>
-                <td><%= a.attributes.description %></td>
-                <td><%= a.attributes.id %></td>
+                <td><%= a.escape('category') %></td>
+                <td><%= a.escape('description') %></td>
+                <td><%= a.escape('id') %></td>
                 <td>
-                	<a href="#/axis/<%=a.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
-					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=a.attributes.id%>" title="Trash" />
+                	<a href="#/axis/<%=a.escape('id')%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=a.escape('id')%>" title="Trash" />
 				</td>
             </tr>
             <% }); %>

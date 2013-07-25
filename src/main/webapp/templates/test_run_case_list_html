@@ -22,16 +22,30 @@
 
 			<% _.each(cases, function (c) { %>
             <tr>
-                <td><%= c.attributes.title %></td>
-                <td><%= c.attributes.criterias.axisValue %></td>
-                <td><%= c.attributes.assignee %></td>
-                <td><%= c.attributes.ciLink %></td>
-                <td><%= c.attributes.bugTrLink %></td>
-                <td><%= c.attributes.result %></td>
-                <td><%= c.attributes.id %></td>
+                <td><%= c.escape('title') %></td>
+                <td><%= c.listCriterias() %></td>
+                <td><%= c.escape('assignee') %></td>
+                <td><%= c.escape('ciLink') %></td>
+                <td><%= c.escape('bugTrLink') %></td>
                 <td>
-                	<a href="#/test_run_cases/<%=c.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
-					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=c.attributes.id%>" title="Trash" />
+                	<img src="images/ico_<%= c.escape('result').toLowerCase() %>.png" 
+                		 title="<%= c.escape('result') %>" alt="<%= c.escape('result') %>" 
+                		 id="<%= c.escape('id') %>_status_img" 
+                		 onclick="$('#<%= c.escape('id') %>_result').toggle()"/>
+                		 
+                		<div style="display:none;" id="<%= c.escape('id') %>_result">
+							<input type="image"	src="images/ico_running.png" data-tm-role='status' data-tm-id="<%= c.escape('id') %>" data-tm-status="RUNNING" title="RUNNING" />
+							<input type="image"	src="images/ico_error.png"   data-tm-role='status' data-tm-id="<%= c.escape('id') %>" data-tm-status="ERROR" title="ERROR" />
+							<input type="image"	src="images/ico_blocked.png" data-tm-role='status' data-tm-id="<%= c.escape('id') %>" data-tm-status="BLOCKED" title="BLOCKED" />
+							<input type="image"	src="images/ico_failed.png"  data-tm-role='status' data-tm-id="<%= c.escape('id') %>" data-tm-status="FAILED" title="FAILED" />
+							<input type="image"	src="images/ico_waived.png"  data-tm-role='status' data-tm-id="<%= c.escape('id') %>" data-tm-status="WAIVED" title="WAIVED" />
+							<input type="image"	src="images/ico_passed.png"  data-tm-role='status' data-tm-id="<%= c.escape('id') %>" data-tm-status="PASSED" title="PASSED" />
+						</div>
+                </td>
+                <td><%= c.escape('id') %></td>
+                <td>
+                	<a href="#/test_run_cases/<%= c.escape('id') %>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%= c.escape('id') %>" title="Trash" />
 				</td>
             </tr>
             <% }); %>

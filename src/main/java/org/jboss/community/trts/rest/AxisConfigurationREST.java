@@ -21,7 +21,7 @@ import org.jboss.community.trts.service.AxisService;
 import org.jboss.community.trts.service.ProductVersionService;
 
 @RequestScoped
-@RolesAllowed({"Tester, Admin"})
+@RolesAllowed({"Manager"})
 @Path("/axis/{aid:[0-9][0-9]*}/version/{vid:[0-9][0-9]*}/configurations")
 public class AxisConfigurationREST {
 
@@ -52,6 +52,7 @@ public class AxisConfigurationREST {
 	}
 
 	@GET
+	@RolesAllowed({"Tester, Manager"})
 	public List<AxisConfig> listConfigurations(@PathParam("aid") Long aid,
 			@PathParam("vid") Long vid) {
 		return configService.getAxisConfigs(service.getById(aid),
@@ -60,6 +61,7 @@ public class AxisConfigurationREST {
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
+	@RolesAllowed({"Tester, Manager"})
 	@Produces(MediaType.APPLICATION_JSON)
 	public AxisConfig getById(@PathParam("aid") Long aid,
 			@PathParam("vid") Long vid, @PathParam("id") Long id) {

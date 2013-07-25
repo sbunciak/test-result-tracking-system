@@ -7,11 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -31,8 +30,7 @@ public class TestRunCase extends TestSystemEntity {
 	@NotEmpty
 	private String title;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name="criterias_id")
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<AxisConfig> criterias;
 
 	@ManyToOne
@@ -75,9 +73,12 @@ public class TestRunCase extends TestSystemEntity {
 	 * 
 	 * @return TestPlan of assigned TestRun
 	 */
-	public TestPlan getTestPlan() {
-		return getTestRun().getTestPlan();
-	}
+	/*
+	 * @XmlTransient
+	 * 
+	 * @Transient private TestPlan getTestPlan() { return
+	 * getTestRun().getTestPlan(); }
+	 */
 
 	public TestResult getResult() {
 		return this.result;

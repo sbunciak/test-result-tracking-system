@@ -20,14 +20,14 @@
 
 					<% _.each(configs, function (c) { %>
 					<tr>
-						<td><%= c.attributes.axisValue.value %></td>
-						<td><input type="radio" value="P1" disabled="disabled" <%= _.isEqual(c.attributes.priority,"P1") ?  'checked="checked"' : '' %> /></td>
-						<td><input type="radio" value="P2" disabled="disabled" <%= _.isEqual(c.attributes.priority,"P2") ?  'checked="checked"' : '' %> /></td>
-						<td><input type="radio" value="P3" disabled="disabled" <%= _.isEqual(c.attributes.priority,"P3") ?  'checked="checked"' : '' %> /></td>
-						<td><input type="radio" value="DISABLED" disabled="disabled" <%= _.isEqual(c.attributes.priority,"DISABLED") ?  'checked="checked"' : '' %>/></td>
+						<td><%= _.escape(c.attributes.axisValue.value) %></td>
+						<td><input type="radio" value="P1" disabled="disabled" <%= _.isEqual(c.escape('priority'),"P1") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="P2" disabled="disabled" <%= _.isEqual(c.escape('priority'),"P2") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="P3" disabled="disabled" <%= _.isEqual(c.escape('priority'),"P3") ?  'checked="checked"' : '' %> /></td>
+						<td><input type="radio" value="DISABLED" disabled="disabled" <%= _.isEqual(c.escape('priority'),"DISABLED") ?  'checked="checked"' : '' %>/></td>
 						<td>
-							<a href="#/axis_configs/<%=c.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a> 
-							<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=c.attributes.id%>" title="Trash" />
+							<a href="#/axis_configs/<%= c.escape('id') %>"><img src="images/icn_edit.png" alt="Edit" /></a> 
+							<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%= c.escape('id') %>" title="Trash" />
 						</td>
 					</tr>
 					<% }); %>

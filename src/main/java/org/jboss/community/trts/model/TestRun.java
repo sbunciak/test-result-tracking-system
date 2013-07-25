@@ -11,7 +11,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "TestRun.findAll", query = "SELECT r FROM TestRun r WHERE r.testPlan = :plan") })
+@NamedQueries({
+		@NamedQuery(name = "TestRun.findAll", query = "SELECT r FROM TestRun r WHERE r.testPlan = :plan"),
+		@NamedQuery(name = "TestRun.findAllByBuild", query = "SELECT r FROM TestRun r WHERE r.productBuild = :build") })
 public class TestRun extends TestSystemEntity {
 
 	@Transient
@@ -24,7 +26,7 @@ public class TestRun extends TestSystemEntity {
 	@ManyToOne
 	@NotNull
 	private ProductBuild productBuild;
-	
+
 	@Column
 	@NotEmpty
 	private String name;
@@ -48,11 +50,11 @@ public class TestRun extends TestSystemEntity {
 	public ProductBuild getProductBuild() {
 		return productBuild;
 	}
-	
+
 	public void setProductBuild(ProductBuild productBuild) {
 		this.productBuild = productBuild;
 	}
-	
+
 	@Override
 	public String toString() {
 		String result = "";

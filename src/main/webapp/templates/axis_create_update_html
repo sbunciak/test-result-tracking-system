@@ -4,9 +4,9 @@
 	<h3>Add new Axis</h3>
 	
 	<fieldset>
-		<label>Category name</label> <input type="text" name="category" id="category" value="<%= axis.attributes.category %>" />
+		<label>Category name</label> <input type="text" name="category" id="category" value="<%= axis.escape('category') %>" />
 		<label>Description</label>
-		<textarea name="description" id="description" rows="3"><%= axis.attributes.description %></textarea>
+		<textarea name="description" id="description" rows="3"><%= axis.escape('description') %></textarea>
 	</fieldset>
 	<div class="clear"></div>
 </div>

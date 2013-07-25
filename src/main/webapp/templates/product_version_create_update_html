@@ -6,18 +6,26 @@
 
 		<fieldset>
 			<label>Version</label> <input type="text" name="productVersion"
-				id="productVersion" value="<%= version.attributes.productVersion %>" />
+				id="productVersion" value="<%= version.escape('productVersion') %>" />
 		</fieldset>
 		<fieldset>
 			<label>Description</label>
-			<textarea name="description" id="description" rows="3"><%= version.attributes.description %></textarea>
+			<textarea name="description" id="description" rows="3"><%= version.escape('description') %></textarea>
 		</fieldset>
+		
+		<% if (cloning) { %>
+		<fieldset>
+			<label>Cloning options</label>
+			<input name="clone" value="configs" type="checkbox" /> Axis Configurations &nbsp; 
+			<input name="clone" value="plans" type="checkbox" /> Test Plans
+		</fieldset>
+		<% } %>
 		<div class="clear"></div>
 	</div>
 	<footer>
 		<div class="submit_link">
 			<a href="#/product_versions">&lt;&lt; Back to product version list</a> 
-			<input type="button" value="Save" class="alt_btn" data-tm-role="create" /> 
+			<input type="button" value="Save" class="alt_btn" data-tm-role="create" onclick="return false;"/> 
 			<input type="reset" value="Reset" />
 		</div>
 	</footer>

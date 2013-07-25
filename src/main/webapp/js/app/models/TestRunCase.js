@@ -10,6 +10,22 @@ define([], function() {
 				// We have received an error, log it, alert it or forget it :)
 				addMessage("error", error);
 			});
+		},
+		
+		listCriterias : function() {
+			var body = "";
+			
+			_.each(this.get('criterias'), function(c) {
+				body += '[';
+				body += c.axisValue.axis.category;
+				body += ' ';
+				body += c.axisValue.value;
+				body += ' = ';
+				body += c.priority;
+				body += '] ';
+			});
+			
+			return body;
 		}
 	});
 

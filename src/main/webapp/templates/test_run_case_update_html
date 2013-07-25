@@ -4,18 +4,18 @@
 	<h3>Test run case</h3>
 	
 	<fieldset>
-		<label>Title</label> <input type="text" name="title" id="title" disabled="disabled" value="<%= c.attributes.title %>"/>
-		<label>Assignee</label> <input type="text" name="assignee" id="assignee" value="<%= c.attributes.assignee %>"/>
-		<label>CI Link</label> <input type="text" name="ciLink" id="ciLink" value="<%= c.attributes.ciLink %>"/>
-		<label>Bug Tracking Link</label> <input type="text" name="bugTrLink" id="bugTrLink" value="<%= c.attributes.bugTrLink %>"/>
-		<label>Result</label> <input type="text" name="result" id="result" value="<%= c.attributes.result %>"/>
+		<label>Title</label> <input type="text" name="title" id="title" disabled="disabled" value="<%= c.escape('title') %>"/>
+		<label>Assignee</label> <input type="text" name="assignee" id="assignee" value="<%= c.escape('assignee') %>"/>
+		<label>CI Link</label> <input type="text" name="ciLink" id="ciLink" value="<%= c.escape('ciLink') %>"/>
+		<label>Bug Tracking Link</label> <input type="text" name="bugTrLink" id="bugTrLink" value="<%= c.escape('bugTrLink') %>"/>
+		<label>Result</label> 
 			<select	name="result" id="result">
-				<option value="PASSED" <%= _.isEqual(c.attributes.result,"PASSED") ?  'checked="checked"' : '' %> >PASSED</option>
-				<option value="WAIVED" <%= _.isEqual(c.attributes.result,"WAIVED") ?  'checked="checked"' : '' %> >WAIVED</option>
-				<option value="FAILED" <%= _.isEqual(c.attributes.result,"FAILED") ?  'checked="checked"' : '' %> >FAILED</option>
-				<option value="BLOCKED" <%= _.isEqual(c.attributes.result,"BLOCKED") ?  'checked="checked"' : '' %> >BLOCKED</option>
-				<option value="ERROR" <%= _.isEqual(c.attributes.result,"ERROR") ?  'checked="checked"' : '' %> >ERROR</option>
-				<option value="RUNNING" <%= _.isEqual(c.attributes.result,"RUNNING") ?  'checked="checked"' : '' %> >RUNNING</option>
+				<option value="PASSED" <%= _.isEqual(c.escape('result'),"PASSED") ?  'selected="selected"' : '' %> >PASSED</option>
+				<option value="WAIVED" <%= _.isEqual(c.escape('result'),"WAIVED") ?  'selected="selected"' : '' %> >WAIVED</option>
+				<option value="FAILED" <%= _.isEqual(c.escape('result'),"FAILED") ?  'selected="selected"' : '' %> >FAILED</option>
+				<option value="BLOCKED" <%= _.isEqual(c.escape('result'),"BLOCKED") ?  'selected="selected"' : '' %> >BLOCKED</option>
+				<option value="ERROR" <%= _.isEqual(c.escape('result'),"ERROR") ?  'selected="selected"' : '' %> >ERROR</option>
+				<option value="RUNNING" <%= _.isEqual(c.escape('result'),"RUNNING") ?  'selected="selected"' : '' %> >RUNNING</option>
 			</select>
 	</fieldset>
 	<div class="clear"></div>

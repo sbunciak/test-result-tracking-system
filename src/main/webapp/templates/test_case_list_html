@@ -19,13 +19,13 @@
 
 			<% _.each(cases, function (c) { %>
             <tr>
-                <td><%= c.attributes.title %></td>
-                <td><%= c.attributes.defaultTester %></td>
-                <td><%= c.attributes.ciLink %></td>
-                <td><%= c.attributes.id %></td>
+                <td><%= c.escape('title') %></td>
+                <td><%= c.escape('defaultTester') %></td>
+                <td><%= c.escape('ciLink') %></td>
+                <td><%= c.escape('id') %></td>
                 <td>
-                	<a href="#/test_cases/<%=c.attributes.id%>"><img src="images/icn_edit.png" alt="Edit" /></a>
-					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=c.attributes.id%>" title="Trash" />
+                	<a href="#/test_cases/<%=c.escape('id')%>"><img src="images/icn_edit.png" alt="Edit" /></a>
+					<input type="image"	src="images/icn_trash.png" data-tm-role='delete' data-tm-id="<%=c.escape('id')%>" title="Trash" />
 				</td>
             </tr>
             <% }); %>

@@ -90,4 +90,16 @@ public class TestPlan extends TestSystemEntity {
 			result += " " + description;
 		return result;
 	}
+
+	@Override
+	public Object clone() {
+		TestPlan clone = new TestPlan();
+		clone.setDescription(getDescription());
+		clone.setName(getName());
+		clone.setRules(getRules());
+		clone.setType(getType());
+		clone.setProductVersion(getProductVersion());
+
+		return clone;
+	}
 }

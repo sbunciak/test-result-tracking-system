@@ -69,7 +69,6 @@ public abstract class BaseEntityService<T> {
 	}
 
 	public List<T> getAll() {
-		// TODO: Check
 		final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		final CriteriaQuery<T> criteriaQuery = criteriaBuilder
 				.createQuery(entityClass);

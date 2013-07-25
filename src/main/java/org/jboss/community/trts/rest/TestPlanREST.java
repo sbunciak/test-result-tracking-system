@@ -21,7 +21,7 @@ import org.jboss.community.trts.service.ProductVersionService;
 import org.jboss.community.trts.service.TestPlanService;
 
 @RequestScoped
-@RolesAllowed({"Tester, Admin"})
+@RolesAllowed({"Manager"})
 @Path("/products/{pid:[0-9][0-9]*}/versions/{vid:[0-9][0-9]*}/testplans")
 public class TestPlanREST {
 
@@ -32,6 +32,7 @@ public class TestPlanREST {
 	private ProductVersionService versionService;
 
 	@GET
+	@RolesAllowed({"Tester, Manager"})
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<TestPlan> getTestPlansByProduct(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid) {
@@ -56,6 +57,7 @@ public class TestPlanREST {
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
+	@RolesAllowed({"Tester, Manager"})
 	@Produces(MediaType.APPLICATION_JSON)
 	public TestPlan getTestPlan(@PathParam("pid") Long pid,
 			@PathParam("vid") Long vid, @PathParam("id") Long id) {
