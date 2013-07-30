@@ -4,11 +4,14 @@ $ Compiled class files
 # dot(hidden) files/dirs
 .*
 !/.gitignore
-
 # Maven target dir
 target/*
-
 # Package Files #
 *.jar
 *.war
 *.ear
+target
+.settings/*
+!.settings/.jsdtscope
+.project
+.classpath
