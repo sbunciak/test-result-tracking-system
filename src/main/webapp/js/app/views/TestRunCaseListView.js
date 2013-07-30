@@ -35,7 +35,7 @@ define([ "lib/text!../../../templates/test_run_case_list_html" ], function(
 			var status = $(event.currentTarget).data("tm-status");
 			var attributes = {
 					result : status 
-			}
+			};
 			
 			// updating existing product
 			this.model.get(id).save(attributes, {
@@ -43,7 +43,7 @@ define([ "lib/text!../../../templates/test_run_case_list_html" ], function(
 					addMessage("success", "Test Run Case result updated.");
 					$('#'+id+'_status_img').attr('src', 'images/ico_'+status.toLowerCase()+'.png');
 				}
-			})
+			});
 		}
 		
 		

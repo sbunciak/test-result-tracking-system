@@ -27,7 +27,7 @@ define([ "lib/text!../../../templates/product_build_list_html", "../../navigatio
 			this.model.get(id).destroy({
 				success : function() {
 					addMessage("success", "Product build successfully removed.");
-					navigation.refresh();
+					navigation.buildProductBuildOptions();
 				}
 			});
 		}

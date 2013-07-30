@@ -27,7 +27,7 @@ define([ "lib/text!../../../templates/product_version_list_html", "../../navigat
 			this.model.get(id).destroy({
 				success : function() {
 					addMessage("success", "Product version successfully removed.");
-					navigation.refresh();
+					navigation.buildProductVersionOptions();
 				}
 			});
 		}

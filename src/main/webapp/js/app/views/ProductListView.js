@@ -25,7 +25,7 @@ define([ "lib/text!../../../templates/product_list_html", "../../navigation" ], 
 			this.model.get(id).destroy({
 				success : function() {
 					addMessage("success", "Product successfully removed.");
-					navigation.refresh();
+					navigation.buildProductOptions();
 				}
 			});
 		}

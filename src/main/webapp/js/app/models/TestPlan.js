@@ -1,4 +1,4 @@
-define([], function() {
+define(['lib/backbone'], function() {
 
 	var TestPlan = Backbone.Model.extend({
 

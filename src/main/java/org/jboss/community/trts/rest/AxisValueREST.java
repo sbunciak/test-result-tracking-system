@@ -63,7 +63,7 @@ public class AxisValueREST {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void addProductBuildAxisValue(@PathParam("aid") Long aid,
+	public void addAxisValue(@PathParam("aid") Long aid,
 			AxisValue value) {
 		value.setAxis(service.getById(aid));
 

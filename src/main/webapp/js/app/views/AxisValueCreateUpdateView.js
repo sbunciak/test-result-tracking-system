@@ -33,14 +33,14 @@ define([ "lib/text!../../../templates/axis_value_create_update_html" ], function
 					success : function(axis) {
 						addMessage("success", "Axis value successfully created.");
 					}
-				})
+				});
 			} else {
 				// updating existing Axis
 				this.model.save(axisAttributes, {
 					success : function(axis) {
 						addMessage("success", "Axis value successfully saved.");
 					}
-				})
+				});
 			}
 
 		}

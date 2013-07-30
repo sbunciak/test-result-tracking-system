@@ -33,17 +33,17 @@ define([ "lib/text!../../../templates/axis_create_update_html", "../../navigatio
 				this.model.save(null, {
 					success : function(axis) {
 						addMessage("success", "Axis successfully created.");
-						navigation.refresh();
+						navigation.buildAxisOptions();
 					}
-				})
+				});
 			} else {
 				// updating existing Axis
 				this.model.save(axisAttributes, {
 					success : function(axis) {
 						addMessage("success", "Axis successfully saved.");
-						navigation.refresh();
+						navigation.buildAxisOptions();
 					}
-				})
+				});
 			}
 
 		}

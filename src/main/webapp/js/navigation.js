@@ -149,8 +149,8 @@ define([ "jquery", "app/collections/Products",
 			});
 
 			$('#nav_version_id').change(function() {
-				navigation.buildProductBuildOptions();
 				navigation.buildTestPlanOptions();
+				navigation.buildProductBuildOptions();
 			});
 
 			$('#nav_build_id').change(function() {

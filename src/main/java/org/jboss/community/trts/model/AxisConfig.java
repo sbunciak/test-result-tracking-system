@@ -1,6 +1,5 @@
 package org.jboss.community.trts.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -22,11 +21,11 @@ public class AxisConfig extends TestSystemEntity {
 	private static final long serialVersionUID = 4684947539422770667L;
 
 	@NotNull
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private ProductVersion productVersion;
 
 	@NotNull
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private AxisValue axisValue;
 
 	@Column

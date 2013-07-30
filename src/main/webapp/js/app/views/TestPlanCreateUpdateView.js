@@ -35,17 +35,17 @@ define([ "lib/text!../../../templates/test_plan_create_update_html", "../../navi
 				this.model.save(null, {
 					success : function(product) {
 						addMessage("success", "Test plan successfully created.");
-						navigation.refresh();
+						navigation.buildTestPlanOptions();
 					}
-				})
+				});
 			} else {
 				// updating existing product
 				this.model.save(planAttributes, {
 					success : function(product) {
 						addMessage("success", "Test plan successfully saved.");
-						navigation.refresh();
+						navigation.buildTestPlanOptions();
 					}
-				})
+				});
 			}
 
 		}

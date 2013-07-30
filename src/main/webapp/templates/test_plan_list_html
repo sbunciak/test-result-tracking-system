@@ -22,7 +22,7 @@
             <tr>
                 <td><%= p.escape('name') %></td>
                 <td><%= p.escape('type') %></td>
-                <td><pre class="toggle"><%= p.escape('rules') %></pre></td>
+                <td><a href="#" onclick="$('#<%= p.escape('id') %>_rules').toggle(); return false;">Toggle rules</a><pre id="<%= p.escape('id') %>_rules" style="display:none;"><%= p.escape('rules') %></pre></td>
                 <td><%= p.escape('description') %></td>
                 <td><%= p.escape('id') %></td>
                 <td>

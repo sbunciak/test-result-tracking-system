@@ -32,9 +32,9 @@ define([ "lib/text!../../../templates/test_run_case_update_html" ], function(
 			// updating existing product
 			this.model.save(caseAttributes, {
 				success : function(product) {
-					addMessage("success", "Test Run successfully saved.");
+					addMessage("success", "Test Run Case successfully saved.");
 				}
-			})
+			});
 
 		}
 	});

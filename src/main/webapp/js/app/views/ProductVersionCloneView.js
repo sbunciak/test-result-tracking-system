@@ -50,7 +50,7 @@ define([ "lib/text!../../../templates/product_version_create_update_html", "../.
 				contentType : "application/json",
 				success : function() {
 					addMessage("success", "Product version successfully cloned.");
-					navigation.refresh();
+					navigation.buildProductVersionOptions();
 				}
 			});
 		}

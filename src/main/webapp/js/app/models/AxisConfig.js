@@ -1,4 +1,4 @@
-define([], function() {
+define(['lib/backbone'], function() {
 
 	var AxisConfig = Backbone.Model.extend({
 

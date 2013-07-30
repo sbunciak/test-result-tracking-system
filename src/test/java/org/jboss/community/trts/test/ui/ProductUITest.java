@@ -10,7 +10,6 @@ import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.community.trts.model.Product;
-import org.jboss.community.trts.rest.JaxRsActivator;
 import org.jboss.community.trts.rest.ProductREST;
 import org.jboss.community.trts.service.ProductService;
 import org.jboss.community.trts.util.Resources;
@@ -42,8 +41,8 @@ public class ProductUITest {
 				.create(WebArchive.class, "test.war")
 				.addPackage(Product.class.getPackage())
 				.addPackage(ProductService.class.getPackage())
-				.addClasses(ProductREST.class, JaxRsActivator.class,
-						Resources.class)
+				.addPackage(ProductREST.class.getPackage())
+				.addClass(Resources.class)
 				.merge(ShrinkWrap.create(GenericArchive.class)
 						.as(ExplodedImporter.class).importDirectory(WEBAPP_SRC)
 						.as(GenericArchive.class), "/",

@@ -25,7 +25,7 @@ define([ "lib/text!../../../templates/axis_list_html", "../../navigation" ], fun
 			this.model.get(id).destroy({
 				success : function() {
 					addMessage("success", "Axis successfully removed.");
-					navigation.refresh();
+					navigation.buildAxisOptions();
 				}
 			});
 		}

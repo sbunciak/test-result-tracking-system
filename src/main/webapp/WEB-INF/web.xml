@@ -12,6 +12,8 @@
 		<mime-type>image/x-icon</mime-type>
 	</mime-mapping>
 	
+	<distributable/>
+	
 	<!-- Tester constraint -->
 	<security-constraint>
 		<web-resource-collection>
@@ -19,7 +21,7 @@
 			<description>Protect all content</description>
 			<url-pattern>*.html</url-pattern>
 			<url-pattern>/js/*</url-pattern>
-			<url-pattern>/rest/*</url-pattern> <!-- Consider BASIC auth -->
+			<url-pattern>/rest/*</url-pattern>
 			<url-pattern>/templates/*</url-pattern>
 		</web-resource-collection>
 
@@ -28,6 +30,7 @@
 		</auth-constraint>
 	</security-constraint>
 	
+	<!-- TODO: Removed FORM auth due to rest difficulties
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<realm-name>trts-realm</realm-name>
@@ -36,7 +39,12 @@
 			<form-error-page>/access-denied.html</form-error-page>
 		</form-login-config>
 	</login-config>
-
+ -->
+ 	<login-config>
+ 		<auth-method>BASIC</auth-method>
+ 		<realm-name>trts-realm</realm-name>
+ 	</login-config>
+ 
 	<security-role>
 		<description>All Testers</description>
 		<role-name>Tester</role-name>

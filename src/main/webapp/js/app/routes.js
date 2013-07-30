@@ -145,7 +145,6 @@ function(Product, ProductVersion, ProductBuild, Axis, AxisValue, AxisConfig,
 			});
 
 			testRunCases.fetch();
-			console.log(testRunCases);
 		},
 
 		editTestRunCase : function(case_id) {

@@ -25,8 +25,8 @@
                 <td><%= c.escape('title') %></td>
                 <td><%= c.listCriterias() %></td>
                 <td><%= c.escape('assignee') %></td>
-                <td><%= c.escape('ciLink') %></td>
-                <td><%= c.escape('bugTrLink') %></td>
+                <td><a href="<%= c.escape('ciLink') %>"><%= c.escape('ciLink') %></a></td>
+                <td><a href="<%= c.escape('bugTrLink') %>"><%= c.escape('bugTrLink') %></a></td>
                 <td>
                 	<img src="images/ico_<%= c.escape('result').toLowerCase() %>.png" 
                 		 title="<%= c.escape('result') %>" alt="<%= c.escape('result') %>" 

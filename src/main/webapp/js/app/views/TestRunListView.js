@@ -25,7 +25,7 @@ define([ "lib/text!../../../templates/test_run_list_html", "../../navigation" ],
 			this.model.get(id).destroy({
 				success : function() {
 					addMessage("success", "Test run successfully removed.");
-					navigation.refresh();
+					navigation.buildTestRunOptions();
 				}
 			});
 		}

@@ -35,14 +35,14 @@ define([ "lib/text!../../../templates/test_case_create_update_html" ], function(
 					success : function(product) {
 						addMessage("success", "Test case successfully created.");
 					}
-				})
+				});
 			} else {
 				// updating existing product
 				this.model.save(caseAttributes, {
 					success : function(product) {
 						addMessage("success", "Test case successfully saved.");
 					}
-				})
+				});
 			}
 
 		}

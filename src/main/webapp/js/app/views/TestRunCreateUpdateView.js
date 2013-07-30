@@ -35,17 +35,17 @@ define([ "lib/text!../../../templates/test_run_create_update_html", "../../navig
 				this.model.save(null, {
 					success : function(product) {
 						addMessage("success", "Test Run successfully created.");
-						navigation.refresh();
+						navigation.buildTestRunOptions();
 					}
-				})
+				});
 			} else {
 				// updating existing product
 				this.model.save(runAttributes, {
 					success : function(product) {
 						addMessage("success", "Test Run successfully saved.");
-						navigation.refresh();
+						navigation.buildTestRunOptions();
 					}
-				})
+				});
 			}
 
 		}

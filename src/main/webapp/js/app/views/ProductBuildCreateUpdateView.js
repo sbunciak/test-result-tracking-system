@@ -32,17 +32,17 @@ define([ "lib/text!../../../templates/product_build_create_update_html", "../../
 				this.model.save(null, {
 					success : function(product) {
 						addMessage("success", "Product Build successfully created.");
-						navigation.refresh();
+						navigation.buildProductBuildOptions();
 					}
-				})
+				});
 			} else {
 				// updating existing product
 				this.model.save(productAttributes, {
 					success : function(product) {
 						addMessage("success", "Product Build successfully saved.");
-						navigation.refresh();
+						navigation.buildProductBuildOptions();
 					}
-				})
+				});
 			}
 
 		}

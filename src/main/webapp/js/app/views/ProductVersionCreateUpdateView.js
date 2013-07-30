@@ -34,17 +34,17 @@ define([ "lib/text!../../../templates/product_version_create_update_html", "../.
 				this.model.save(null, {
 					success : function(productVersion) {
 						addMessage("success", "Product version successfully created.");
-						navigation.refresh();
+						navigation.buildProductVersionOptions();
 					}
-				})
+				});
 			} else {
 				// updating existing product
 				this.model.save(productAttributes, {
 					success : function(productVersion) {
 						addMessage("success", "Product version successfully saved.");
-						navigation.refresh();
+						navigation.buildProductVersionOptions();
 					}
-				})
+				});
 			}
 
 		}

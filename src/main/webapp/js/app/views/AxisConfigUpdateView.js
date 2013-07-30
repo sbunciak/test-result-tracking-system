@@ -26,10 +26,10 @@ define([ "lib/text!../../../templates/axis_config_update_html" ], function(
 			// updating Axis Config
 			var axisAttributes = { 
 					priority : $('input[name=' + $('input[name=id]').val() + ']:checked').val()
-			}
+			};
 
 			this.model.save(axisAttributes, { success : function(axis) {
-				 addMessage("success", "Axis config successfully saved."); } })
+				 addMessage("success", "Axis config successfully saved."); } });
 				
 		}
 	});

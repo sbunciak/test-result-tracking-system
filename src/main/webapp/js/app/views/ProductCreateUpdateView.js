@@ -33,17 +33,17 @@ define([ "lib/text!../../../templates/product_create_update_html", "../../naviga
 				this.model.save(null, {
 					success : function(product) {
 						addMessage("success", "Product successfully created.");
-						navigation.refresh();
+						navigation.buildProductOptions();
 					}
-				})
+				});
 			} else {
 				// updating existing product
 				this.model.save(productAttributes, {
 					success : function(product) {
 						addMessage("success", "Product successfully saved.");
-						navigation.refresh();
+						navigation.buildProductOptions();
 					}
-				})
+				});
 			}
 
 		}
