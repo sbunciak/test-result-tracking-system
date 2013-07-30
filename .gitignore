@@ -2,7 +2,7 @@ $ Compiled class files
 *.class
 
 # dot(hidden) files/dirs
-.*
+# .*
 !/.gitignore
 # Maven target dir
 target/*
