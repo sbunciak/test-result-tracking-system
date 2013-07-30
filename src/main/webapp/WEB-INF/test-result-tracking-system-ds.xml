@@ -20,15 +20,15 @@
 	</datasource>
 	 -->
 	<datasource jndi-name="java:jboss/datasources/test-result-tracking-system-DS"
-		pool-name="{artifactId}" enabled="true" jta="true" use-java-context="true"
+		pool-name="{artifactId}" enabled="false" jta="true" use-java-context="true"
 		use-ccm="true">
 		<connection-url>
-			jdbc:mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/trts
+			jdbc:mysql://localhost:3306/trts
 		</connection-url>
 		<driver>mysql</driver>
 		<security>
-			<user-name>adminxBKArNU</user-name>
-			<password>JR61T7jsA86a</password>
+			<user-name>root</user-name>
+			<password></password>
 		</security>
 		<statement>
 			<prepared-statement-cache-size>100</prepared-statement-cache-size>
