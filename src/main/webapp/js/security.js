@@ -12,7 +12,13 @@ define([ "jquery" ], function($) {
 					$('#nav_user_id').empty().append("Logged as: " + data);
 				}
 			});
-		},	
+		},
+		
+		logout : function() {
+			var p = window.location.protocol + '//';
+			// current location must return 200 OK for this GET
+			window.location = window.location.href.replace(p, p + 'logout:password@');
+		},
 			
 		enableMenus : function() {
 			$.ajax({
@@ -61,6 +67,11 @@ define([ "jquery" ], function($) {
 			
 			// Enable only appropriate menus
 			this.enableMenus();
+			
+			$('#logout').click(function() {
+				security.logout();
+				return false;
+			});
 		}
 	};
 

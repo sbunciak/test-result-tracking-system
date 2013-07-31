@@ -1,15 +1,12 @@
-package org.jboss.community.trts.test.ui;
-
-import static org.junit.Assert.assertTrue;
+package org.jboss.community.trts.test.bdd;
 
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.drone.api.annotation.Drone;
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.community.trts.model.Product;
+import org.jboss.community.trts.rest.JaxRsActivator;
 import org.jboss.community.trts.rest.ProductREST;
 import org.jboss.community.trts.service.ProductService;
 import org.jboss.community.trts.util.Resources;
@@ -19,13 +16,18 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.thoughtworks.selenium.DefaultSelenium;
 
-@RunWith(Arquillian.class)
-public class ProductUITest {
+import cucumber.runtime.arquillian.ArquillianCucumber;
+import cucumber.runtime.arquillian.api.Features;
+import cucumber.runtime.arquillian.api.Glues;
+
+@Glues(Steps.class)
+@Features({ "org/jboss/community.trts.bdd.acceptance.feature" })
+@RunWith(ArquillianCucumber.class)
+public class AcceptanceTest {
 
 	@Drone
 	private DefaultSelenium browser;
@@ -42,7 +44,7 @@ public class ProductUITest {
 				.addPackage(Product.class.getPackage())
 				.addPackage(ProductService.class.getPackage())
 				.addPackage(ProductREST.class.getPackage())
-				.addClass(Resources.class)
+				.addClasses(JaxRsActivator.class,Resources.class)
 				.merge(ShrinkWrap.create(GenericArchive.class)
 						.as(ExplodedImporter.class).importDirectory(WEBAPP_SRC)
 						.as(GenericArchive.class), "/",
@@ -51,21 +53,5 @@ public class ProductUITest {
 						"META-INF/persistence.xml")
 				.addAsWebInfResource("test-ds.xml", "test-ds.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-	}
-
-	@Test
-	@RunAsClient
-	public void canAddProduct() {
-		browser.setSpeed("2000"); // 2 seconds between each operation
-		
-		browser.open(deploymentUrl.toString());
-
-		browser.click("css=a[href='#/products']");
-
-		browser.type("id=name", "JBoss Developer Studio");
-		browser.click("css=input[value='Save']");
-
-		assertTrue("Product should be created!",
-				browser.isVisible("//h4[@class='alert_success']"));
 	}
 }

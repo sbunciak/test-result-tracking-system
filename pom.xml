@@ -17,7 +17,7 @@
 			resources, i.e. build is platform dependent! -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Define the version of JBoss' Java EE 6 APIs and Tools we want to import. -->
-		<jboss.bom.version>1.0.0.Final</jboss.bom.version>
+		<jboss.bom.version>1.0.1.Final</jboss.bom.version>
 		<!-- Alternatively, comment out the above line, and un-comment the line 
 			below to use version 1.0.0.M12-redhat-1 which is a release certified to work 
 			with JBoss EAP 6. It requires you have access to the JBoss EAP 6 maven repository. -->
@@ -218,7 +218,7 @@
 			<artifactId>knowledge-api</artifactId>
 			<version>5.4.0.Final</version>
 		</dependency>
-		
+
 		<!-- Google libraries for cartesian product -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -251,7 +251,13 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-server</artifactId>
 			<scope>test</scope>
-			
+
+			<exclusions>
+				<exclusion>
+					<artifactId>servlet-api-2.5</artifactId>
+					<groupId>org.mortbay.jetty</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -261,8 +267,20 @@
 		</dependency>
 		<dependency>
 			<groupId>com.github.cukespace</groupId>
-			<artifactId>cukespace-jbas7</artifactId>
-			<version>1.0.0.Beta2</version>
+			<artifactId>cukespace-core</artifactId>
+			<version>1.5.1</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.jboss.shrinkwrap</groupId>
+					<artifactId>shrinkwrap-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.spec.javax.servlet</groupId>
+			<artifactId>jboss-servlet-api_3.1_spec</artifactId>
+			<version>1.0.0.Beta1</version>
 		</dependency>
 	</dependencies>
 
