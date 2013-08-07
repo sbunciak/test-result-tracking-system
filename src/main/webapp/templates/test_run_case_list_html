@@ -8,6 +8,7 @@
 		<table class="tablesorter">
 			<thead>
 				<tr>
+					<th>&nbsp;</th>
 					<th>Title</th>
 					<th>Criterias</th>
 					<th>Assignee</th>
@@ -22,6 +23,7 @@
 
 			<% _.each(cases, function (c) { %>
             <tr>
+                <td><input type="checkbox" name="multi_rcases" value="<%= c.escape('id') %>" /></td>
                 <td><%= c.escape('title') %></td>
                 <td><%= c.listCriterias() %></td>
                 <td><%= c.escape('assignee') %></td>
@@ -52,6 +54,20 @@
 
 			</tbody>
 		</table>
+		
+		<p>Change status of selected Test Run Cases to: 
+		
+			<select	name="result" id="result">
+				<option value="PASSED" >PASSED</option>
+				<option value="WAIVED" >WAIVED</option>
+				<option value="FAILED" >FAILED</option>
+				<option value="BLOCKED" >BLOCKED</option>
+				<option value="ERROR" >ERROR</option>
+				<option value="RUNNING" >RUNNING</option>
+			</select>
+		
+		<input type="button" data-tm-role='statusMulti' title="Apply" value="Apply" /></p>
+		
 	</div>
 	<!-- end of tab -->
 

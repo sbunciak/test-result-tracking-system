@@ -1,6 +1,6 @@
 define([ "lib/text!../../../templates/test_plan_create_update_html", "../../navigation", 
          "../collections/Axiss", "../models/Axis" ], 
-         function( testTemplate, navigation, Axiss, Axis, navigation) {
+         function( testTemplate, navigation, Axiss, Axis) {
 
 	var TestPlanCreateUpdateView = Backbone.View.extend({
 		events : {
@@ -31,12 +31,15 @@ define([ "lib/text!../../../templates/test_plan_create_update_html", "../../navi
 			var selAxisId = $('select[name="axiss"]').val();
 			
 			var selectedAxiss = new Array();
-			for ( var int = 0; int < selAxisId.length; int++) {
-				var a = new Axis({id:selAxisId[int]});
-				a.fetch({async:false});
-				selectedAxiss[int] = a.toJSON();
+			
+			if (selAxisId) {
+				for ( var int = 0; int < selAxisId.length; int++) {
+					var a = new Axis({id:selAxisId[int]});
+					a.fetch({async:false});
+					selectedAxiss[int] = a.toJSON();
+				}
 			}
-						
+					
 			// get attributes from the form
 			var planAttributes = {
 				name : $('#name').val(),
