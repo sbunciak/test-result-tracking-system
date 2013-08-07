@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>test-result-tracking-system</display-name>
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+	<mime-mapping>
+		<extension>ico</extension>
+		<mime-type>image/x-icon</mime-type>
+	</mime-mapping>
+	
+	<distributable/>
+	
+	<!-- Tester constraint -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>All Resources</web-resource-name>
+			<description>Protect all content</description>
+			<url-pattern>*.html</url-pattern>
+			<url-pattern>/js/*</url-pattern>
+			<url-pattern>/rest/*</url-pattern>
+			<url-pattern>/templates/*</url-pattern>
+		</web-resource-collection>
+
+		<auth-constraint>
+			<role-name>Tester</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<!-- TODO: Removed FORM auth due to rest difficulties
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>trts-realm</realm-name>
+		<form-login-config>
+			<form-login-page>/login.html</form-login-page>
+			<form-error-page>/access-denied.html</form-error-page>
+		</form-login-config>
+	</login-config>
+ -->
+ 	<login-config>
+ 		<auth-method>BASIC</auth-method>
+ 		<realm-name>trts-realm</realm-name>
+ 	</login-config>
+ 
+	<security-role>
+		<description>All Testers</description>
+		<role-name>Tester</role-name>
+	</security-role>
+	<security-role>
+		<description>Test manager</description>
+		<role-name>Manager</role-name>
+	</security-role>
+</web-app>

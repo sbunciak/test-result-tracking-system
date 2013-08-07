@@ -16,6 +16,22 @@
 				<option value="REGRESSION" <%= _.isEqual(plan.escape('result'),"REGRESSION") ?  'checked="checked"' : '' %> >REGRESSION</option>
 			</select> 
 			<label for="rules">Rules</label><textarea name="rules" id="rules"><%= plan.escape('rules') %></textarea>
+			<label for="axiss">Axis</label>
+			
+			<select name="axiss" id="axiss" style="height: 100%" multiple>
+  				<% _.each(axiss, function(a) { %> 
+  					<option value="<%= a.get('id') %>" 
+  					<% _.each(plan.get('axiss'), function(pa) {
+  						if (pa.id == a.get('id')) {
+  							%> selected="selected" <%
+  						}
+  					}) %> 
+  					>
+  						<%= a.escape('category') %>
+  					</option>
+  				<% }) %>
+			</select>
+			
 			<label for="description">Description</label><textarea name="description" id="description"><%= plan.escape('description') %></textarea>
 		</fieldset>
 		<div class="clear"></div>

@@ -13,11 +13,14 @@ define([ "lib/text!../../../templates/product_version_create_update_html", "../.
 		render : function() {
 			// Compile the template using underscore
 			var template = _.template(productsTemplate, {
-				version : this.model
+				version : this.model,
+				cloning : false
 			});
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product']);
 		},
 
 		saveVersion : function(event) {
@@ -35,6 +38,10 @@ define([ "lib/text!../../../templates/product_version_create_update_html", "../.
 					success : function(productVersion) {
 						addMessage("success", "Product version successfully created.");
 						navigation.buildProductVersionOptions();
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/product_versions";
+						}, 2000);
 					}
 				});
 			} else {
@@ -43,6 +50,10 @@ define([ "lib/text!../../../templates/product_version_create_update_html", "../.
 					success : function(productVersion) {
 						addMessage("success", "Product version successfully saved.");
 						navigation.buildProductVersionOptions();
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/product_versions";
+						}, 2000);
 					}
 				});
 			}

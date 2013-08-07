@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/axis_list_html", "../../navigation" ], function(
-		axisTemplate) {
+define([ "lib/text!../../../templates/axis_list_html", "../../navigation" ], 
+		function(axisTemplate, navigation) {
 
 	var AxisListView = Backbone.View.extend({
 		events : {
@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/axis_list_html", "../../navigation" ], fun
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight([]);
 		},
 
 		deleteAxis : function(event) {

@@ -20,6 +20,8 @@ define([ "lib/text!../../../templates/product_build_list_html", "../../navigatio
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product','version']);
 		},
 
 		deleteBuild : function(event) {

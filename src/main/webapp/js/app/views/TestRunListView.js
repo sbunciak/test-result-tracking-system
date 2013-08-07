@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/test_run_list_html", "../../navigation" ], function(
-		testTemplate, navigation) {
+define([ "lib/text!../../../templates/test_run_list_html", "../../navigation" ], 
+		function(testTemplate, navigation) {
 
 	var TestRunListView = Backbone.View.extend({
 		events : {
@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/test_run_list_html", "../../navigation" ],
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product','version','build','plan']);
 		},
 
 		deleteRun : function(event) {

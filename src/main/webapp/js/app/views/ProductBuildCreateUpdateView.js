@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/product_build_create_update_html", "../../
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product','version']);
 		},
 
 		saveBuild : function(event) {
@@ -33,6 +35,10 @@ define([ "lib/text!../../../templates/product_build_create_update_html", "../../
 					success : function(product) {
 						addMessage("success", "Product Build successfully created.");
 						navigation.buildProductBuildOptions();
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/product_builds";
+						}, 2000);
 					}
 				});
 			} else {
@@ -41,6 +47,10 @@ define([ "lib/text!../../../templates/product_build_create_update_html", "../../
 					success : function(product) {
 						addMessage("success", "Product Build successfully saved.");
 						navigation.buildProductBuildOptions();
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/product_builds";
+						}, 2000);
 					}
 				});
 			}

@@ -33,8 +33,6 @@ public class ProductUITest {
 	@ArquillianResource
 	private URL deploymentUrl;
 
-	private static final String WEBAPP_SRC = "src/main/webapp";
-
 	@Deployment(testable = false)
 	public static WebArchive create() {
 		return ShrinkWrap
@@ -44,12 +42,19 @@ public class ProductUITest {
 				.addPackage(ProductREST.class.getPackage())
 				.addClass(Resources.class)
 				.merge(ShrinkWrap.create(GenericArchive.class)
-						.as(ExplodedImporter.class).importDirectory(WEBAPP_SRC)
+						.as(ExplodedImporter.class)
+						.importDirectory("src/main/webapp")
 						.as(GenericArchive.class), "/",
 						Filters.exclude(".*\\.xml$"))
 				.addAsResource("META-INF/test-persistence.xml",
 						"META-INF/persistence.xml")
+				.addAsWebInfResource("test-jboss-web.xml", "jboss-web.xml")
+				.addAsWebInfResource("test-roles.properties",
+						"/classes/roles.properties")
+				.addAsWebInfResource("test-users.properties",
+						"/classes/users.properties")
 				.addAsWebInfResource("test-ds.xml", "test-ds.xml")
+				.addAsWebInfResource("test-web.xml", "web.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
@@ -57,8 +62,11 @@ public class ProductUITest {
 	@RunAsClient
 	public void canAddProduct() {
 		browser.setSpeed("2000"); // 2 seconds between each operation
-		
-		browser.open(deploymentUrl.toString());
+
+		String applicationUrl = deploymentUrl.toString().replace("http://",
+				"http://admin:admin@");
+
+		browser.open(applicationUrl);
 
 		browser.click("css=a[href='#/products']");
 

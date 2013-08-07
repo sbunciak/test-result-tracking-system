@@ -8,7 +8,7 @@ define(['lib/backbone'], function() {
 		initialize : function() {
 			this.bind("error", function(model, error) {
 				// We have received an error, log it, alert it or forget it :)
-				addMessage("error", error);
+				addMessage("error", "Unexpected error has occured: " + error.statusText);
 			});
 		}
 	});

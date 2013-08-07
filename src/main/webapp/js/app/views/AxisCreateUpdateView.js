@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/axis_create_update_html", "../../navigatio
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight([]);
 		},
 
 		saveAxis : function(event) {
@@ -34,6 +36,11 @@ define([ "lib/text!../../../templates/axis_create_update_html", "../../navigatio
 					success : function(axis) {
 						addMessage("success", "Axis successfully created.");
 						navigation.buildAxisOptions();
+						
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/axis";
+						}, 2000);
 					}
 				});
 			} else {
@@ -42,6 +49,11 @@ define([ "lib/text!../../../templates/axis_create_update_html", "../../navigatio
 					success : function(axis) {
 						addMessage("success", "Axis successfully saved.");
 						navigation.buildAxisOptions();
+						
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/axis";
+						}, 2000);
 					}
 				});
 			}

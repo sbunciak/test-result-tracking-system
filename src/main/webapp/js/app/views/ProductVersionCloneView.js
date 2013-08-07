@@ -19,6 +19,8 @@ define([ "lib/text!../../../templates/product_version_create_update_html", "../.
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product']);
 		},
 
 		saveVersion : function(event) {
@@ -51,6 +53,10 @@ define([ "lib/text!../../../templates/product_version_create_update_html", "../.
 				success : function() {
 					addMessage("success", "Product version successfully cloned.");
 					navigation.buildProductVersionOptions();
+					// auto redirect
+					setTimeout(function() {
+						  window.location.href = "#/product_versions";
+					}, 2000);
 				}
 			});
 		}

@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/test_case_list_html" ], function(
-		testTemplate) {
+define([ "lib/text!../../../templates/test_case_list_html", "../../navigation" ], 
+		function(testTemplate, navigation) {
 
 	var TestCaseListView = Backbone.View.extend({
 		events : {
@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/test_case_list_html" ], function(
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product','version','plan']);
 		},
 
 		deleteCase : function(event) {

@@ -227,6 +227,11 @@ article.breadcrumbs { /* float: left; */
 	margin-left: 2px;
 }
 
+.highlight {
+	border-color: black !important;
+	border-width: 2px !important;
+}
+
 /* Sidebar */
 aside#sidebar {
 	width: 23%;

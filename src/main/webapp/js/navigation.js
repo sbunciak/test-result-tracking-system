@@ -181,6 +181,15 @@ define([ "jquery", "app/collections/Products",
 		refresh : function() {
 			Backbone.history.fragment = null;
 			Backbone.history.navigate(document.location.hash, true);
+		},
+		// highlight select box
+		highlight : function(entities) {
+			// remove .highlight class
+			$('.breadcrumbs select').removeClass('highlight');
+			// add class .highlight
+			_.each(entities, function(e) {
+				$('#nav_'+e+'_id').addClass('highlight');
+			});
 		}
 	};
 

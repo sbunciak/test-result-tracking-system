@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/axis_value_create_update_html" ], function(
-		axisTemplate) {
+define([ "lib/text!../../../templates/axis_value_create_update_html","../../navigation" ], 
+		function(axisTemplate, navigation) {
 
 	var AxisValueCreateUpdateView = Backbone.View.extend({
 		events : {
@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/axis_value_create_update_html" ], function
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['axis']);
 		},
 
 		saveAxis : function(event) {
@@ -32,6 +34,10 @@ define([ "lib/text!../../../templates/axis_value_create_update_html" ], function
 				this.model.save(null, {
 					success : function(axis) {
 						addMessage("success", "Axis value successfully created.");
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/axis_values";
+						}, 2000);
 					}
 				});
 			} else {
@@ -39,6 +45,10 @@ define([ "lib/text!../../../templates/axis_value_create_update_html" ], function
 				this.model.save(axisAttributes, {
 					success : function(axis) {
 						addMessage("success", "Axis value successfully saved.");
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/axis_values";
+						}, 2000);
 					}
 				});
 			}

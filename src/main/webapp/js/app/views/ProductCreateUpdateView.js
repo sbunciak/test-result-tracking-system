@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/product_create_update_html", "../../naviga
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight([]);
 		},
 
 		saveProduct : function(event) {
@@ -34,6 +36,10 @@ define([ "lib/text!../../../templates/product_create_update_html", "../../naviga
 					success : function(product) {
 						addMessage("success", "Product successfully created.");
 						navigation.buildProductOptions();
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/products";
+						}, 2000);
 					}
 				});
 			} else {
@@ -42,6 +48,10 @@ define([ "lib/text!../../../templates/product_create_update_html", "../../naviga
 					success : function(product) {
 						addMessage("success", "Product successfully saved.");
 						navigation.buildProductOptions();
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/products";
+						}, 2000);
 					}
 				});
 			}

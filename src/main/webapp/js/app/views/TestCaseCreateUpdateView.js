@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/test_case_create_update_html" ], function(
-		testTemplate) {
+define([ "lib/text!../../../templates/test_case_create_update_html","../../navigation" ], 
+		function(testTemplate, navigation) {
 
 	var TestCaseCreateUpdateView = Backbone.View.extend({
 		events : {
@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/test_case_create_update_html" ], function(
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product','version','plan']);
 		},
 
 		saveCase : function(event) {
@@ -34,6 +36,10 @@ define([ "lib/text!../../../templates/test_case_create_update_html" ], function(
 				this.model.save(null, {
 					success : function(product) {
 						addMessage("success", "Test case successfully created.");
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/test_cases";
+						}, 2000);
 					}
 				});
 			} else {
@@ -41,6 +47,10 @@ define([ "lib/text!../../../templates/test_case_create_update_html" ], function(
 				this.model.save(caseAttributes, {
 					success : function(product) {
 						addMessage("success", "Test case successfully saved.");
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/test_cases";
+						}, 2000);
 					}
 				});
 			}

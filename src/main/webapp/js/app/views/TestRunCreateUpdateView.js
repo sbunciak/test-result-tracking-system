@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/test_run_create_update_html", "../../navigation" ], function(
-		testTemplate, navigation) {
+define([ "lib/text!../../../templates/test_run_create_update_html", "../../navigation" ], 
+		function(testTemplate, navigation) {
 
 	var TestRunCreateUpdateView = Backbone.View.extend({
 		events : {
@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/test_run_create_update_html", "../../navig
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product','version','build','plan']);
 		},
 
 		saveRun : function(event) {
@@ -36,6 +38,10 @@ define([ "lib/text!../../../templates/test_run_create_update_html", "../../navig
 					success : function(product) {
 						addMessage("success", "Test Run successfully created.");
 						navigation.buildTestRunOptions();
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/test_runs";
+						}, 2000);
 					}
 				});
 			} else {
@@ -44,6 +50,10 @@ define([ "lib/text!../../../templates/test_run_create_update_html", "../../navig
 					success : function(product) {
 						addMessage("success", "Test Run successfully saved.");
 						navigation.buildTestRunOptions();
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/test_runs";
+						}, 2000);
 					}
 				});
 			}

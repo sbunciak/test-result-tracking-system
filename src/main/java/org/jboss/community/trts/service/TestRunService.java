@@ -1,5 +1,6 @@
 package org.jboss.community.trts.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -11,6 +12,7 @@ import javax.persistence.TypedQuery;
 
 import org.jboss.community.trts.model.Axis;
 import org.jboss.community.trts.model.AxisConfig;
+import org.jboss.community.trts.model.AxisPriority;
 import org.jboss.community.trts.model.ProductBuild;
 import org.jboss.community.trts.model.TestPlan;
 import org.jboss.community.trts.model.TestRun;
@@ -70,19 +72,29 @@ public class TestRunService extends BaseEntityService<TestRun> {
 
 		RulesProcessor rulesProc = new RulesProcessor();
 
-		List<AxisConfig> configs = configService.getAxisConfigs(build.getProductVersion());
-		
+		List<AxisConfig> configs = new ArrayList<AxisConfig>();
+		// remove all Axis Configurations with priority DISABLED
+		for (AxisConfig config : configService.getAxisConfigs(build.getProductVersion())) {
+			if (!config.getPriority().equals(AxisPriority.DISABLED)) configs.add(config);
+		}
+				
 		HashMap<Axis, Set<AxisConfig>> axisMap = new HashMap<Axis, Set<AxisConfig>>();
 		
 		for (AxisConfig axisConfig : configs) {
+			
 			Axis axis = axisConfig.getAxisValue().getAxis();
-			 
-			if (axisMap.keySet().contains(axis)) {
-				Set<AxisConfig> setOfConfigs = axisMap.get(axis);
-				setOfConfigs.add(axisConfig);
-			} else {
-				axisMap.put(axis, Sets.newHashSet(axisConfig));
-			}			
+			
+			// enable only axiss which are configured with the test plan
+			if (plan.getAxiss().contains(axis)) {
+				// "group axis configs by axis" 
+				if (axisMap.keySet().contains(axis)) {
+					Set<AxisConfig> setOfConfigs = axisMap.get(axis);
+					setOfConfigs.add(axisConfig);
+				} else {
+					axisMap.put(axis, Sets.newHashSet(axisConfig));
+				}
+			}
+						
 		}
 		
 		List<TestRunCase> generatedCases = TestRunHelper.generateTestRunCases(

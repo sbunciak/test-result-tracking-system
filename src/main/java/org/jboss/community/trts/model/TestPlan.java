@@ -1,10 +1,14 @@
 package org.jboss.community.trts.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -29,6 +33,9 @@ public class TestPlan extends TestSystemEntity {
 	@NotNull
 	@ManyToOne
 	private ProductVersion productVersion;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Axis> axiss;
 
 	@Column
 	@NotNull
@@ -80,6 +87,14 @@ public class TestPlan extends TestSystemEntity {
 
 	public void setType(TestType type) {
 		this.type = type;
+	}
+	
+	public List<Axis> getAxiss() {
+		return axiss;
+	}
+	
+	public void setAxiss(List<Axis> axiss) {
+		this.axiss = axiss;
 	}
 
 	public String toString() {

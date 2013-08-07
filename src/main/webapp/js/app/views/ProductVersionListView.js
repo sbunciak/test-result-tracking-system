@@ -13,13 +13,13 @@ define([ "lib/text!../../../templates/product_version_list_html", "../../navigat
 		render : function() {
 			// Compile the template using underscore
 			var template = _.template(productsTemplate, {
-				versions : this.model.models,
-				// temporary solution
-				// product_id : $("#nav_product_id").val()
+				versions : this.model.models
 			});
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product']);
 		},
 
 		deleteVersion : function(event) {

@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/test_run_case_update_html" ], function(
-		testTemplate) {
+define([ "lib/text!../../../templates/test_run_case_update_html","../../navigation" ], 
+		function(testTemplate, navigation) {
 
 	var TestRunCaseUpdateView = Backbone.View.extend({
 		events : {
@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/test_run_case_update_html" ], function(
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product','version','build','plan','run']);
 		},
 
 		saveCase : function(event) {
@@ -33,6 +35,10 @@ define([ "lib/text!../../../templates/test_run_case_update_html" ], function(
 			this.model.save(caseAttributes, {
 				success : function(product) {
 					addMessage("success", "Test Run Case successfully saved.");
+					// auto redirect
+					setTimeout(function() {
+						  window.location.href = "#/test_run_cases";
+					}, 2000);
 				}
 			});
 

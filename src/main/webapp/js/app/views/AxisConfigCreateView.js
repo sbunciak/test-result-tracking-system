@@ -1,6 +1,6 @@
 define([ "lib/text!../../../templates/axis_config_create_html",
-		"app/collections/AxisConfigs", "app/collections/AxisValues", ], function(
-		axisTemplate, AxisConfigs, AxisValues) {
+		"app/collections/AxisConfigs", "app/collections/AxisValues", "../../navigation" ], 
+		function(axisTemplate, AxisConfigs, AxisValues, navigation) {
 
 	var AxisConfigCreateView = Backbone.View.extend({
 
@@ -30,6 +30,8 @@ define([ "lib/text!../../../templates/axis_config_create_html",
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product','version','axis']);
 		},
 
 		saveAxis : function(event) {
@@ -45,6 +47,11 @@ define([ "lib/text!../../../templates/axis_config_create_html",
 					success : function(axis) {
 						addMessage("success",
 								"Axis config successfully created.");
+						
+						// auto redirect
+						setTimeout(function() {
+							  window.location.href = "#/axis_configs";
+							}, 2000);
 					}
 				});
 			}

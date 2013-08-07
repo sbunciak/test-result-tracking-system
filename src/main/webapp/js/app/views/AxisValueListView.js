@@ -1,5 +1,5 @@
-define([ "lib/text!../../../templates/axis_value_list_html" ], function(
-		axisTemplate) {
+define([ "lib/text!../../../templates/axis_value_list_html", "../../navigation"], function(
+		axisTemplate, navigation) {
 
 	var AxisValueListView = Backbone.View.extend({
 		events : {
@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/axis_value_list_html" ], function(
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['axis']);
 		},
 
 		deleteAxisValue : function(event) {

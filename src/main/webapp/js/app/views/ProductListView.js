@@ -18,6 +18,8 @@ define([ "lib/text!../../../templates/product_list_html", "../../navigation" ], 
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight([]);
 		},
 
 		deleteProduct : function(event) {

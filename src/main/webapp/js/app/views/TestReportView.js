@@ -1,6 +1,6 @@
 define([ "lib/text!../../../templates/test_report_html",
-		"../collections/TestRuns", "../collections/TestRunCases", ], function(
-		testTemplate, TestRuns, TestRunCases) {
+		"../collections/TestRuns", "../collections/TestRunCases", "../../navigation" ], 
+		function(testTemplate, TestRuns, TestRunCases, navigation) {
 
 	var TestReportView = Backbone.View.extend({
 
@@ -30,6 +30,8 @@ define([ "lib/text!../../../templates/test_report_html",
 
 			// Load the compiled HTML into the Backbone "el"
 			this.$el.html(template);
+			
+			navigation.highlight(['product','version','build']);
 		}
 	});
 

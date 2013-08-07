@@ -307,7 +307,8 @@ function(Product, ProductVersion, ProductBuild, Axis, AxisValue, AxisConfig,
 				model : testPlan
 			});
 
-			testPlan.fetch();
+			// TODO: Multi select hack
+			testPlan.fetch({async:false});
 		},
 
 		createTestPlan : function() {
