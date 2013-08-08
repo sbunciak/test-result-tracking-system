@@ -50,7 +50,7 @@ define([ "lib/text!../../../templates/test_run_case_list_html", "../../navigatio
 		},
 		
 		changeStatusMulti : function(event) {
-			var ids = $('input[name="multi_rcases"]');
+			var ids = $('input[name="multi_rcases"]:checked');
 			var status = $('#result').val();
 			
 			var attributes = {
