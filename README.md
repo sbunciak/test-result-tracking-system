@@ -30,7 +30,25 @@ New DSL (Domain Specific Language) for JBoss Drools was introduced during implem
 
 To Run:
 
-Add mysql module to eap,
+Add mysql module to eap, MysqlDS Datasource to eap.
+
+<datasource jndi-name="java:jboss/datasources/MysqlDS"
+		pool-name="{artifactId}" enabled="true" jta="true" use-java-context="true"
+		use-ccm="true">
+		<connection-url>
+			jdbc:mysql://localhost:3306/trts
+		</connection-url>
+		<driver>mysql</driver>
+		<security>
+			<user-name>root</user-name>
+			<password></password>
+		</security>
+		<statement>
+			<prepared-statement-cache-size>100</prepared-statement-cache-size>
+			<share-prepared-statements />
+		</statement>
+	</datasource>
+
 add security domain to standalone.xml
 	
 				<security-domain name="trts-realm">

@@ -6,21 +6,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.jboss.org/ironjacamar/schema http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
 	<!-- The datasource is bound into JNDI at this location. We reference this 
-		in META-INF/persistence.xml -->
-	<!-- 
-	<datasource jndi-name="java:jboss/datasources/test-result-tracking-system-DS"
-		pool-name="{artifactId}" enabled="false" use-java-context="true">
-		<connection-url>jdbc:h2:mem:test-result-tracking-system;DB_CLOSE_DELAY=-1
-		</connection-url>
-		<driver>h2</driver>
-		<security>
-			<user-name>sa</user-name>
-			<password>sa</password>
-		</security>
-	</datasource>
-	 -->
+		in META-INF/persistence.xml 
+	
 	<datasource jndi-name="java:jboss/datasources/MysqlDS"
-		pool-name="{artifactId}" enabled="false" jta="true" use-java-context="true"
+		pool-name="{artifactId}" enabled="true" jta="true" use-java-context="true"
 		use-ccm="true">
 		<connection-url>
 			jdbc:mysql://localhost:3306/trts
@@ -28,12 +17,12 @@
 		<driver>mysql</driver>
 		<security>
 			<user-name>root</user-name>
-			<password>PWD</password>
+			<password></password>
 		</security>
 		<statement>
 			<prepared-statement-cache-size>100</prepared-statement-cache-size>
 			<share-prepared-statements />
 		</statement>
-	</datasource>
+	</datasource> -->
 </datasources>
  

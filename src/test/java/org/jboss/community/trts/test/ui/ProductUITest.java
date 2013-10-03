@@ -3,6 +3,7 @@ package org.jboss.community.trts.test.ui;
 import static org.junit.Assert.assertTrue;
 
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -19,19 +20,21 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import com.thoughtworks.selenium.DefaultSelenium;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 @RunWith(Arquillian.class)
 public class ProductUITest {
 
 	@Drone
-	private DefaultSelenium browser;
+	private WebDriver driver;
 
 	@ArquillianResource
 	private URL deploymentUrl;
+	private String applicationUrl = null;
 
 	@Deployment(testable = false)
 	public static WebArchive create() {
@@ -58,22 +61,33 @@ public class ProductUITest {
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
 
+	@Before
+	public void setUp() {
+		// driver = new FirefoxDriver();
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+		applicationUrl = deploymentUrl.toString().replace("http://",
+				"http://admin:admin@");
+
+		// log in
+		driver.get(applicationUrl);
+		// driver.findElement(By.cssSelector("input[name='j_username']"))
+		// .sendKeys("admin");
+		// driver.findElement(By.cssSelector("input[name='j_password']"))
+		// .sendKeys("overlord");
+		// driver.findElement(By.cssSelector("input[type='submit']")).click();
+	}
+
 	@Test
 	@RunAsClient
 	public void canAddProduct() {
-		browser.setSpeed("2000"); // 2 seconds between each operation
+		driver.findElement(By.partialLinkText("Products")).click();
 
-		String applicationUrl = deploymentUrl.toString().replace("http://",
-				"http://admin:admin@");
+		driver.findElement(By.id("name")).sendKeys("JBoss Developer Studio");
 
-		browser.open(applicationUrl);
-
-		browser.click("css=a[href='#/products']");
-
-		browser.type("id=name", "JBoss Developer Studio");
-		browser.click("css=input[value='Save']");
+		driver.findElement(By.cssSelector("input[value='Save']")).click();
 
 		assertTrue("Product should be created!",
-				browser.isVisible("//h4[@class='alert_success']"));
+				driver.findElement(By.className("alert_success")) != null);
 	}
 }

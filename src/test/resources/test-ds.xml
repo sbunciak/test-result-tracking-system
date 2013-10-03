@@ -8,7 +8,7 @@
    <!-- The datasource is bound into JNDI at this location. We reference 
       this in META-INF/test-persistence.xml -->
    <datasource jndi-name="java:jboss/datasources/test-result-tracking-system-testDS"
-      pool-name="test-result-tracking-system -test" enabled="true"
+      pool-name="test-result-tracking-system-test" enabled="true"
       use-java-context="true">
       <connection-url>jdbc:h2:mem:test-result-tracking-system-test;DB_CLOSE_DELAY=-1</connection-url>
       <driver>h2</driver>

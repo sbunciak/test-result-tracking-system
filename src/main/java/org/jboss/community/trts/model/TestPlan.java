@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -15,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -33,8 +34,10 @@ public class TestPlan extends TestSystemEntity {
 	@NotNull
 	@ManyToOne
 	private ProductVersion productVersion;
-	
-	@ManyToMany(fetch = FetchType.EAGER)
+
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
+	// Workaround for Hibernate with h2 dialect cannot handle eager fetch
 	private List<Axis> axiss;
 
 	@Column
@@ -88,11 +91,11 @@ public class TestPlan extends TestSystemEntity {
 	public void setType(TestType type) {
 		this.type = type;
 	}
-	
+
 	public List<Axis> getAxiss() {
 		return axiss;
 	}
-	
+
 	public void setAxiss(List<Axis> axiss) {
 		this.axiss = axiss;
 	}

@@ -22,6 +22,9 @@
 			below to use version 1.0.0.M12-redhat-1 which is a release certified to work 
 			with JBoss EAP 6. It requires you have access to the JBoss EAP 6 maven repository. -->
 		<!-- <jboss.bom.version>1.0.0.M12-redhat-1</jboss.bom.version>> -->
+
+		<version.org.jboss.arquillian>1.1.1.Final</version.org.jboss.arquillian>
+		<version.org.jboss.arquillian.drone>1.2.0.CR1</version.org.jboss.arquillian.drone>
 	</properties>
 
 
@@ -50,27 +53,29 @@
 				<scope>import</scope>
 			</dependency>
 
+			<!-- Arquillian Core dependencies -->
 			<dependency>
 				<groupId>org.jboss.arquillian</groupId>
 				<artifactId>arquillian-bom</artifactId>
-				<version>1.0.0.Final</version>
+				<version>${version.org.jboss.arquillian}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<!-- Arquillian Drone dependencies and WebDriver/Selenium dependencies -->
 			<dependency>
 				<groupId>org.jboss.arquillian.extension</groupId>
 				<artifactId>arquillian-drone-bom</artifactId>
-				<version>1.0.0.Final</version>
+				<version>${version.org.jboss.arquillian.drone}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
 			<dependency>
 				<groupId>com.google.collections</groupId>
 				<artifactId>google-collections</artifactId>
 				<version>1.0</version>
 				<scope>test</scope>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -160,6 +165,20 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Dependency as a result of Hibernate @LazyCollection workaround. See 
+			TestPlan class -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>3.5.6-Final</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>antlr</artifactId>
+					<groupId>antlr</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<!-- Needed for running tests (you may also use TestNG) -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -188,6 +207,16 @@
 			<artifactId>resteasy-jaxrs</artifactId>
 			<scope>test</scope>
 			<version>2.2.3.GA</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>httpclient</artifactId>
+					<groupId>org.apache.httpcomponents</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-httpclient</artifactId>
+					<groupId>commons-httpclient</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
@@ -229,36 +258,12 @@
 		<!-- Arquillian drone extension/selenium dependencies -->
 		<dependency>
 			<groupId>org.jboss.arquillian.extension</groupId>
-			<artifactId>arquillian-drone-impl</artifactId>
+			<artifactId>arquillian-drone-webdriver-depchain</artifactId>
+			<version>${version.org.jboss.arquillian.drone}</version>
+			<type>pom</type>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.jboss.arquillian.extension</groupId>
-			<artifactId>arquillian-drone-selenium</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.arquillian.extension</groupId>
-			<artifactId>arquillian-drone-selenium-server</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
-			<scope>test</scope>
 
-			<exclusions>
-				<exclusion>
-					<artifactId>servlet-api-2.5</artifactId>
-					<groupId>org.mortbay.jetty</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
