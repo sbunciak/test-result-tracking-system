@@ -30,7 +30,8 @@ New DSL (Domain Specific Language) for JBoss Drools was introduced during implem
 
 To Run:
 
-Add mysql module to eap, MysqlDS Datasource to eap.
+Add mysql module to eap, 
+MysqlDS Datasource to eap.
 
 <datasource jndi-name="java:jboss/datasources/MysqlDS" pool-name="{artifactId}" enabled="true" jta="true" use-java-context="true" use-ccm="true">
 		<connection-url>
