@@ -32,9 +32,7 @@ To Run:
 
 Add mysql module to eap, MysqlDS Datasource to eap.
 
-<datasource jndi-name="java:jboss/datasources/MysqlDS"
-		pool-name="{artifactId}" enabled="true" jta="true" use-java-context="true"
-		use-ccm="true">
+<datasource jndi-name="java:jboss/datasources/MysqlDS" pool-name="{artifactId}" enabled="true" jta="true" use-java-context="true" use-ccm="true">
 		<connection-url>
 			jdbc:mysql://localhost:3306/trts
 		</connection-url>
