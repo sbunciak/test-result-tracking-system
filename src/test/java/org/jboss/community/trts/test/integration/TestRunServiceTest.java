@@ -1,4 +1,4 @@
-package org.jboss.community.trts.test;
+package org.jboss.community.trts.test.integration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -19,16 +19,13 @@ import org.jboss.community.trts.service.ProductService;
 import org.jboss.community.trts.service.ProductVersionService;
 import org.jboss.community.trts.service.TestPlanService;
 import org.jboss.community.trts.service.TestRunService;
-import org.jboss.community.trts.util.Resources;
+import org.jboss.community.trts.test.TRTSIntTest;
 import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class TestRunServiceTest {
+public class TestRunServiceTest extends TRTSIntTest {
 
 	@Inject
 	private TestPlanService planService;
@@ -47,15 +44,7 @@ public class TestRunServiceTest {
 
 	@Deployment
 	public static Archive<?> createTestArchive() {
-		return ShrinkWrap
-				.create(WebArchive.class, "test.war")
-				.addPackage(TestRun.class.getPackage())
-				.addPackage(TestRunService.class.getPackage())
-				.addClass(Resources.class)
-				.addAsResource("META-INF/test-persistence.xml",
-						"META-INF/persistence.xml")
-				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-				.addAsWebInfResource("test-ds.xml", "test-ds.xml");
+		return createTestWebArchive(false);
 	}
 
 	@Test

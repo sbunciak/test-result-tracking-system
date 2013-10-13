@@ -13,7 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 /**
- * Base service class to perform basic CRUD operations on persistance layer
+ * Base service class to perform basic CRUD operations on persistence layer
  * 
  * @author sbunciak
  * 

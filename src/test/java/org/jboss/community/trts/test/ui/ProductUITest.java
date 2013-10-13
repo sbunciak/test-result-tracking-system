@@ -24,13 +24,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 @RunWith(Arquillian.class)
 public class ProductUITest {
 
 	@Drone
-	private WebDriver driver;
+	private FirefoxDriver driver;
 
 	@ArquillianResource
 	private URL deploymentUrl;
@@ -38,50 +38,48 @@ public class ProductUITest {
 
 	@Deployment(testable = false)
 	public static WebArchive create() {
-		return ShrinkWrap
-				.create(WebArchive.class, "test.war")
-				.addPackage(Product.class.getPackage())
+		WebArchive archive = ShrinkWrap.create(WebArchive.class, "test.war");
+
+		archive.addPackage(Product.class.getPackage())
 				.addPackage(ProductService.class.getPackage())
 				.addPackage(ProductREST.class.getPackage())
 				.addClass(Resources.class)
-				.merge(ShrinkWrap.create(GenericArchive.class)
+				.addAsResource("META-INF/test-persistence.xml",
+						"META-INF/persistence.xml")
+				.addAsWebInfResource("test-ds.xml", "test-ds.xml")
+				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
+		archive.merge(
+				ShrinkWrap.create(GenericArchive.class)
 						.as(ExplodedImporter.class)
 						.importDirectory("src/main/webapp")
 						.as(GenericArchive.class), "/",
-						Filters.exclude(".*\\.xml$"))
-				.addAsResource("META-INF/test-persistence.xml",
-						"META-INF/persistence.xml")
+				Filters.exclude(".*\\.xml$"))
 				.addAsWebInfResource("test-jboss-web.xml", "jboss-web.xml")
 				.addAsWebInfResource("test-roles.properties",
 						"/classes/roles.properties")
 				.addAsWebInfResource("test-users.properties",
 						"/classes/users.properties")
-				.addAsWebInfResource("test-ds.xml", "test-ds.xml")
-				.addAsWebInfResource("test-web.xml", "web.xml")
-				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
+				.addAsWebInfResource("test-web.xml", "web.xml");
+		return archive;
 	}
 
 	@Before
 	public void setUp() {
-		// driver = new FirefoxDriver();
+		// set default timeout
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
+		// "auth" to the application
 		applicationUrl = deploymentUrl.toString().replace("http://",
 				"http://admin:admin@");
-
-		// log in
-		driver.get(applicationUrl);
-		// driver.findElement(By.cssSelector("input[name='j_username']"))
-		// .sendKeys("admin");
-		// driver.findElement(By.cssSelector("input[name='j_password']"))
-		// .sendKeys("overlord");
-		// driver.findElement(By.cssSelector("input[type='submit']")).click();
 	}
 
 	@Test
 	@RunAsClient
 	public void canAddProduct() {
-		driver.findElement(By.partialLinkText("Products")).click();
+		driver.get(applicationUrl);
+
+		driver.findElement(By.partialLinkText("Product")).click();
+
+		driver.findElement(By.partialLinkText("Create new product")).click();
 
 		driver.findElement(By.id("name")).sendKeys("JBoss Developer Studio");
 

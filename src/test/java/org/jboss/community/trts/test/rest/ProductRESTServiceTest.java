@@ -9,21 +9,16 @@ import javax.ws.rs.core.MediaType;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.community.trts.model.Product;
-import org.jboss.community.trts.rest.BaseEntityREST;
-import org.jboss.community.trts.rest.JaxRsActivator;
-import org.jboss.community.trts.rest.ProductREST;
 import org.jboss.community.trts.service.ProductService;
-import org.jboss.community.trts.util.Resources;
+import org.jboss.community.trts.test.TRTSIntTest;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
-public class ProductRESTServiceTest {
+public class ProductRESTServiceTest extends TRTSIntTest {
 
 	private String REST_URL_PRODUCTS = "http://localhost:8080/test/rest/products/";
 
@@ -32,16 +27,7 @@ public class ProductRESTServiceTest {
 
 	@Deployment
 	public static WebArchive create() {
-		return ShrinkWrap
-				.create(WebArchive.class, "test.war")
-				.addPackage(Product.class.getPackage())
-				.addPackage(ProductService.class.getPackage())
-				.addClasses(BaseEntityREST.class, ProductREST.class,
-						JaxRsActivator.class, Resources.class)
-				.addAsResource("META-INF/test-persistence.xml",
-						"META-INF/persistence.xml")
-				.addAsWebInfResource("test-ds.xml", "test-ds.xml")
-				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
+		return createTestWebArchive(false);
 	}
 
 	@Test

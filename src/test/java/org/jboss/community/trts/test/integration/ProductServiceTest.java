@@ -1,4 +1,4 @@
-package org.jboss.community.trts.test;
+package org.jboss.community.trts.test.integration;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -14,11 +14,8 @@ import org.jboss.community.trts.model.ProductVersion;
 import org.jboss.community.trts.service.ProductBuildService;
 import org.jboss.community.trts.service.ProductService;
 import org.jboss.community.trts.service.ProductVersionService;
-import org.jboss.community.trts.util.Resources;
+import org.jboss.community.trts.test.TRTSIntTest;
 import org.jboss.shrinkwrap.api.Archive;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,7 +23,7 @@ import org.junit.runner.RunWith;
  * Integration tests using Arquillian according to the current Use Case diagram
  */
 @RunWith(Arquillian.class)
-public class ProductServiceTest {
+public class ProductServiceTest extends TRTSIntTest {
 
 	@Inject
 	private ProductService productService;
@@ -39,15 +36,7 @@ public class ProductServiceTest {
 
 	@Deployment
 	public static Archive<?> createTestArchive() {
-		return ShrinkWrap
-				.create(WebArchive.class, "test.war")
-				.addPackage(Product.class.getPackage())
-				.addPackage(ProductService.class.getPackage())
-				.addClass(Resources.class)
-				.addAsResource("META-INF/test-persistence.xml",
-						"META-INF/persistence.xml")
-				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-				.addAsWebInfResource("test-ds.xml", "test-ds.xml");
+		return createTestWebArchive(false);
 	}
 
 	@Test

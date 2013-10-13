@@ -1,4 +1,4 @@
-package org.jboss.community.trts.test.rules;
+package org.jboss.community.trts.test.unit;
 
 import static org.junit.Assert.assertTrue;
 
