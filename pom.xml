@@ -25,6 +25,8 @@
 		<version.jboss.bom>1.0.7.Final</version.jboss.bom>
 		<version.org.jboss.arquillian>1.1.1.Final</version.org.jboss.arquillian>
 		<version.org.jboss.arquillian.drone>1.2.0.Final</version.org.jboss.arquillian.drone>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
 	</properties>
 
 

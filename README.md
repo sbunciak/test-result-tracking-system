@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 test-result-tracking-system
 ===========================
 
@@ -70,3 +71,8 @@ New DSL (Domain Specific Language) for JBoss Drools was introduced during implem
 ### Running example
 
 + <http://trts-sbunciak.rhcloud.com/> (can take some time to load since it's not used very often)
+=======
+The OpenShift `jbosseap` cartridge documentation can be found at:
+
+https://github.com/openshift/origin-server/tree/master/cartridges/openshift-origin-cartridge-jbosseap/README.md
+>>>>>>> 419a7c7dba7852d9b2c68908cf6bb3be5dcfcc1f
