@@ -65,7 +65,10 @@ New DSL (Domain Specific Language) for JBoss Drools was introduced during implem
 			    </login-module>
 		    </authentication>
 	    </security-domain>
-                
+
+### Demo
+
+[![TRTS Demo](http://img.youtube.com/vi/fksfpmWswNo/0.jpg)](http://www.youtube.com/watch?v=fksfpmWswNo)
 
 ### Running example
 
